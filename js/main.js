@@ -169,11 +169,22 @@ function galleryHTML(w) {
     return `<div class="m-gallery"><div class="m-ph" style="background:${phFor(WORKS.indexOf(w))}">미디어를 data.js의 media에 추가하세요</div></div>`;
   }
   return `<div class="m-gallery">${w.media
-    .map((m) =>
-      m.type === "video"
-        ? `<video src="${m.src}" controls playsinline></video>`
-        : `<img src="${m.src}" alt="${w.title}">`
-    )
+    .map((m) => {
+      if (m.type === "youtube") {
+        // id 에 영상 ID 또는 전체 링크 둘 다 허용
+        const raw = (m.id || m.src || "").trim();
+        const mm = raw.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/);
+        const id = mm ? mm[1] : raw;
+        const params = new URLSearchParams({ rel: "0", modestbranding: "1", playsinline: "1" });
+        return `<div class="m-embed"><iframe src="https://www.youtube-nocookie.com/embed/${id}?${params}"
+          title="${w.title}" frameborder="0" loading="lazy"
+          allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`;
+      }
+      if (m.type === "video") {
+        return `<video src="${m.src}" controls playsinline></video>`;
+      }
+      return `<img src="${m.src}" alt="${w.title}">`;
+    })
     .join("")}</div>`;
 }
 

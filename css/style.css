@@ -117,8 +117,8 @@ body::before {
 .hero::after {
   content: ""; position: absolute; inset: 0; z-index: -1;
   background:
-    linear-gradient(90deg, rgba(0,0,0,.94) 0%, rgba(0,0,0,.7) 42%, rgba(0,0,0,.2) 100%),
-    linear-gradient(180deg, rgba(0,0,0,.4) 0%, transparent 30%, transparent 65%, #000 100%);
+    linear-gradient(90deg, rgba(0,0,0,.8) 0%, rgba(0,0,0,.45) 45%, rgba(0,0,0,0) 100%),
+    linear-gradient(180deg, rgba(0,0,0,.25) 0%, transparent 28%, transparent 70%, #000 100%);
 }
 .hero__inner { position: relative; z-index: 1; max-width: var(--maxw); margin: 0 auto; width: 100%; }
 .hero__eyebrow {
@@ -283,6 +283,8 @@ body::before {
 .m-meta .v { font-weight: 600; }
 .m-gallery { display: grid; gap: 1rem; margin-bottom: 1.8rem; }
 .m-gallery img, .m-gallery video { width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--line-soft); }
+.m-embed { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--line-soft); }
+.m-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
 .m-ph { aspect-ratio: 16/9; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-family: "JetBrains Mono", monospace; color: rgba(255,255,255,.85); border: 1px dashed var(--line); }
 .m-desc { color: var(--txt-soft); margin-bottom: 1.4rem; }
 .m-bullets { display: flex; flex-direction: column; gap: .6rem; }

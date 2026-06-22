@@ -5,7 +5,9 @@
 
    ※ 현재 cover/media는 예시용 PNG입니다. assets/works/ 의 같은 이름 PNG를
      본인 스크린샷으로 덮어쓰면 자동으로 갈아끼워집니다. (권장 1600×1000)
-     영상은 media에 { type:"video", src:"assets/works/xxx.mp4" } 로 추가.
+     영상은 media에 추가:
+       - 유튜브(권장): { type:"youtube", id:"영상ID 또는 링크" }   ← 일부공개 영상 OK
+       - 파일:         { type:"video",   src:"assets/works/xxx.mp4" }
    ========================================================================= */
 
 /* 히어로(메인) 배경 영상 --------------------------------------------------
@@ -30,10 +32,9 @@ const PROFILE = {
 
 /* 연락처 (없으면 줄을 지우세요) ------------------------------------------- */
 const CONTACTS = [
-  { label: "Email",      value: "you@example.com",          href: "mailto:you@example.com" },
-  { label: "ArtStation", value: "artstation.com/yourname",  href: "https://artstation.com/yourname" },
-  { label: "GitHub",     value: "github.com/yourname",      href: "https://github.com/yourname" },
-  { label: "LinkedIn",   value: "linkedin.com/in/yourname", href: "https://linkedin.com/in/yourname" },
+  { label: "Email",   value: "leesukyi9@gmail.com",     href: "mailto:leesukyi9@gmail.com" },
+  { label: "YouTube", value: "youtube.com/@임동하-i2n",  href: "https://www.youtube.com/@%EC%9E%84%EB%8F%99%ED%95%98-i2n" },
+  { label: "Blog",    value: "blog.naver.com/ridas_",   href: "https://blog.naver.com/ridas_" },
 ];
 
 /* 어프로치 — 상단 3컬럼 소개 밴드 (icon: shader|vfx|tool 중 택1) ---------- */
@@ -41,25 +42,25 @@ const APPROACH = [
   {
     icon: "shader",
     title: "셰이더 & 룩 개발",
-    text: "물·헤어·환경 등 일관된 룩을 단일 머티리얼로 통합하고, 아티스트가 코드 없이 연출하도록 파라미터로 노출합니다.",
+    text: "물, 머리카락, 환경처럼 룩이 중요한 곳의 셰이더를 만듭니다. 아티스트가 코드를 몰라도 직접 조절할 수 있게 합니다.",
   },
   {
     icon: "vfx",
-    title: "VFX & 시뮬레이션",
-    text: "Houdini 시뮬을 엔진에서 대량 재생하는 워크플로우를 설계해, 전투·마법 이펙트를 빠르게 양산합니다.",
+    title: "최적화 & VFX",
+    text: "Niagara · HLSL로 게임 이펙트를 제작하고 퍼포먼스 예산 안에서 동작하도록 드로우콜·셰이더 비용을 줄입니다.",
   },
   {
     icon: "tool",
     title: "파이프라인 & 툴",
-    text: "반복 작업을 자동화하고 흔한 에러를 사전에 차단하는 인하우스 툴로, 팀 전체의 셋업 시간을 줄입니다.",
+    text: "손이 많이 가는 반복 작업을 자동화하는 툴을 만듭니다. 내보내기나 검수처럼 매번 반복되는 과정을 한 번에 처리합니다.",
   },
 ];
 
 /* 스킬 / 도구 ------------------------------------------------------------- */
 const SKILLS = [
   { group: "Real-time / Engine", items: ["Unreal Engine 5", "Unity (URP/HDRP)", "HLSL / GLSL", "Shader Graph", "Niagara / VFX Graph"] },
-  { group: "DCC / Look-dev",     items: ["Houdini", "Substance Designer", "Substance Painter", "Maya / Blender", "Marmoset Toolbag"] },
-  { group: "Tools / Pipeline",   items: ["Python", "PySide / Qt", "C# / C++", "Git", "Perforce"] },
+  { group: "DCC / Look-dev",     items: ["3ds Max", "Maya", "Blender", "Substance Designer", "Substance Painter"] },
+  { group: "Tools / Pipeline",   items: ["Python", "PySide / Qt", "C# / C++", "Git", "ImGui"] },
 ];
 
 /* 카테고리 필터 (works의 category와 일치해야 함) -------------------------- */
