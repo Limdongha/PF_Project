@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lim Dongha · Technical Artist</title>
+  <meta name="description" content="게임 테크니컬 아티스트 포트폴리오 — 셰이더, VFX, 툴, 실시간 렌더링." />
+
+  <meta property="og:title" content="Lim Dongha · Technical Artist" />
+  <meta property="og:description" content="게임 테크니컬 아티스트 포트폴리오" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/img/og.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ===== Nav ===== -->
+  <header class="nav" id="nav">
+    <button class="nav__toggle" id="nav-toggle" aria-label="메뉴 열기">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav__links" id="nav-links">
+      <a href="#works">Works</a>
+      <a href="#skills">Skills</a>
+      <a href="#about">About</a>
+      <a href="#contact" class="nav__cta">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== Hero ===== -->
+    <section class="hero" id="hero">
+      <!-- 배경: 정지 이미지(폴백/포스터) + (선택) 영상.
+           영상 쓰려면 assets/img/hero.mp4 (권장: 추가로 hero.webm) 를 넣으면 자동 재생.
+           파일이 없으면 hero.png 이미지가 그대로 보입니다. -->
+      <img class="hero__bg" src="assets/img/hero.png" alt="" aria-hidden="true" />
+      <video class="hero__bg hero__bg--video" autoplay muted loop playsinline
+             preload="auto" poster="assets/img/hero.png">
+        <source src="assets/img/hero.webm" type="video/webm" />
+        <source src="assets/img/hero.mp4" type="video/mp4" />
+      </video>
+      <div class="hero__inner">
+        <p class="hero__eyebrow">Game Industry · Portfolio 2026</p>
+        <h1 class="hero__title">
+          Portfolio<em>Lim Dongha · Technical Artist</em>
+        </h1>
+        <p class="hero__sub">
+          비주얼을 구현하고 최적화합니다.<br />
+          셰이더 · VFX · 파이프라인 툴 · 실시간 렌더링 · AI
+        </p>
+        <div class="hero__actions">
+          <a href="#works" class="btn btn--primary">작업물 보기 ↓</a>
+          <a href="#contact" class="btn btn--ghost">연락하기</a>
+        </div>
+        <ul class="hero__stats" id="hero-stats"></ul>
+      </div>
+      <a href="#approach" class="hero__scroll" aria-label="아래로 스크롤">Scroll</a>
+    </section>
+
+    <!-- ===== Approach (3-column band) ===== -->
+    <section class="approach" id="approach">
+      <div class="approach__intro">
+        <p class="section__kicker">Approach</p>
+        <h2 class="section__title">기술로 받치는 비주얼</h2>
+      </div>
+      <div class="approach__cols" id="approach-cols"></div>
+    </section>
+
+    <!-- ===== Works (full-bleed showcase) ===== -->
+    <section id="works">
+      <div class="section__head section__head--pad">
+        <p class="section__kicker">Selected Works</p>
+        <h2 class="section__title">프로젝트</h2>
+        <div class="filters" id="filters"></div>
+      </div>
+      <div class="grid" id="showcase"></div>
+    </section>
+
+    <!-- ===== Skills ===== -->
+    <section class="section" id="skills">
+      <div class="section__head">
+        <p class="section__kicker">Toolset</p>
+        <h2 class="section__title">기술 &amp; 도구</h2>
+      </div>
+      <div class="skills" id="skills-grid"></div>
+    </section>
+
+    <!-- ===== About + Contact ===== -->
+    <section class="section section--split" id="about">
+      <div class="about">
+        <div class="section__head">
+          <p class="section__kicker">About</p>
+          <h2 class="section__title">소개</h2>
+        </div>
+        <p class="about__lead">
+          안녕하세요, 게임 테크니컬 아티스트 <strong>Lim Dongha</strong>입니다.
+        </p>
+        <p class="about__text">
+          여기에 본인 소개를 적어주세요. 어떤 게임/프로젝트에서 어떤 역할을 했는지,
+          어떤 문제를 기술적으로 풀어내는 걸 좋아하는지, 아트팀과 엔지니어 사이에서
+          어떤 가치를 만드는지를 2~3문단으로 풀어쓰면 좋습니다.
+        </p>
+        <p class="about__text">
+          파이프라인 자동화, 셰이더 R&amp;D, 퍼포먼스 최적화, 룩 개발 등
+          본인이 강한 영역을 구체적인 사례와 함께 적어주세요.
+        </p>
+      </div>
+
+      <div class="contact" id="contact">
+        <div class="section__head">
+          <p class="section__kicker">Contact</p>
+          <h2 class="section__title">연락</h2>
+        </div>
+        <p class="contact__text">협업, 채용, 외주 문의 모두 환영합니다.</p>
+        <ul class="contact__list" id="contact-list"></ul>
+        <a href="assets/resume.pdf" class="btn btn--primary" download>이력서 다운로드 (PDF)</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Lim Dongha · Technical Artist</p>
+  </footer>
+
+  <!-- ===== Project Modal (case study) ===== -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__panel" role="dialog" aria-modal="true">
+      <button class="modal__close" data-close aria-label="닫기">✕</button>
+      <div class="modal__body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

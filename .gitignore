@@ -1,0 +1,23 @@
+# ── OS 생성 파일 ──
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# ── 에디터 / IDE ──
+.vscode/
+.idea/
+*.swp
+*~
+
+# ── Python 캐시 (tools/gen_art.py 실행 시 생김) ──
+__pycache__/
+*.pyc
+
+# ── 대용량 "원본" 영상 (압축 전 raw 파일은 커밋 금지) ──
+# 주의: 사이트에 실제로 쓰는 압축본(assets/img/hero.mp4, hero.webm 등)은
+#       커밋해야 함! 아래는 편집용 원본 포맷만 제외.
+*.mov
+*.avi
+*.mkv
+*.prproj
