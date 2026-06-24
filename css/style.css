@@ -365,6 +365,15 @@ body::before {
 }
 .m-related__item:hover { border-color: var(--accent); background: rgba(255,255,255,.04); transform: translateY(-1px); }
 .m-link { margin-top: 1.8rem; }
+.m-linkrow { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1.8rem; }
+.m-linkrow .m-link { margin-top: 0; }
+/* 케이스 스터디 (이미지 + 캡션) */
+.m-lead { color: var(--txt); font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.6rem; padding-bottom: 1.4rem; border-bottom: 1px solid var(--line-soft); }
+.m-study { margin-top: .2rem; }
+.m-study .m-subhead:first-child { margin-top: .4rem; }
+.m-fig { margin: 1.5rem 0; }
+.m-fig img { width: 100%; display: block; border-radius: var(--radius-sm); border: 1px solid var(--line-soft); background: #111; }
+.m-fig figcaption { font-size: .82rem; color: var(--txt-dim); margin-top: .55rem; line-height: 1.55; }
 
 /* Scroll reveal ----------------------------------------------------------
    기본은 보이게(콘텐츠 안전). JS가 .reveal-on 을 붙였을 때만 숨겼다 나타남. */

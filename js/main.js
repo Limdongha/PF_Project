@@ -280,6 +280,20 @@ function openModalShell() {
   if (panel) panel.scrollTop = 0;
 }
 
+// 케이스 스터디: 이미지+캡션을 본문 순서대로 배치 (study 배열이 있으면 갤러리/요약 대신 사용)
+function studyHTML(w) {
+  return `<div class="m-study">${w.study
+    .map((b) => {
+      if (b.h) return `<h3 class="m-subhead">${b.h}</h3>`;
+      if (b.p) return `<p class="m-desc">${b.p}</p>`;
+      if (b.img)
+        return `<figure class="m-fig"><img src="${b.img}" alt="${b.cap || w.title}" loading="lazy"
+          onerror="this.closest('.m-fig').style.display='none'">${b.cap ? `<figcaption>${b.cap}</figcaption>` : ""}</figure>`;
+      return "";
+    })
+    .join("")}</div>`;
+}
+
 function openModal(i) {
   const w = WORKS[i];
   modalBody.innerHTML = `
@@ -290,10 +304,16 @@ function openModal(i) {
       <div><span class="k">Role</span><span class="v">${w.role}</span></div>
       <div><span class="k">Tools</span><span class="v">${w.tools.join(", ")}</span></div>
     </div>
-    ${galleryHTML(w)}
-    <p class="m-desc">${w.description}</p>
-    ${w.bullets && w.bullets.length ? `<ul class="m-bullets">${w.bullets.map((b) => `<li>${b}</li>`).join("")}</ul>` : ""}
+    ${w.summary ? `<p class="m-lead">${w.summary}</p>` : ""}
+    ${w.study && w.study.length
+      ? studyHTML(w)
+      : `${galleryHTML(w)}<p class="m-desc">${w.description}</p>${w.bullets && w.bullets.length ? `<ul class="m-bullets">${w.bullets.map((b) => `<li>${b}</li>`).join("")}</ul>` : ""}`}
     <div class="m-tools">${w.tools.map((t) => `<span>${t}</span>`).join("")}</div>
+    ${w.links && w.links.length
+      ? `<div class="m-linkrow">${w.links
+          .map((l) => `<a href="${l.href}" class="btn btn--primary m-link" target="_blank" rel="noopener">${l.label} ↗</a>`)
+          .join("")}</div>`
+      : ""}
   `;
   openModalShell();
 }
