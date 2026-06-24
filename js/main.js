@@ -329,6 +329,7 @@ function openProjectModal(i) {
       <div><span class="k">Role</span><span class="v">${p.role || "—"}</span></div>
       ${p.studio ? `<div><span class="k">Studio</span><span class="v">${p.studio}</span></div>` : ""}
     </div>
+    ${p.notice ? `<div class="m-notice">${p.notice}</div>` : ""}
     ${galleryHTML(p)}
     <p class="m-desc">${p.description || p.summary || ""}</p>
     ${p.contribution && p.contribution.length

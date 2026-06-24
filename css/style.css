@@ -374,6 +374,8 @@ body::before {
 .m-fig { margin: 1.5rem 0; }
 .m-fig img { width: 100%; display: block; border-radius: var(--radius-sm); border: 1px solid var(--line-soft); background: #111; }
 .m-fig figcaption { font-size: .82rem; color: var(--txt-dim); margin-top: .55rem; line-height: 1.55; }
+/* 모달 상단 안내 박스 (예: AI 대체 이미지 고지) */
+.m-notice { margin: 0 0 1.5rem; padding: 1rem 1.2rem; border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); background: rgba(255,255,255,.04); color: var(--txt-soft); font-size: .92rem; line-height: 1.6; }
 
 /* Scroll reveal ----------------------------------------------------------
    기본은 보이게(콘텐츠 안전). JS가 .reveal-on 을 붙였을 때만 숨겼다 나타남. */

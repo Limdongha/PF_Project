@@ -87,8 +87,9 @@ const PROJECTS = [
     year: "2026년 3 – 7월 (마일스톤 참여)",
     role: "Technical Artist",
     studio: "콩스튜디오",
-    cover: "assets/projects/maze.png",   // TODO: 그리드 썸네일 PNG를 assets/projects/maze.png 로 넣기
+    cover: "assets/projects/maze.jpg",   // TODO: 그리드 썸네일 PNG를 assets/projects/maze.jpg 로 넣기
     summary: "콩스튜디오에서 팀으로 개발한 서브컬처 스테이지형 RPG. PC·모바일 빌드.",
+    notice: "※ 아래 이미지는 실제 게임 화면이 아닙니다. 미공개 프로젝트라 원본을 공개할 수 없어, 분위기만 참고해 AI로 새로 생성한 대체 이미지입니다.",
     description:
       "콩스튜디오에서 팀 프로젝트로 개발한 서브컬처 스테이지형 RPG입니다. PC와 모바일 빌드를 " +
       "모두 진행했습니다(정식 출시 전). 저는 테크니컬 아티스트로 마일스톤 기간(2026년 3~7월)에 참여해, " +
@@ -104,7 +105,7 @@ const PROJECTS = [
     linkLabel: "영상 보기",
     related: [],              // 각 기술별 쇼케이스(WORKS)를 만든 뒤 그 인덱스를 넣어 연결
     media: [
-      { type: "image", src: "assets/projects/maze.png" },
+      { type: "image", src: "assets/projects/maze.jpg" },
       // TODO: 플레이 영상 유튜브 링크 받으면 아래 주석 풀고 넣기
       // { type: "youtube", id: "https://youtu.be/영상ID" },
     ],
@@ -115,8 +116,9 @@ const PROJECTS = [
     year: "2026년 7월 (약 1개월)",
     role: "1인 개발 (전 과정)",
     studio: "콩스튜디오",
-    cover: "assets/projects/maze-mobile.png",   // TODO: 썸네일 PNG를 assets/projects/maze-mobile.png 로
+    cover: "assets/projects/maze-mobile.jpg",   // TODO: 썸네일 PNG를 assets/projects/maze-mobile.jpg 로
     summary: "Maze 중단 후 기존 리소스로 1개월간 혼자 만든 모바일 프로젝트. 전 과정에 AI 활용.",
+    notice: "※ 아래 이미지는 실제 게임 화면이 아닙니다. 미공개 프로젝트라 원본을 공개할 수 없어, 분위기만 참고해 AI로 새로 생성한 대체 이미지입니다.",
     description:
       "Maze 개발 중단이 확정된 뒤, 콩스튜디오에서 기존 Maze 리소스를 활용해 약 1개월간 진행한 " +
       "모바일 프로젝트입니다. 빈 프로젝트에서 시작해 기획·구현·아트를 1인으로 전부 담당했고, " +
@@ -131,7 +133,7 @@ const PROJECTS = [
     linkLabel: "영상 보기",
     related: [],              // 관련 기술 쇼케이스(WORKS) 만들면 인덱스 연결
     media: [
-      { type: "image", src: "assets/projects/maze-mobile.png" },
+      { type: "image", src: "assets/projects/maze-mobile.jpg" },
       // TODO: 플레이 영상 유튜브 링크 받으면 주석 풀고 넣기
       // { type: "youtube", id: "https://youtu.be/영상ID" },
     ],
