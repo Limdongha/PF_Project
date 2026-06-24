@@ -158,6 +158,15 @@
   <script src="js/main.js"></script>
 
   <!-- 방문 통계 (GoatCounter) — 비공개 대시보드: leesukyi5.goatcounter.com -->
+  <script>
+    // 링크에 ?v=코드 가 있으면 그 코드를 경로에 붙여 회사별로 따로 집계되게 함
+    window.goatcounter = {
+      path: function (p) {
+        var v = new URLSearchParams(location.search).get("v");
+        return v ? p + "?v=" + v : p;
+      },
+    };
+  </script>
   <script data-goatcounter="https://leesukyi5.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>
 </body>
