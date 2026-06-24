@@ -185,7 +185,6 @@ const PROJECTS = [
     related: [],              // 관련 기술 쇼케이스(WORKS) 만들면 인덱스 연결
     media: [
       { type: "youtube", id: "https://youtu.be/Ug0tOwWOcdg" },
-      { type: "image", src: "assets/projects/lies-of-p.png" },
     ],
   },
   {
@@ -211,7 +210,6 @@ const PROJECTS = [
     related: [],              // 툰 셰이더 쇼케이스를 만들면 그 인덱스로 연결하면 좋음
     media: [
       { type: "youtube", id: "https://youtu.be/GOxVFVGjr_s" },
-      { type: "image", src: "assets/projects/genshin.png" },
     ],
   },
   {
@@ -236,7 +234,6 @@ const PROJECTS = [
     related: [],
     media: [
       { type: "youtube", id: "https://youtu.be/9vZXUiEQZFo" },
-      { type: "image", src: "assets/projects/skul.png" },
     ],
   },
   {
