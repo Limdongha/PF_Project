@@ -23,13 +23,44 @@ npx serve .
 | 이메일·SNS 링크 | `js/data.js` → `CONTACTS` |
 | 스킬/도구 목록 | `js/data.js` → `SKILLS` |
 | 필터 카테고리 | `js/data.js` → `CATEGORIES` |
-| 프로젝트 | `js/data.js` → `WORKS` |
+| **프로젝트(참여 타이틀)** | `js/data.js` → `PROJECTS` |
+| **기술 쇼케이스(셰이더/VFX/툴)** | `js/data.js` → `WORKS` |
 | 소개(About) 문구 | `index.html` 의 `#about` 영역 |
 | 상단 로고/제목의 `NAME` | `index.html` |
 
+> **두 칸의 차이**
+> - `PROJECTS` = 만들거나 참여한 **프로젝트 전반**(개인·팀·게임잼·외주 등)과 거기서 맡은 역할 (맥락)
+> - `WORKS` = 셰이더/VFX/툴 같은 **기술 분해** (실력 증명)
+> - `PROJECTS`의 `related`에 `WORKS` 인덱스를 넣으면, 프로젝트 모달에서 "사용 기술"로 해당 쇼케이스에 바로 연결됩니다.
+
 ### 프로젝트 추가하기
 
-`WORKS` 배열에 객체 하나를 추가하면 카드가 생깁니다:
+`PROJECTS` 배열에 객체를 추가하면 카드가 생깁니다. 카드 클릭 시 모달이 열리고, 링크가 있으면 버튼도 같이 나옵니다. **상용 출시작이 아니어도 됩니다** — 성격을 `platform`에 솔직하게 적으세요:
+
+```js
+{
+  title: "프로젝트 이름",
+  platform: "개인 프로젝트 · Unreal 5",  // 성격+엔진. 예) "팀 프로젝트 · Unity", "게임잼 48h"
+  year: "2024",
+  role: "1인 제작 (아트·셰이더·툴)",
+  studio: "",                       // 팀일 때만. 개인작이면 "" → 모달에서 숨김
+  cover: "assets/projects/내이미지.png",  // 영상(.mp4)도 가능 / 없으면 자동 그라데이션
+  summary: "한 줄 소개",
+  description: "모달 설명 문단",
+  contribution: ["내가 맡은 일 1", "내가 맡은 일 2"],
+  link: "https://youtu.be/...",     // 영상/플레이/깃허브/블로그. 비우면 버튼 숨김
+  linkLabel: "영상 보기",
+  related: [0, 4],                  // 연결할 WORKS 인덱스 (사용 기술 크로스링크)
+  media: [                          // 모달 갤러리 (선택)
+    { type: "youtube", id: "유튜브링크" },
+    { type: "image",   src: "assets/projects/shot1.png" }
+  ],
+}
+```
+
+### 기술 쇼케이스 추가하기
+
+`WORKS` 배열에 객체 하나를 추가하면 쇼케이스 카드가 생깁니다:
 
 ```js
 {
@@ -57,7 +88,7 @@ npx serve .
 | 슬롯 | 파일 경로 |
 |---|---|
 | 랜딩(히어로) 큰 배경 | `assets/img/hero.png` |
-| 1. 워터 셰이더 | `assets/works/water.png` |
+| 1. 툰 셰이더 | `assets/works/water.png` |
 | 2. 절차적 VFX | `assets/works/vfx.png` |
 | 3. 파이프라인 툴 | `assets/works/tool.png` |
 | 4. 환경 라이팅 | `assets/works/light.png` |
@@ -66,7 +97,9 @@ npx serve .
 
 - 새 이름으로 넣고 싶으면 `js/data.js` 의 `cover` / `media` 경로만 바꾸면 됩니다.
 - **이미지가 없으면** 자동으로 색 그라데이션 플레이스홀더가 표시됩니다 (검은 화면 안 됨).
-- 영상/GIF: `media` 배열에 `{ type:"video", src:"assets/works/demo.mp4" }` 추가.
+- **그리드 미리보기를 영상으로**: `cover` 를 `.mp4`/`.webm` 로 지정하면 무음으로 자동 반복재생됩니다. (예: `cover: "assets/works/toon.mp4"`) GIF·이미지도 그대로 됩니다. 모션 최소화 설정 사용자에겐 자동재생 없이 정지로 보입니다.
+- **모달(클릭 시 상세창)에 유튜브**: `media` 배열에 `{ type:"youtube", id:"https://youtu.be/영상ID" }` 추가. (ID만 넣어도 됩니다.)
+- 로컬 영상 파일을 모달에 넣을 땐: `{ type:"video", src:"assets/works/demo.mp4" }`.
 - 이력서는 `assets/resume.pdf` 로 넣으면 다운로드 버튼이 동작합니다.
 
 ### 히어로(메인) 배경에 영상 넣기

@@ -16,6 +16,10 @@ const phFor = (i) => PH_GRADS[i % PH_GRADS.length];
 /* 스크롤 등장 옵저버 — renderWorks()가 일찍 호출하므로 최상단에서 선언 (TDZ 방지) */
 let revealObserver = null;
 
+/* 모션 최소화 선호 여부 — showMedia()가 그리드 영상 자동재생 제어에 사용.
+   renderProjects()가 showMedia()를 일찍 호출하므로 최상단에서 선언 (TDZ 방지). */
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 /* ---------- Hero background ----------
    우선순위: 동영상 파일(hero.mp4/webm) > 유튜브 링크 > 이미지(hero.png)
    - 파일이 실제로 있으면 그 파일을 재생, 없으면 유튜브, 그것도 없으면 이미지.
@@ -113,15 +117,92 @@ let revealObserver = null;
   ).join("");
 })();
 
+/* ---------- Projects (참여/제작 타이틀) ---------- */
+const projGrid = document.getElementById("projects-grid");
+
+function renderProjects() {
+  if (!projGrid || typeof PROJECTS === "undefined") return;
+  projGrid.innerHTML = PROJECTS.map((p, i) => {
+    const sub = [p.role, p.year].filter(Boolean).join(" · ");
+    return `<article class="tile tile--project reveal" data-project="${i}" tabindex="0" role="button" aria-label="${p.title} 상세 보기">
+      <div class="tile__media">${showMedia(p, i)}</div>
+      <div class="tile__overlay">
+        <span class="tile__cat">${p.platform || "Project"}</span>
+        <h3 class="tile__title">${p.title}</h3>
+        ${sub ? `<span class="tile__sub">${sub}</span>` : ""}
+        <span class="tile__view">자세히 보기 →</span>
+      </div>
+    </article>`;
+  }).join("");
+  observeReveals();
+}
+renderProjects();
+
+let projDragged = false; // 드래그로 스크롤한 직후의 클릭(모달 열림)을 막기 위한 플래그
+
+if (projGrid) {
+  projGrid.addEventListener("click", (e) => {
+    if (projDragged) return;                       // 방금 드래그였으면 모달 열지 않음
+    const t = e.target.closest("[data-project]");
+    if (t) openProjectModal(+t.dataset.project);
+  });
+  projGrid.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    const t = e.target.closest("[data-project]");
+    if (t) { e.preventDefault(); openProjectModal(+t.dataset.project); }
+  });
+
+  // 마우스 드래그로 가로 스크롤 (터치/트랙패드는 네이티브 스크롤 사용)
+  const rowWrap = document.getElementById("projects-rowwrap");
+  let down = false, startX = 0, startLeft = 0;
+  projGrid.addEventListener("pointerdown", (e) => {
+    if (e.pointerType !== "mouse" || e.button !== 0) return;
+    down = true; projDragged = false;
+    startX = e.clientX; startLeft = projGrid.scrollLeft;
+    projGrid.classList.add("dragging");
+  });
+  document.addEventListener("pointermove", (e) => {
+    if (!down) return;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 6) projDragged = true;
+    projGrid.scrollLeft = startLeft - dx;
+  });
+  document.addEventListener("pointerup", () => {
+    if (!down) return;
+    down = false;
+    projGrid.classList.remove("dragging");
+  });
+
+  // 스크롤 힌트(오른쪽 페이드 + 라벨) 상태 갱신
+  function updateRowHint() {
+    if (!rowWrap) return;
+    const max = projGrid.scrollWidth - projGrid.clientWidth;
+    rowWrap.classList.toggle("no-scroll", max <= 4);     // 스크롤 필요 없음(카드 다 보임)
+    rowWrap.classList.toggle("at-end", projGrid.scrollLeft >= max - 2);
+    rowWrap.classList.toggle("scrolled", projGrid.scrollLeft > 8);
+  }
+  projGrid.addEventListener("scroll", updateRowHint, { passive: true });
+  window.addEventListener("resize", updateRowHint);
+  updateRowHint();
+}
+
 /* ---------- Works showcase + filters ---------- */
 const grid = document.getElementById("showcase");
 
 function showMedia(w, i) {
-  // 이미지가 있으면 <img>, onerror 시 그라데이션 플레이스홀더로 교체
+  // cover 가 .mp4/.webm 이면 무음 루프 <video>, 그 외(이미지·gif)는 <img>.
+  // 로드 실패 시 둘 다 그라데이션 플레이스홀더로 교체.
   const ph = `<div class="tile__ph" style="background:${phFor(i)}">${w.title}</div>`;
   if (!w.cover) return ph;
-  return `<img src="${w.cover}" alt="${w.title}" loading="lazy"
-    onerror="this.outerHTML='<div class=&quot;tile__ph&quot; style=&quot;background:${phFor(i)}&quot;>${w.title}</div>'">`;
+  const fallback = `this.outerHTML='<div class=&quot;tile__ph&quot; style=&quot;background:${phFor(i)}&quot;>${w.title}</div>'`;
+
+  if (/\.(mp4|webm)(\?.*)?$/i.test(w.cover)) {
+    // 모션 최소화 사용자: 자동재생 끄고 첫 프레임만(=정지) 노출
+    const auto = prefersReducedMotion ? "" : "autoplay loop";
+    return `<video src="${w.cover}" ${auto} muted playsinline preload="metadata"
+      aria-label="${w.title}" onerror="${fallback}"></video>`;
+  }
+  return `<img src="${w.cover}" alt="${w.title}" loading="lazy" onerror="${fallback}">`;
 }
 
 function renderWorks(filter = "All") {
@@ -166,7 +247,7 @@ const modalBody = document.getElementById("modal-body");
 
 function galleryHTML(w) {
   if (!w.media || !w.media.length) {
-    return `<div class="m-gallery"><div class="m-ph" style="background:${phFor(WORKS.indexOf(w))}">미디어를 data.js의 media에 추가하세요</div></div>`;
+    return `<div class="m-gallery"><div class="m-ph" style="background:${phFor(Math.max(0, WORKS.indexOf(w)))}">미디어를 data.js의 media에 추가하세요</div></div>`;
   }
   return `<div class="m-gallery">${w.media
     .map((m) => {
@@ -183,9 +264,20 @@ function galleryHTML(w) {
       if (m.type === "video") {
         return `<video src="${m.src}" controls playsinline></video>`;
       }
-      return `<img src="${m.src}" alt="${w.title}">`;
+      const g = phFor(Math.max(0, WORKS.indexOf(w)));
+      return `<img src="${m.src}" alt="${w.title}"
+        onerror="this.outerHTML='<div class=&quot;m-ph&quot; style=&quot;background:${g}&quot;>${w.title}</div>'">`;
     })
     .join("")}</div>`;
+}
+
+function openModalShell() {
+  modal.scrollTop = 0;
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+  const panel = modal.querySelector(".modal__panel");
+  if (panel) panel.scrollTop = 0;
 }
 
 function openModal(i) {
@@ -203,9 +295,35 @@ function openModal(i) {
     ${w.bullets && w.bullets.length ? `<ul class="m-bullets">${w.bullets.map((b) => `<li>${b}</li>`).join("")}</ul>` : ""}
     <div class="m-tools">${w.tools.map((t) => `<span>${t}</span>`).join("")}</div>
   `;
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
+  openModalShell();
+}
+
+function openProjectModal(i) {
+  const p = PROJECTS[i];
+  const related = (p.related || []).map((wi) => WORKS[wi]).filter(Boolean);
+  modalBody.innerHTML = `
+    <p class="m-cat">${p.platform || "Project"}</p>
+    <h2 class="m-title">${p.title}</h2>
+    <div class="m-meta">
+      <div><span class="k">Year</span><span class="v">${p.year || "—"}</span></div>
+      <div><span class="k">Role</span><span class="v">${p.role || "—"}</span></div>
+      ${p.studio ? `<div><span class="k">Studio</span><span class="v">${p.studio}</span></div>` : ""}
+    </div>
+    ${galleryHTML(p)}
+    <p class="m-desc">${p.description || p.summary || ""}</p>
+    ${p.contribution && p.contribution.length
+      ? `<h3 class="m-subhead">담당 · 기여</h3><ul class="m-bullets">${p.contribution.map((b) => `<li>${b}</li>`).join("")}</ul>`
+      : ""}
+    ${related.length
+      ? `<h3 class="m-subhead">사용 기술</h3><div class="m-related">${related
+          .map((w) => `<button type="button" class="m-related__item" data-open-work="${WORKS.indexOf(w)}">${w.title} →</button>`)
+          .join("")}</div>`
+      : ""}
+    ${p.link
+      ? `<a href="${p.link}" class="btn btn--primary m-link" target="_blank" rel="noopener">${p.linkLabel || "프로젝트 보기"} ↗</a>`
+      : ""}
+  `;
+  openModalShell();
 }
 
 function closeModal() {
@@ -224,7 +342,11 @@ grid.addEventListener("keydown", (e) => {
   const trigger = e.target.closest("[data-open]");
   if (trigger) { e.preventDefault(); openModal(+trigger.dataset.open); }
 });
-modal.addEventListener("click", (e) => { if (e.target.dataset.close !== undefined) closeModal(); });
+modal.addEventListener("click", (e) => {
+  const rel = e.target.closest("[data-open-work]");
+  if (rel) { openModal(+rel.dataset.openWork); return; } // 프로젝트 모달 → 기술 쇼케이스 모달로 전환
+  if (e.target.dataset.close !== undefined) closeModal();
+});
 document.addEventListener("keydown", (e) => { if (e.key === "Escape" && modal.classList.contains("open")) closeModal(); });
 
 /* ---------- Nav: scroll state, active link, mobile menu ---------- */
@@ -248,7 +370,7 @@ navLinks.querySelectorAll("a").forEach((a) =>
 );
 
 /* Active section highlight */
-const sections = ["works", "skills", "about", "contact"].map((id) => document.getElementById(id)).filter(Boolean);
+const sections = ["projects", "works", "skills", "about", "contact"].map((id) => document.getElementById(id)).filter(Boolean);
 const linkFor = {};
 navLinks.querySelectorAll("a").forEach((a) => {
   const id = a.getAttribute("href").slice(1);
