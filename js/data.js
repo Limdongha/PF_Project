@@ -97,13 +97,18 @@ const PROJECTS = [
     contribution: [
       "캐릭터 셰이더 제작",
       "맵 에셋 배치 툴 개발",
-      "캐릭터 아웃라인 구현",
       "프로시저럴 모델링 툴 개발",
       "성능 최적화 모니터링 툴 개발",
     ],
+    results: [
+      "셰이더 제작을 통한 비주얼 디벨럽 기여",
+      "아트 파이프라인 자동화로 제작 기간 단축",
+      "최적화 툴 개발로 성능 기준 정립",
+    ],
+    tools: ["Unity", "C#"],
     link: "",                 // 외부 링크 버튼용(선택). 플레이 영상은 아래 media에 유튜브로 넣음
     linkLabel: "영상 보기",
-    related: [],              // 각 기술별 쇼케이스(WORKS)를 만든 뒤 그 인덱스를 넣어 연결
+    related: [4, 5, 6, 7, 8],  // Water 셰이더·맵 배치 툴·텍스처 검수 툴·최적화 모니터링 툴·프로시저럴 모델링 툴
     media: [
       { type: "image", src: "assets/projects/maze.jpg" },
       // TODO: 플레이 영상 유튜브 링크 받으면 아래 주석 풀고 넣기
@@ -129,9 +134,15 @@ const PROJECTS = [
       "모바일 전용으로 설계 및 최적화",
       "개발 전 과정에 AI 활용",
     ],
+    results: [
+      "1개월 만에 1인으로 모바일 빌드 완성",
+      "PC 리소스를 모바일 사양에 맞게 경량화",
+      "AI 활용 워크플로우로 제작 속도 향상",
+    ],
+    tools: ["Unity", "C#"],
     link: "",                 // 외부 링크 버튼용(선택). 플레이 영상은 아래 media에 유튜브로 넣음
     linkLabel: "영상 보기",
-    related: [],              // 관련 기술 쇼케이스(WORKS) 만들면 인덱스 연결
+    related: [9, 10, 11, 12],  // 모션 트레일·URP 툰 셰이딩·SDF 공격 장판·물리 애니메이션 툴
     media: [
       { type: "image", src: "assets/projects/maze-mobile.jpg" },
       // TODO: 플레이 영상 유튜브 링크 받으면 주석 풀고 넣기
@@ -156,9 +167,15 @@ const PROJECTS = [
       "MAXScript로 AI 결과물 → 제작 워크플로우 연동·자동화",
       "아트 리소스 제작 기간 3일 → 1일로 단축",
     ],
+    results: [
+      "아트 리소스 제작 3일 → 1일 (약 66% 단축)",
+      "팀 최초의 생성형 AI 아트 파이프라인 정립",
+      "단독(1인 TA)으로 파이프라인 설계·구축·도입",
+    ],
+    tools: ["3ds Max", "MAXScript", "Tripo", "Hunyuan 3D", "MeshAI"],
     link: "",
     linkLabel: "데모 보기",
-    related: [],
+    related: [13],            // 생성형 AI 아트 파이프라인
     media: [
       { type: "image", src: "assets/projects/audition.png" },
       // { type: "youtube", id: "https://youtu.be/영상ID" },
@@ -171,20 +188,29 @@ const PROJECTS = [
     role: "팀장 · Technical Artist",
     studio: "",
     cover: "assets/projects/lies-of-p.png",   // TODO: 썸네일 PNG를 assets/projects/lies-of-p.png 로
-    summary: "「P의 거짓」을 모작한 포트폴리오용 팀 프로젝트. 팀장으로 셰이더·플레이어·최적화 담당.",
+    summary: "「P의 거짓」을 모작한 팀 프로젝트. 팀장 + 플레이어·PBR 셰이더·라이팅·최적화 담당.",
     description:
-      "「P의 거짓」의 비주얼과 플레이를 모작한 포트폴리오용 팀 프로젝트입니다. PC 기준으로 약 2개월간 " +
-      "개발했고, 팀장을 맡아 일정과 작업 분배를 이끌면서 셰이더, 플레이어 컨트롤러, 성능 최적화를 " +
-      "직접 담당했습니다. (정식 출시 없이 포트폴리오 목적으로 제작)",
+      "「P의 거짓」의 비주얼과 플레이를 모작한 포트폴리오용 팀 프로젝트입니다(PC, 약 2개월). 팀장을 맡아 " +
+      "일정·작업 분배를 이끌었고, 직접 담당한 영역은 플레이어·셰이더·라이팅·최적화입니다. 플레이어는 모든 " +
+      "시스템이 맞물리는 허브라 판단해 제가 맡았습니다. 아트 출신인 만큼 원본 룩을 최대한 재현하기 위해 " +
+      "DirectX 환경에서 PBR 셰이더를 구현하고, 빛 디자인이 핵심이라 보고 라이팅 아티스트 역할을 겸했습니다. " +
+      "최적화는 옥트리·LOD·프러스텀 컬링으로 처리했습니다. (포트폴리오 목적으로 제작)",
     contribution: [
       "팀장 — 일정·작업 분배 및 팀 리딩",
-      "셰이더 제작",
-      "플레이어 컨트롤러·조작 시스템 구현",
-      "성능 최적화",
+      "플레이어 시스템 구현",
+      "DirectX 환경에서 PBR 셰이더 구현 — 원본 룩 재현",
+      "라이팅 디자인 (라이팅 아티스트 역할 겸임)",
+      "최적화 — 옥트리 · LOD · 프러스텀 컬링",
     ],
+    results: [
+      "PBR + 라이팅으로 원작에 근접한 비주얼 재현",
+      "원작에 가까운 플레이어 조작감 구현",
+      "옥트리·LOD·컬링으로 렌더링 부하 절감",
+    ],
+    tools: ["DirectX 11", "HLSL", "C++"],
     link: "",                 // 외부 링크 버튼용(선택). 플레이 영상은 아래 media에 유튜브로
     linkLabel: "영상 보기",
-    related: [],              // 관련 기술 쇼케이스(WORKS) 만들면 인덱스 연결
+    related: [14, 15],        // PBR 셰이더 & 라이팅 · 렌더링 최적화
     media: [
       { type: "youtube", id: "https://youtu.be/Ug0tOwWOcdg" },
     ],
@@ -202,17 +228,22 @@ const PROJECTS = [
       "약 한 달간 1인으로 재현한 프로젝트입니다. 핵심 과제는 원신 특유의 전투 시스템과 셰이더, " +
       "캐릭터를 또렷하게 잡아주는 아웃라인을 실시간에서 양립시키는 것이었습니다. " +
       "램프 텍스처로 음영 단계를 제어하고 얼굴은 노멀을 따로 베이크해 그림자가 깨지는 문제를 해결했습니다. " +
-      "원작에 근접한 룩을 디퍼드 렌더링 파이프라인으로 구현했습니다. " +
-      "(정식 출시 없이 포트폴리오 목적으로 제작)",
+      "원작에 근접한 룩을 디퍼드 렌더링 파이프라인으로 구현했습니다. (포트폴리오 목적으로 제작)",
     contribution: [
       // 설명에서 언급한 작업만 정리 — 세부 기법/수치 있으면 자유롭게 보강하세요
       "DirectX 디퍼드 렌더링 파이프라인 직접 구현",
       "램프 텍스처 기반 셀 셰이딩 — 음영 단계 제어",
       "페이스 노멀 베이크로 얼굴 그림자 문제 해결",
-      "캐릭터 아웃라인 구현",
-      "NPR 파티클 시스템 구현",
+      "캐릭터 아웃라인 구현 (배면법)",
+      "파티클 시스템 구현",
       "전투 시스템 구현",
     ],
+    results: [
+      "DirectX 디퍼드 렌더링 파이프라인을 직접 구현",
+      "셀 셰이딩·아웃라인·그림자를 실시간에서 양립",
+      "렌더러부터 전투까지 구현",
+    ],
+    tools: ["DirectX 11", "HLSL", "C++"],
     link: "",
     linkLabel: "영상 보기",
     related: [0, 1, 2, 3],    // 디퍼드 렌더러 쇼케이스 4개(파티클·디퍼드·툰·그림자&SSAO) 연결
@@ -227,16 +258,24 @@ const PROJECTS = [
     role: "1인 개발 (전 과정)",
     studio: "",
     cover: "assets/projects/skul.png",   // TODO: 썸네일 PNG를 assets/projects/skul.png 로
-    summary: "「스컬」을 모작한 2D 게임 1인 개발 프로젝트. 2D 렌더링·연출 역량.",
+    summary: "엔진 없이 Windows API(GDI+)로 「스컬」을 모작한 2D 게임. 충돌·중력·전투·인벤토리 등 핵심 시스템을 직접 구현.",
     description:
-      "「스컬」을 모작한 1인 개발 프로젝트입니다. 3D 위주 작업과 달리 2D 게임으로 진행했고, " +
-      "PC 기준 약 2개월간 빈 프로젝트에서 시작해 혼자 구현했습니다. (정식 출시 없이 포트폴리오 목적으로 제작)",
+      "게임 엔진 없이 Windows API(GDI+) 기반으로 「스컬」을 모작한 1인 프로젝트입니다. 박스 충돌, 중력, " +
+      "이펙트 생명주기, 전투, 인벤토리 등 보통 엔진이 대신 처리해 주는 핵심 시스템들을 직접 구현하며, 게임이 " +
+      "돌아가는 원리를 밑바닥부터 다뤘습니다. (포트폴리오 목적으로 제작)",
     contribution: [
-      // ※ 2D 중심으로 추정한 초안 — 실제 한 작업으로 수정/추가해 주세요
-      "2D 게임 전 과정 1인 개발",
-      "2D 캐릭터·이펙트 연출",
-      "2D 렌더링/셰이더 작업",
+      "Windows API(GDI+) 기반 2D 게임 1인 개발",
+      "박스 충돌 처리 구현",
+      "중력·점프 등 기본 물리 구현",
+      "이펙트 생명주기 관리",
+      "전투 시스템 구현",
+      "인벤토리 시스템 구현",
     ],
+    results: [
+      "엔진 없이 게임의 핵심 시스템을 처음부터 직접 구현",
+      "충돌·물리·전투·인벤토리 등 게임 전반 구조를 경험",
+    ],
+    tools: ["C++", "WinAPI", "GDI+"],
     link: "",
     linkLabel: "영상 보기",
     related: [],
@@ -262,6 +301,12 @@ const PROJECTS = [
       "엔믹스·드미트리 베가스 등 아티스트 공연 연출",
       "Unreal 엔진 기반 무대 연출·렌더링 구현",
     ],
+    results: [
+      "실제 서비스 출시 — 라이브 메타버스 콘서트 구현",
+      "엔믹스·드미트리 베가스 등 실제 아티스트 공연을 인게임으로 재현",
+      "약 1년간 콘서트장 제작·연출 전 과정 참여",
+    ],
+    tools: ["Unreal Engine", "Sequencer"],
     link: "",                 // 공식 영상/소개 페이지 있으면 (있으면 버튼 노출)
     linkLabel: "공연 영상 보기",
     related: [],
@@ -287,6 +332,12 @@ const PROJECTS = [
       "Unreal 엔진 기반 실시간 렌더링·연출",
       "전시 현장 상영 점검 및 대응",
     ],
+    results: [
+      "의림지 역사박물관에 실제 전시·상영",
+      "약 1년간 모델링~렌더링 전 과정 참여",
+      "전시 현장 상영 안정성 점검·대응",
+    ],
+    tools: ["Unreal Engine", "Sequencer"],
     link: "",
     linkLabel: "전시 영상 보기",
     related: [],
@@ -298,7 +349,7 @@ const PROJECTS = [
 ];
 
 /* 카테고리 필터 (works의 category와 일치해야 함) -------------------------- */
-const CATEGORIES = ["All", "Rendering", "Shader", "VFX"];
+const CATEGORIES = ["All", "Rendering", "Shader", "Tool", "VFX"];
 
 /* =========================================================================
    기술 쇼케이스 (셰이더 / VFX / 툴 분해 — 실력 증명 칸)
@@ -514,5 +565,236 @@ const WORKS = [
       { label: "그림자 매핑", href: "https://blog.naver.com/ridas_/223930081038" },
       { label: "SSAO", href: "https://blog.naver.com/ridas_/223934613803" },
     ],
+  },
+
+  // ===== Maze 프로젝트 기술 쇼케이스 (임시 내용 — 실제 작업으로 다듬으세요) =====
+  {
+    title: "Water 셰이더",
+    category: "Shader",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["Unity", "HLSL", "Shader Graph"],
+    cover: "assets/works/maze-water.png",   // TODO: 중립 씬에서 재현한 스크린샷
+    summary: "깊이·굴절·거품·흐름을 결합한 스타일라이즈드 물 셰이더. 아티스트가 코드 없이 다양한 수역을 연출.",
+    description:
+      "맵의 강·호수에 일관된 룩을 입히기 위해 제작한 물 셰이더입니다. 깊이에 따른 색 블렌딩, 굴절, " +
+      "가장자리 거품, 흐름(flow)을 파라미터로 노출해 아티스트가 코드 없이 다양한 수역을 연출할 수 있게 했습니다.",
+    bullets: [
+      "깊이 기반 얕은물/깊은물 색 블렌딩",
+      "굴절·반사 + 가장자리 거품",
+      "Flow map 기반 물 흐름 표현",
+      "아티스트용 파라미터 노출",
+    ],
+    media: [{ type: "image", src: "assets/works/maze-water.png" }],
+  },
+  {
+    title: "맵 에셋 배치 툴",
+    category: "Tool",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["Unity", "C#", "Editor Scripting"],
+    cover: "assets/works/maze-place.png",   // TODO: 툴 UI 스크린샷(게임 에셋 안 보이게)
+    summary: "맵 에셋을 브러시·스캐터 방식으로 빠르게 배치하는 Unity 에디터 툴. 배치 시간 단축.",
+    description:
+      "맵 제작 시 반복되는 에셋 배치를 자동화한 에디터 툴입니다. 브러시/스캐터 배치, 그리드 스냅·표면 정렬, " +
+      "랜덤 변형(회전·스케일)을 제공해 레벨 셋업 시간을 크게 줄였습니다.",
+    bullets: [
+      "브러시/스캐터 방식 에셋 배치",
+      "그리드 스냅·표면 정렬",
+      "랜덤 회전·스케일로 자연스러운 분포",
+    ],
+    media: [{ type: "image", src: "assets/works/maze-place.png" }],
+  },
+  {
+    title: "텍스처 검수 툴",
+    category: "Tool",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["Unity", "C#", "Editor Scripting"],
+    cover: "assets/works/maze-texcheck.png",   // TODO: 툴 UI 스크린샷
+    summary: "텍스처 규격(해상도·압축·밉맵·네이밍)을 일괄 검사·자동 교정하는 Unity 툴. 메모리·성능 사고 예방.",
+    description:
+      "규격을 벗어난 텍스처가 메모리·성능 문제를 일으키는 것을 막기 위한 검수 툴입니다. 해상도·압축 포맷·밉맵·" +
+      "네이밍을 일괄 검사하고, 규격 위반 항목을 리포트하고 원클릭으로 교정합니다.",
+    bullets: [
+      "텍스처 해상도·압축·밉맵 일괄 검사",
+      "규격 위반 항목 리포트",
+      "원클릭 자동 교정",
+    ],
+    media: [{ type: "image", src: "assets/works/maze-texcheck.png" }],
+  },
+  {
+    title: "최적화 모니터링 툴",
+    category: "Tool",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["Unity", "C#"],
+    cover: "assets/works/maze-perf.png",   // TODO: 툴 UI 스크린샷
+    summary: "드로우콜·배칭·메모리·프레임타임을 실시간 표시하는 Unity 성능 모니터링 툴. 팀 최적화 기준 마련.",
+    description:
+      "팀이 성능 예산 안에서 작업하도록 주요 지표를 실시간으로 보여주는 모니터링 툴입니다. 드로우콜·배칭·메모리·" +
+      "프레임타임을 한 화면에 표시하고, 기준 초과 시 경고해 최적화 기준점을 제공합니다.",
+    bullets: [
+      "드로우콜·배칭·메모리·프레임타임 실시간 표시",
+      "성능 예산 초과 경고",
+      "씬별 성능 스냅샷 비교",
+    ],
+    media: [{ type: "image", src: "assets/works/maze-perf.png" }],
+  },
+  {
+    title: "프로시저럴 모델링 툴",
+    category: "Tool",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["Unity", "C#"],
+    cover: "assets/works/maze-proc.png",   // TODO: 결과 메쉬 스크린샷(중립)
+    summary: "스플라인·파라미터로 반복 구조물을 자동 생성하는 Unity 프로시저럴 모델링 툴. 수작업 모델링 시간 절감.",
+    description:
+      "난간·계단·파이프처럼 반복되는 구조물을 파라미터로 생성하는 프로시저럴 모델링 툴입니다. 스플라인을 따라 " +
+      "메쉬를 생성하고 길이·간격·분기를 실시간으로 조절해, 반복 모델링 작업을 자동화했습니다.",
+    bullets: [
+      "파라미터 기반 반복 구조물 생성",
+      "스플라인 따라 메쉬 생성",
+      "실시간 프리뷰·조절",
+    ],
+    media: [{ type: "image", src: "assets/works/maze-proc.png" }],
+  },
+
+  // ===== Maze 모바일 스핀오프 기술 쇼케이스 (임시 내용 — 실제 작업으로 다듬으세요) =====
+  {
+    title: "모션 트레일",
+    category: "VFX",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["Unity", "URP", "C#", "HLSL"],
+    cover: "assets/works/mob-trail.png",   // TODO: 중립 씬 잔상 스크린샷
+    summary: "공격 모션에 속도감을 더하는 메쉬 기반 모션 트레일. 모바일 부하를 고려해 경량화.",
+    description:
+      "공격·이동 모션에 잔상을 남겨 속도감을 주는 모션 트레일 기법입니다. 프레임마다 메쉬(또는 본 위치)를 " +
+      "샘플링해 잔상 리본을 생성하고, 수명에 따른 페이드·컬러 그라데이션으로 자연스럽게 사라지게 했습니다. " +
+      "샘플 수·수명을 파라미터로 노출해 모바일 환경에서 부하를 조절할 수 있게 했습니다.",
+    bullets: [
+      "메쉬/본 샘플링 기반 잔상 리본 생성",
+      "수명에 따른 페이드·컬러 그라데이션",
+      "샘플 수·수명 파라미터화로 모바일 최적화",
+    ],
+    media: [{ type: "image", src: "assets/works/mob-trail.png" }],
+  },
+  {
+    title: "URP 툰 셰이딩",
+    category: "Shader",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["Unity", "URP", "Shader Graph", "HLSL"],
+    cover: "assets/works/mob-toon.png",   // TODO: 중립 메쉬 적용 스크린샷
+    summary: "Unity URP 환경에서 모바일 성능을 고려해 구현한 툰 셰이딩 — 셀 명암 + 외곽선.",
+    description:
+      "모바일(URP)에 맞춘 툰 셰이더입니다. 램프/계단 명암으로 셀 셰이딩을 구현하고, 외곽선은 모바일 부하를 " +
+      "고려해 노멀 압출 방식으로 처리했습니다. 모바일 GPU 예산 안에서 동작하도록 인스트럭션을 줄여 경량화했습니다.",
+    bullets: [
+      "램프 기반 셀 명암 (단계 음영)",
+      "노멀 압출 외곽선 — 모바일 경량 방식",
+      "URP Shader Graph·HLSL로 구현",
+      "모바일 GPU 예산 내 최적화",
+    ],
+    media: [{ type: "image", src: "assets/works/mob-toon.png" }],
+  },
+  {
+    title: "SDF 공격 장판",
+    category: "VFX",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["Unity", "URP", "HLSL"],
+    cover: "assets/works/mob-sdf.png",   // TODO: 장판 효과 스크린샷
+    summary: "SDF(부호 거리장)로 공격 범위 장판을 해상도 무관하게 선명히 그리는 기법.",
+    description:
+      "보스·스킬의 공격 범위를 바닥에 표시하는 장판 효과입니다. SDF로 원·부채꼴·사각 등 다양한 모양을 " +
+      "수학적으로 그려, 해상도에 무관하게 선명한 테두리와 채움을 표현했습니다. 경고에서 발동까지의 타이밍을 " +
+      "알파·스케일 애니메이션으로 연출했습니다.",
+    bullets: [
+      "SDF 기반 모양(원·부채꼴·사각) 선명 렌더",
+      "테두리 두께·채움·펄스 파라미터화",
+      "경고 → 발동 타이밍 애니메이션",
+    ],
+    media: [{ type: "image", src: "assets/works/mob-sdf.png" }],
+  },
+  {
+    title: "물리 애니메이션 툴",
+    category: "Tool",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["Unity", "C#"],
+    cover: "assets/works/mob-physanim.png",   // TODO: 툴 UI/결과 스크린샷
+    summary: "본 체인에 흔들림(2차 모션)을 자동으로 주는 Unity 물리 애니메이션 툴. 수작업 키프레임 절감.",
+    description:
+      "머리카락·천·꼬리·장신구 같은 부위에 2차 모션(흔들림)을 자동으로 주는 툴입니다. 본 체인에 스프링·감쇠를 " +
+      "적용해 일일이 키프레임하지 않아도 자연스러운 흔들림을 만들고, 강성·감쇠·충돌을 파라미터로 조절합니다.",
+    bullets: [
+      "본 체인 스프링·감쇠 기반 2차 모션",
+      "강성·감쇠·충돌 파라미터 조절",
+      "수작업 키프레임 없이 자연스러운 흔들림",
+    ],
+    media: [{ type: "image", src: "assets/works/mob-physanim.png" }],
+  },
+
+  // ===== 오디션 프로젝트 기술 쇼케이스 =====
+  {
+    title: "생성형 AI 아트 파이프라인",
+    category: "Tool",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["3ds Max", "MAXScript", "Tripo", "Hunyuan 3D", "MeshAI"],
+    cover: "assets/works/audition-aipipe.png",   // TODO: 파이프라인 다이어그램/툴 UI 스크린샷
+    summary: "생성형 3D AI와 3ds Max(MAXScript)를 연동해 아트 리소스 제작을 자동화한 파이프라인. 제작 3일→1일.",
+    description:
+      "온라인 댄스 게임 「오디션」의 아트 리소스 제작을 가속하기 위해 단독 구축한 파이프라인입니다. " +
+      "Tripo·Hunyuan·MeshAI 등 3D 생성 AI로 초기 메쉬를 만들고, MAXScript로 정리·규격화·임포트까지 " +
+      "자동으로 이어, 기존 3일 걸리던 제작을 1일로 단축했습니다.",
+    bullets: [
+      "Tripo·Hunyuan·MeshAI로 초기 3D 에셋 생성",
+      "MAXScript로 메쉬 정리·규격화·임포트 자동화",
+      "AI 결과물 → 제작 워크플로우 원클릭 연결",
+      "아트 리소스 제작 3일 → 1일 단축",
+    ],
+    media: [{ type: "image", src: "assets/works/audition-aipipe.png" }],
+  },
+
+  // ===== P의 거짓 프로젝트 기술 쇼케이스 =====
+  {
+    title: "PBR 셰이더 & 라이팅",
+    category: "Shader",
+    year: "2025",
+    role: "Technical Artist · Lighting",
+    tools: ["DirectX 11", "HLSL", "C++"],
+    cover: "assets/works/lop-pbr.png",   // TODO: 중립 씬 재질·라이팅 스크린샷
+    summary: "DirectX 환경에서 직접 구현한 PBR 셰이더 + 원작 무드 재현을 위한 라이팅 디자인.",
+    description:
+      "「P의 거짓」의 어둡고 무거운 룩을 재현하기 위해 DirectX 환경에서 직접 구현한 PBR 셰이더입니다. " +
+      "메탈릭·러프니스 기반 물리 셰이딩으로 재질감을 살리고, 원작의 분위기를 좌우하는 빛 디자인을 핵심으로 " +
+      "보고 라이팅까지 직접 설계했습니다.",
+    bullets: [
+      "메탈릭·러프니스 기반 PBR 셰이딩",
+      "DirectX/HLSL로 직접 구현",
+      "원작 무드 재현을 위한 라이팅 디자인",
+    ],
+    media: [{ type: "image", src: "assets/works/lop-pbr.png" }],
+  },
+  {
+    title: "렌더링 최적화 — 옥트리·LOD·컬링",
+    category: "Rendering",
+    year: "2025",
+    role: "Technical Artist",
+    tools: ["DirectX 11", "C++"],
+    cover: "assets/works/lop-opt.png",   // TODO: 디버그 뷰/지표 스크린샷
+    summary: "옥트리 공간 분할 + 거리 기반 LOD + 프러스텀 컬링으로 렌더링 부하를 줄인 최적화.",
+    description:
+      "넓은 씬을 안정적으로 렌더링하기 위한 최적화 작업입니다. 옥트리로 공간을 분할해 컬링·쿼리를 가속하고, " +
+      "거리 기반 LOD로 폴리곤 부하를 줄였으며, 프러스텀 컬링으로 화면 밖 오브젝트를 그리지 않게 했습니다.",
+    bullets: [
+      "옥트리 공간 분할로 컬링·쿼리 가속",
+      "거리 기반 LOD로 폴리곤 부하 절감",
+      "프러스텀 컬링으로 화면 밖 오브젝트 제외",
+    ],
+    media: [{ type: "image", src: "assets/works/lop-opt.png" }],
   },
 ];

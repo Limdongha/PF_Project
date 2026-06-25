@@ -196,6 +196,21 @@ body::before {
   gap: 1.2rem;
 }
 
+/* 쇼케이스 세로 스크롤 — 항목이 늘어나도 영역을 고정하고 안에서 아래로 스크롤.
+   높이만 바꾸면 보이는 줄 수 조절: 딱 2줄 ≈ 580px / 2줄+살짝 = 720px / 3줄 ≈ 880px */
+.grid--scroll {
+  max-height: 720px;
+  overflow-y: auto;
+  padding-bottom: .8rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+  scroll-padding-top: .4rem;
+}
+.grid--scroll::-webkit-scrollbar { width: 9px; }
+.grid--scroll::-webkit-scrollbar-thumb { background: var(--line); border-radius: 100px; }
+.grid--scroll::-webkit-scrollbar-thumb:hover { background: var(--txt-dim); }
+.grid--scroll::-webkit-scrollbar-track { background: transparent; }
+
 /* ===== 가로 드래그 스크롤 (프로젝트 칸 전용) ===== */
 .row-wrap { position: relative; }
 /* 오른쪽 페이드 — "옆에 더 있다" 힌트. 끝까지 가면/스크롤 불필요하면 사라짐 */
@@ -354,6 +369,9 @@ body::before {
 .m-bullets li::before { content: "▸"; color: var(--txt-dim); }
 .m-tools { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1.6rem; }
 .m-tools span { font-family: "JetBrains Mono", monospace; font-size: .75rem; color: var(--txt-dim); padding: .3rem .7rem; border: 1px solid var(--line); border-radius: 6px; }
+.m-subhead + .m-tools { margin-top: 0; }
+.m-bullets--result li { color: var(--txt); }
+.m-bullets--result li::before { content: "✦"; color: var(--accent); }
 
 /* 프로젝트 모달: 소제목 + 사용 기술 크로스링크 + 외부 링크 버튼 */
 .m-subhead { font-family: var(--mono); font-size: .78rem; color: var(--txt-dim); letter-spacing: .14em; text-transform: uppercase; margin: 1.8rem 0 .9rem; }

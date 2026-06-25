@@ -335,6 +335,12 @@ function openProjectModal(i) {
     ${p.contribution && p.contribution.length
       ? `<h3 class="m-subhead">담당 · 기여</h3><ul class="m-bullets">${p.contribution.map((b) => `<li>${b}</li>`).join("")}</ul>`
       : ""}
+    ${p.results && p.results.length
+      ? `<h3 class="m-subhead">핵심 성과</h3><ul class="m-bullets m-bullets--result">${p.results.map((r) => `<li>${r}</li>`).join("")}</ul>`
+      : ""}
+    ${p.tools && p.tools.length
+      ? `<h3 class="m-subhead">Tools</h3><div class="m-tools">${p.tools.map((t) => `<span>${t}</span>`).join("")}</div>`
+      : ""}
     ${related.length
       ? `<h3 class="m-subhead">사용 기술</h3><div class="m-related">${related
           .map((w) => `<button type="button" class="m-related__item" data-open-work="${WORKS.indexOf(w)}">${w.title} →</button>`)
