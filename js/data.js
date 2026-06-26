@@ -789,7 +789,7 @@ const WORKS = [
     year: "2025",
     role: "Technical Artist",
     tools: ["DirectX 11", "C++"],
-    cover: "assets/works/lop-opt.png",   // TODO: 디버그 뷰/지표 스크린샷
+    cover: "assets/works/lop-opt.jpg",   // TODO: 디버그 뷰/지표 스크린샷
     summary: "옥트리 공간 분할 + 거리 기반 LOD + 프러스텀 컬링으로 렌더링 부하를 줄인 최적화.",
     description:
       "넓은 씬을 안정적으로 렌더링하기 위한 최적화 작업입니다. 옥트리로 공간을 분할해 컬링·쿼리를 가속하고, " +
@@ -799,7 +799,7 @@ const WORKS = [
       "거리 기반 LOD로 폴리곤 부하 절감",
       "프러스텀 컬링으로 화면 밖 오브젝트 제외",
     ],
-    media: [{ type: "image", src: "assets/works/lop-opt.png" }],
+    media: [{ type: "image", src: "assets/works/lop-opt.jpg" }],
   },
 
   // ===== 칼리버스 프로젝트 기술 쇼케이스 =====
@@ -809,7 +809,7 @@ const WORKS = [
     year: "2024",
     role: "Technical Artist",
     tools: ["Unreal Engine", "Blueprint"],
-    cover: "assets/works/kalli-scatter.png",   // TODO: 툴 UI/결과 스크린샷
+    cover: "assets/works/kalli-scatter.jpg",   // TODO: 툴 UI/결과 스크린샷
     summary: "모델 임포트 시 머티리얼 인스턴스 생성·슬롯 할당·텍스처 연결을 자동으로 처리하는 언리얼 툴.",
     description:
       "모델을 가져올 때마다 반복되던 머티리얼 세팅을 자동화한 툴입니다. 머티리얼 인스턴스를 자동으로 만들어 " +
@@ -821,6 +821,6 @@ const WORKS = [
       "대응 텍스처(알베도·노멀·러프니스 등) 자동 연결",
       "반복 셋업 시간·실수 감소",
     ],
-    media: [{ type: "image", src: "assets/works/kalli-scatter.png" }],
+    media: [{ type: "image", src: "assets/works/kalli-scatter.jpg" }],
   },
 ];
