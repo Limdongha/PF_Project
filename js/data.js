@@ -300,16 +300,17 @@ const PROJECTS = [
       "콘서트장 환경 제작 — 모델링부터 렌더링까지 전 과정 참여",
       "엔믹스·드미트리 베가스 등 아티스트 공연 연출",
       "Unreal 엔진 기반 무대 연출·렌더링 구현",
+      "머티리얼 스캐터 툴 개발 — 머티리얼 인스턴스·텍스처 셋업 자동화",
     ],
     results: [
       "실제 서비스 출시 — 라이브 메타버스 콘서트 구현",
       "엔믹스·드미트리 베가스 등 실제 아티스트 공연을 인게임으로 재현",
       "약 1년간 콘서트장 제작·연출 전 과정 참여",
     ],
-    tools: ["Unreal Engine", "Sequencer"],
+    tools: ["Unreal Engine", "Blueprint"],
     link: "",                 // 공식 영상/소개 페이지 있으면 (있으면 버튼 노출)
     linkLabel: "공연 영상 보기",
-    related: [],
+    related: [16],            // 언리얼 머티리얼 스캐터
     media: [
       { type: "image", src: "assets/projects/kalliverse.png" },
       // { type: "youtube", id: "https://youtu.be/영상ID" },
@@ -362,7 +363,7 @@ const WORKS = [
     year: "2025",
     role: "Graphics · Tech Art",
     tools: ["DirectX 11", "HLSL", "C++"],
-    cover: "assets/works/thumb-particle.png",   // 전용 썸네일(4:3). 없으면 제목 플레이스홀더로 대체
+    cover: "assets/works/thumb-particle.jpg",   // 전용 썸네일(4:3). 없으면 제목 플레이스홀더로 대체
     summary: "인스턴싱으로 드로우콜을 1회로 줄이고, 메쉬 표면 균등 분포 스폰까지 직접 구현한 GPU 파티클 시스템.",
     description:
       "수천 개의 파티클을 단일 드로우콜로 그리기 위해, 정점·인덱스 버퍼에 인스턴스 버퍼를 더한 구조를 설계했습니다. " +
@@ -414,6 +415,9 @@ const WORKS = [
       { p: "문제는 삼각형을 무작위로 고르니 면이 작고 조밀한 곳에 파티클이 몰린 것이었습니다. 큰 면이든 작은 면이든 같은 확률로 뽑히기 때문입니다. 그래서 면적에 비례해 뽑히도록, 각 삼각형의 면적을 누적합으로 저장하고 전체 면적 중 임의의 값을 lower_bound 이진탐색으로 찾아 해당 삼각형을 선택했습니다. 넓은 면일수록 더 자주 당첨되는 구조입니다." },
       { img: "assets/works/particle/11.png", cap: "면적 가중치 선택으로 표면에 고르게 분포된 파티클 — 큰 면도 작은 면도 자연스럽게 채워집니다." },
       { p: "마지막으로 삼각형 '안에서의' 위치도 다듬어야 했습니다. 그냥 두면 넓은 삼각형은 가운데로 쏠리기 쉬워, 바리센트릭 좌표로 면 위의 무작위 점을 구했습니다. 한 꼭짓점에서 나머지 두 꼭짓점으로 가는 비율(U, V)을 무작위로 정하되 U+V가 1을 넘지 않게 하면, 삼각형 내부 어디에나 균일하게 분포시킬 수 있습니다." },
+
+      { h: "정리" },
+      { p: "여기까지가 파티클 시스템의 큰 틀입니다. 인스턴싱으로 드로우콜을 한 번에 묶고, 움직임·텍스처·스폰은 자식 클래스에서 확장되도록 해뒀습니다. 새 이펙트를 추가할 때 부모를 손댈 필요가 없어졌습니다." },
     ],
     links: [
       { label: "구조 설계 (1편)", href: "https://blog.naver.com/ridas_/223910255258" },
@@ -426,7 +430,7 @@ const WORKS = [
     year: "2025",
     role: "Graphics · Tech Art",
     tools: ["DirectX 11", "HLSL", "C++"],
-    cover: "assets/works/thumb-deferred.png",   // 전용 썸네일(4:3). 없으면 제목 플레이스홀더로 대체
+    cover: "assets/works/thumb-deferred.jpg",   // 전용 썸네일(4:3). 없으면 제목 플레이스홀더로 대체
     summary: "렌더 타겟을 가로채 MRT(디퓨즈·노말·라이트)로 분리하고, 뎁스로 월드 좌표를 복원해 조명을 계산한 디퍼드 파이프라인.",
     description:
       "화면을 한 번에 칠하는 대신, 렌더 타겟을 가로채 디퓨즈·노말·라이트를 멀티 렌더 타겟(MRT)에 나눠 그린 뒤 " +
@@ -479,7 +483,7 @@ const WORKS = [
     year: "2025",
     role: "Shader",
     tools: ["DirectX 11", "HLSL", "C++"],
-    cover: "assets/works/thumb-toon.png",   // 전용 썸네일(4:3). 없으면 제목 플레이스홀더로 대체
+    cover: "assets/works/thumb-toon.jpg",   // 전용 썸네일(4:3). 없으면 제목 플레이스홀더로 대체
     summary: "Ceil 단계 명암과 노멀 압출 2-pass 외곽선으로 원신류 NPR 룩을 재현한 툰 셰이더.",
     description:
       "원신 특유의 비실사(NPR) 캐릭터 룩을 만들기 위한 툰 셰이더입니다. 색상은 N·L 조명을 Ceil 함수로 계단형 " +
@@ -522,7 +526,7 @@ const WORKS = [
     year: "2025",
     role: "Graphics · Tech Art",
     tools: ["DirectX 11", "HLSL", "C++"],
-    cover: "assets/works/thumb-shadowssao.png",   // 전용 썸네일(4:3). 없으면 제목 플레이스홀더로 대체
+    cover: "assets/works/thumb-shadowssao.jpg",   // 전용 썸네일(4:3). 없으면 제목 플레이스홀더로 대체
     summary: "빛 시점 뎁스로 그림자를 만들고, 스크린 공간 반구 샘플링으로 구석 폐색(SSAO)을 더한 음영 표현.",
     description:
       "그림자는 빛의 방향에서 장면을 찍은 뎁스 버퍼를 만들고, 기존 화면의 픽셀을 같은 빛 공간으로 변환해 깊이를 " +
@@ -796,5 +800,27 @@ const WORKS = [
       "프러스텀 컬링으로 화면 밖 오브젝트 제외",
     ],
     media: [{ type: "image", src: "assets/works/lop-opt.png" }],
+  },
+
+  // ===== 칼리버스 프로젝트 기술 쇼케이스 =====
+  {
+    title: "언리얼 머티리얼 스캐터",
+    category: "Tool",
+    year: "2024",
+    role: "Technical Artist",
+    tools: ["Unreal Engine", "Blueprint"],
+    cover: "assets/works/kalli-scatter.png",   // TODO: 툴 UI/결과 스크린샷
+    summary: "모델 임포트 시 머티리얼 인스턴스 생성·슬롯 할당·텍스처 연결을 자동으로 처리하는 언리얼 툴.",
+    description:
+      "모델을 가져올 때마다 반복되던 머티리얼 세팅을 자동화한 툴입니다. 머티리얼 인스턴스를 자동으로 만들어 " +
+      "맞는 슬롯에 넣고, 대응하는 텍스처(알베도·노멀·러프니스 등)까지 자동으로 연결합니다. 인스턴스를 하나씩 " +
+      "만들고 슬롯에 끼우고 텍스처를 링크하던 작업을 한 번에 끝내, 셋업 시간과 실수를 줄였습니다.",
+    bullets: [
+      "머티리얼 인스턴스 자동 생성·매칭",
+      "알맞은 머티리얼 슬롯에 자동 할당",
+      "대응 텍스처(알베도·노멀·러프니스 등) 자동 연결",
+      "반복 셋업 시간·실수 감소",
+    ],
+    media: [{ type: "image", src: "assets/works/kalli-scatter.png" }],
   },
 ];
