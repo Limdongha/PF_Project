@@ -21,3 +21,11 @@ __pycache__/
 *.avi
 *.mkv
 *.prproj
+
+# ── 쇼케이스 원본 원고(_src) — 로컬 전용, 공개 레포에 올리지 않음 ──
+# 노션 PDF·내부 보고서 등 원본 문서. 사이트는 content/works/*.md 와 img/ 만 사용하므로
+# _src 는 배포에 불필요하고, 공개 시 내부 정보가 노출될 수 있어 제외.
+content/works/_src/
+
+# ── Claude 실행용 개인 런처(로컬 전용) ──
+PF.bat

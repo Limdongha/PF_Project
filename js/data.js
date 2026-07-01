@@ -46,8 +46,8 @@ const APPROACH = [
   },
   {
     icon: "vfx",
-    title: "최적화 & VFX",
-    text: "Niagara · HLSL로 게임 이펙트를 제작하고 퍼포먼스 예산 안에서 동작하도록 드로우콜·셰이더 비용을 줄입니다.",
+    title: "최적화 & 애니메이션",
+    text: "퍼포먼스 예산 안에서 동작하도록 드로우콜·셰이더 비용을 줄이고, 물리 기반 애니메이션 툴을 구현합니다.",
   },
   {
     icon: "tool",
@@ -108,7 +108,7 @@ const PROJECTS = [
     tools: ["Unity", "C#"],
     link: "",                 // 외부 링크 버튼용(선택). 플레이 영상은 아래 media에 유튜브로 넣음
     linkLabel: "영상 보기",
-    related: [4, 5, 6, 7, 8],  // Water 셰이더·맵 배치 툴·텍스처 검수 툴·최적화 모니터링 툴·프로시저럴 모델링 툴
+    related: [1, 4, 6, 11, 12],  // Water 셰이더·맵 배치 툴·프로시저럴 모델링 툴·텍스처 검수 툴·최적화 모니터링 툴
     media: [
       { type: "image", src: "assets/projects/maze.jpg" },
       // TODO: 플레이 영상 유튜브 링크 받으면 아래 주석 풀고 넣기
@@ -142,7 +142,7 @@ const PROJECTS = [
     tools: ["Unity", "C#"],
     link: "",                 // 외부 링크 버튼용(선택). 플레이 영상은 아래 media에 유튜브로 넣음
     linkLabel: "영상 보기",
-    related: [9, 10, 11, 12],  // 모션 트레일·URP 툰 셰이딩·SDF 공격 장판·물리 애니메이션 툴
+    related: [5, 7, 8, 10],  // URP 툰 셰이딩·물리 애니메이션 툴·모션 트레일·SDF 공격 장판
     media: [
       { type: "image", src: "assets/projects/maze-mobile.jpg" },
       // TODO: 플레이 영상 유튜브 링크 받으면 주석 풀고 넣기
@@ -175,7 +175,7 @@ const PROJECTS = [
     tools: ["3ds Max", "MAXScript", "Tripo", "Hunyuan 3D", "MeshAI"],
     link: "",
     linkLabel: "데모 보기",
-    related: [13],            // 생성형 AI 아트 파이프라인
+    related: [0],             // 생성형 AI 아트 파이프라인
     media: [
       { type: "image", src: "assets/projects/audition.png" },
       // { type: "youtube", id: "https://youtu.be/영상ID" },
@@ -210,7 +210,7 @@ const PROJECTS = [
     tools: ["DirectX 11", "HLSL", "C++"],
     link: "",                 // 외부 링크 버튼용(선택). 플레이 영상은 아래 media에 유튜브로
     linkLabel: "영상 보기",
-    related: [14, 15],        // PBR 셰이더 & 라이팅 · 렌더링 최적화
+    related: [13, 16],        // PBR 셰이더 & 라이팅 · 렌더링 최적화
     media: [
       { type: "youtube", id: "https://youtu.be/Ug0tOwWOcdg" },
     ],
@@ -246,7 +246,7 @@ const PROJECTS = [
     tools: ["DirectX 11", "HLSL", "C++"],
     link: "",
     linkLabel: "영상 보기",
-    related: [0, 1, 2, 3],    // 디퍼드 렌더러 쇼케이스 4개(파티클·디퍼드·툰·그림자&SSAO) 연결
+    related: [3, 9, 14, 15],   // 디퍼드 렌더러 쇼케이스 4개(파티클·툰·디퍼드·그림자&SSAO) 연결
     media: [
       { type: "youtube", id: "https://youtu.be/GOxVFVGjr_s" },
     ],
@@ -310,7 +310,7 @@ const PROJECTS = [
     tools: ["Unreal Engine", "Blueprint"],
     link: "",                 // 공식 영상/소개 페이지 있으면 (있으면 버튼 노출)
     linkLabel: "공연 영상 보기",
-    related: [16],            // 언리얼 머티리얼 스캐터
+    related: [2],             // 언리얼 머티리얼 스캐터
     media: [
       { type: "image", src: "assets/projects/kalliverse.png" },
       // { type: "youtube", id: "https://youtu.be/영상ID" },
@@ -357,6 +357,77 @@ const CATEGORIES = ["All", "Rendering", "Shader", "Tool", "VFX"];
    개별 "기술 단위" 결과물입니다. 위 PROJECTS(타이틀 단위)와 구분됩니다.
    ========================================================================= */
 const WORKS = [
+  /* 정렬 기준: TA 채용 우선순위
+     위 → 실무 차별점(AI 파이프라인)·엔진 내 프로덕션 셰이더/툴·비주얼 그랩력 큰 작업
+     아래 → DX11 "밑바닥부터 렌더러" 학습작(탄탄한 기초 증명용)
+     ※ 카드는 이 배열 순서대로 렌더됩니다. 내용 채우는 순서도 위에서부터 권장. */
+  {
+    title: "생성형 AI 아트 파이프라인",
+    category: "Tool",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["Gemini", "ComfyUI", "Blender", "ZBrush", "3ds Max"],
+    cover: "assets/works/audition-aipipe.png",   // TODO: 실제 결과 컷으로 교체 권장(예: 품질 그리드/파이프라인 다이어그램)
+    studyMd: "content/works/01-ai-pipeline.md",   // ← 케이스 스터디 본문은 이 마크다운 파일에서 작성
+    summary: "ComfyUI 멀티뷰 생성으로 만든 3D 에셋을 ZBrush 리토폴·3ds Max 자동화로 이은 의상 제작 파이프라인. 제작 3일→1일.",
+    description:
+      "온라인 댄스 게임 「오디션」의 의상 에셋 제작을 가속하기 위해 단독 구축한 파이프라인입니다. " +
+      "ComfyUI로 일관된 멀티뷰 이미지를 만들고, 이를 3D 생성 AI로 변환한 뒤 블렌더·ZBrush로 토폴로지를 " +
+      "정리하고, 3ds Max 자동화 스크립트로 반복 작업을 묶어 기존 3일 걸리던 제작을 1일로 단축했습니다.",
+    bullets: [
+      "ComfyUI 노드로 일관된 멀티뷰 이미지 생성 (제미나이 일관성 문제 해결)",
+      "멀티뷰 → 3D 생성 AI 변환, 블렌더·ZBrush로 리토폴로지 정리",
+      "3ds Max 자동화 스크립트로 정리·스냅샷 등 반복 작업 자동화",
+      "에셋 제작 3일 → 1일 단축 (월 3.5~5세트 → 24세트)",
+    ],
+    media: [{ type: "image", src: "assets/works/audition-aipipe.png" }],
+  },
+
+  {
+    title: "Water 셰이더",
+    category: "Shader",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["Unity", "HLSL", "Shader Graph"],
+    cover: "assets/works/maze-water.png",   // TODO: 중립 씬에서 재현한 스크린샷
+    studyMd: "content/works/02-water.md",   // ← 케이스 스터디 본문
+    summary: "깊이·굴절·거품을 결합한 모바일용 스타일라이즈드 물 셰이더. 기존 텍스처·렌더타겟을 재활용해 가볍게 구현.",
+    description:
+      "모바일 타깃 프로젝트 Maze의 여러 스테이지에 사용한 스타일라이즈드 물 셰이더입니다. 깊이에 따른 색 블렌딩, 굴절, " +
+      "가장자리 거품, 노말 스크롤 반사를 파라미터로 노출해 아티스트가 코드 없이 다양한 수역을 연출할 수 있게 했고, " +
+      "기존 3D 노이즈 텍스처와 커스텀 디퍼드의 렌더타겟을 재활용해 모바일에서도 가볍게 동작하도록 만들었습니다.",
+    bullets: [
+      "깊이 기반 얕은물/깊은물 색 블렌딩",
+      "깊이 비례 굴절 + 가장자리 포말",
+      "노말 스크롤 기반 흐름·반사(TBN)",
+      "기존 텍스처·렌더타겟 재활용 + 필요한 픽셀만 재샘플링",
+      "아티스트용 파라미터(색·굴절·포말·흐름) 노출",
+    ],
+    media: [{ type: "image", src: "assets/works/maze-water.png" }],
+  },
+
+  {
+    title: "언리얼 머티리얼 스캐터",
+    category: "Tool",
+    year: "2024",
+    role: "Technical Artist",
+    tools: ["Unreal Engine", "Blueprint", "Python"],
+    cover: "assets/works/kalli-scatter.jpg",   // TODO: 툴 UI/결과 스크린샷
+    studyMd: "content/works/03-material-scatter.md",   // ← 상단 시연영상만 미리보기. PDF 오면 본문 채움
+    summary: "모델 임포트 시 머티리얼 인스턴스 생성·슬롯 할당·텍스처 연결을 자동으로 처리하는 언리얼 툴.",
+    description:
+      "모델을 가져올 때마다 반복되던 머티리얼 세팅을 자동화한 툴입니다. 머티리얼 인스턴스를 자동으로 만들어 " +
+      "맞는 슬롯에 넣고, 대응하는 텍스처(알베도·노멀·러프니스 등)까지 자동으로 연결합니다. 인스턴스를 하나씩 " +
+      "만들고 슬롯에 끼우고 텍스처를 링크하던 작업을 한 번에 끝내, 셋업 시간과 실수를 줄였습니다.",
+    bullets: [
+      "머티리얼 인스턴스 자동 생성·매칭",
+      "알맞은 머티리얼 슬롯에 자동 할당",
+      "대응 텍스처(알베도·노멀·러프니스 등) 자동 연결",
+      "반복 셋업 시간·실수 감소",
+    ],
+    media: [{ type: "image", src: "assets/works/kalli-scatter.jpg" }],
+  },
+
   {
     title: "GPU 파티클 시스템",
     category: "VFX",
@@ -364,7 +435,7 @@ const WORKS = [
     role: "Graphics · Tech Art",
     tools: ["DirectX 11", "HLSL", "C++"],
     cover: "assets/works/thumb-particle.jpg",   // 전용 썸네일(4:3). 없으면 제목 플레이스홀더로 대체
-    summary: "인스턴싱으로 드로우콜을 1회로 줄이고, 메쉬 표면 균등 분포 스폰까지 직접 구현한 GPU 파티클 시스템.",
+    summary: "GPU 인스턴싱 기반 파티클 시스템. 바리센트릭 기법으로 메쉬 표면에 균등 분포 스폰을 구현.",
     description:
       "수천 개의 파티클을 단일 드로우콜로 그리기 위해, 정점·인덱스 버퍼에 인스턴스 버퍼를 더한 구조를 설계했습니다. " +
       "파티클의 위치·크기·라이프타임·텍스처 인덱스를 인스턴스 버퍼로 GPU에 한 번에 넘기고, 업데이트 로직은 " +
@@ -381,7 +452,8 @@ const WORKS = [
       { type: "image", src: "assets/works/particle/07.png" },
     ],
     study: [
-      { p: "게임의 타격감과 분위기를 좌우하는 이펙트를, 성능을 해치지 않으면서 자유롭게 연출할 수 있는 파티클 시스템이 목표였습니다. 과거에 계획 없이 기능을 덧붙이다 구조가 무너진 경험이 있어, 이번에는 '무엇을 그릴까'보다 '어떻게 그릴까'라는 성능 구조부터 잡고 시작했습니다." },
+      { p: "DirectX 11로 직접 구현한 렌더러 위에, 1인 개발로 모작한 게임에 넣기 위해 만든 파티클 시스템입니다. 타격감과 분위기를 좌우하는 이펙트를, 성능을 해치지 않으면서 자유롭게 연출하는 것이 목표였습니다. 과거에 계획 없이 기능을 덧붙이다 구조가 무너진 경험이 있어, 이번에는 '무엇을 그릴까'보다 '어떻게 그릴까'라는 성능 구조부터 잡고 시작했습니다." },
+      { p: "그렇게 먼저 그리는 뼈대를 세우고, 그 위에 파티클의 움직임 → 겉모습 → 수명 → 태어나는 위치를 하나씩 얹어 갔습니다. 아래는 그 순서대로 정리한 과정입니다." },
 
       { h: "1. 드로우콜을 줄이는 인스턴싱 구조" },
       { p: "파티클의 가장 큰 적은 드로우콜입니다. 물체 하나를 그릴 때마다 CPU가 GPU에게 '이걸 그려라'라는 명령을 보내는데, 파티클을 하나씩 그리면 1,000개를 그리는 데 명령이 1,000번 나갑니다. 이 호출 비용이 쌓이면 GPU가 놀고 있어도 CPU 쪽에서 병목이 생깁니다." },
@@ -391,7 +463,7 @@ const WORKS = [
       { img: "assets/works/particle/03.png", cap: "VI_Buffer → VI_Buffer_Instance → VI_Buffer_Point_Particle 계층. 이후 모든 확장이 이 골격 위에서 이뤄집니다." },
 
       { h: "2. 움직임을 인터페이스로 추상화" },
-      { p: "처음에는 파티클의 움직임을 종류별 함수로 따로 제어했는데, 종류가 늘수록 함수가 흩어져 흐름을 따라가기 어려워졌습니다." },
+      { p: "그리는 뼈대를 세웠으니, 다음은 그 뼈대 안에서 파티클을 '어떻게 움직일까'였습니다. 처음에는 파티클의 움직임을 종류별 함수로 따로 제어했는데, 종류가 늘수록 함수가 흩어져 흐름을 따라가기 어려워졌습니다." },
       { img: "assets/works/particle/04.png", cap: "초기 구조 — 움직임을 함수별로 분리하다 보니 어떤 파티클이 어떻게 움직이는지 한눈에 들어오지 않았습니다." },
       { p: "그래서 UpdateParticles를 순수가상함수로 만들어 인터페이스화했습니다. 부모는 '업데이트해라'라고 한 번만 호출하고, Drop·Spread 같은 실제 움직임은 각 자식 클래스가 자기 방식대로 정의합니다. 진입점이 하나로 모이니, 새 파티클을 추가할 때 부모를 건드리지 않고 자식만 구현하면 됩니다." },
       { img: "assets/works/particle/05.png", cap: "모든 움직임을 업데이트 함수 하나로 통합한 결과. 종류별 동작의 책임이 자식으로 내려갑니다." },
@@ -399,31 +471,252 @@ const WORKS = [
       { img: "assets/works/particle/06.png", cap: "SetupExtraData()로 자식별 데이터를 분배. 크기·라이프타임처럼 셰이더로 넘기는 값만 인스턴스 버퍼에 남겨 부모를 가볍게 유지했습니다." },
 
       { h: "3. 파티클마다 다른 텍스처 입히기" },
-      { p: "불꽃·연기·꼬리처럼, 같은 시스템 안에서도 파티클마다 다른 텍스처를 써야 자연스럽습니다. 그런데 텍스처는 보통 객체 단위로 한 번 바인딩되기 때문에, 정점 하나하나에 다른 텍스처를 지정하는 것은 원리가 다릅니다." },
+      { p: "움직임을 자식 클래스로 내려보내고 나니, 이번엔 겉모습 차례였습니다. 불꽃·연기·꼬리처럼, 같은 시스템 안에서도 파티클마다 다른 텍스처를 써야 자연스럽습니다. 그런데 텍스처는 보통 객체 단위로 한 번 바인딩되기 때문에, 정점 하나하나에 다른 텍스처를 지정하는 것은 원리가 다릅니다." },
       { p: "해법은 라이프타임을 넘기던 방식과 같았습니다. 텍스처 자체가 아니라 '몇 번 텍스처를 쓸지'를 가리키는 인덱스를 인스턴스 버퍼에 실어 셰이더로 넘기고, 픽셀 셰이더에서 텍스처 배열을 받아 그 인덱스로 골라 씁니다. 버퍼 값을 Unmap()으로 갱신하면 파티클마다 다른 인덱스를 줄 수 있습니다." },
       { img: "assets/works/particle/07.png", cap: "파티클마다 다른 텍스처 인덱스를 부여한 결과 — 하나의 시스템 안에서 여러 종류의 입자가 섞여 흩날립니다." },
 
       { h: "4. 루프 파티클과 단발 파티클" },
-      { p: "파티클은 계속 반복되는 루프형과, 한 번 터지고 사라지는 단발형으로 나뉩니다. 루프형은 라이프타임이 끝나면 위치와 시간을 초기화하면 그만이지만, 단발형은 '언제 전부 사라졌는가'를 알아야 객체를 정리할 수 있습니다." },
+      { p: "생성·움직임·겉모습까지 갖추자, 남은 것은 '언제까지 사느냐', 곧 수명 관리였습니다. 파티클은 계속 반복되는 루프형과, 한 번 터지고 사라지는 단발형으로 나뉩니다. 루프형은 라이프타임이 끝나면 위치와 시간을 초기화하면 그만이지만, 단발형은 '언제 전부 사라졌는가'를 알아야 객체를 정리할 수 있습니다." },
       { img: "assets/works/particle/08.png", cap: "루프형과 단발형의 분리. 단발형은 모든 파티클이 소멸하는 시점을 스스로 감지해야 합니다." },
       { p: "그래서 매 프레임 살아있는 파티클 수(AliveCount)를 셉니다. 하나라도 살아있으면 0이 아니므로 유지하고, 전부 소멸하면 스위치를 켭니다. 컴포넌트를 들고 있는 객체는 이 신호를 읽어 자신을 정리합니다." },
       { img: "assets/works/particle/09.png", cap: "AliveCount로 생존 파티클 수를 집계합니다." },
       { img: "assets/works/particle/10.png", cap: "전부 소멸하면 객체에 통지. 포인트 파티클은 인스턴스 버퍼의 크기가 곧 파티클 개수여서, 버퍼만 늘리고 줄이면 개수를 동적으로 제어할 수 있습니다." },
 
       { h: "5. 메쉬 표면에 고르게 뿌리기" },
-      { p: "무기에서 빛 입자가 피어오르는 연출을 위해, 파티클을 무기 메쉬의 표면에서 스폰하려 했습니다. 메쉬의 정점·인덱스 배열을 가져오되, 무기는 이미 플레이어·소켓 행렬까지 곱해진 상태이므로 그 결합 행렬을 기준으로 스폰 위치를 잡았습니다." },
+      { p: "여기까지가 '어떻게 그리고 움직이고 사라지는가'였다면, 마지막 질문은 '어디서 태어나는가'였습니다. 무기에서 빛 입자가 피어오르는 연출을 위해, 파티클을 무기 메쉬의 표면에서 스폰하려 했습니다. 메쉬의 정점·인덱스 배열을 가져오되, 무기는 이미 플레이어·소켓 행렬까지 곱해진 상태이므로 그 결합 행렬을 기준으로 스폰 위치를 잡았습니다." },
       { p: "문제는 삼각형을 무작위로 고르니 면이 작고 조밀한 곳에 파티클이 몰린 것이었습니다. 큰 면이든 작은 면이든 같은 확률로 뽑히기 때문입니다. 그래서 면적에 비례해 뽑히도록, 각 삼각형의 면적을 누적합으로 저장하고 전체 면적 중 임의의 값을 lower_bound 이진탐색으로 찾아 해당 삼각형을 선택했습니다. 넓은 면일수록 더 자주 당첨되는 구조입니다." },
       { img: "assets/works/particle/11.png", cap: "면적 가중치 선택으로 표면에 고르게 분포된 파티클 — 큰 면도 작은 면도 자연스럽게 채워집니다." },
       { p: "마지막으로 삼각형 '안에서의' 위치도 다듬어야 했습니다. 그냥 두면 넓은 삼각형은 가운데로 쏠리기 쉬워, 바리센트릭 좌표로 면 위의 무작위 점을 구했습니다. 한 꼭짓점에서 나머지 두 꼭짓점으로 가는 비율(U, V)을 무작위로 정하되 U+V가 1을 넘지 않게 하면, 삼각형 내부 어디에나 균일하게 분포시킬 수 있습니다." },
 
       { h: "정리" },
-      { p: "여기까지가 파티클 시스템의 큰 틀입니다. 인스턴싱으로 드로우콜을 한 번에 묶고, 움직임·텍스처·스폰은 자식 클래스에서 확장되도록 해뒀습니다. 새 이펙트를 추가할 때 부모를 손댈 필요가 없어졌습니다." },
+      { p: "여기까지가 파티클 시스템의 큰 틀입니다. 성능 구조부터 잡고 시작한 덕분에, 그 위에 움직임·텍스처·수명·스폰을 하나씩 얹는 동안에도 골격은 흔들리지 않았습니다. 새 이펙트를 추가할 때 부모를 손댈 필요가 없어진 것이, 처음에 '어떻게 그릴까'부터 물었던 이 설계에서 얻은 가장 큰 소득입니다." },
     ],
     links: [
       { label: "구조 설계 (1편)", href: "https://blog.naver.com/ridas_/223910255258" },
       { label: "표면 스폰 (2편)", href: "https://blog.naver.com/ridas_/223913107113" },
     ],
   },
+
+  {
+    title: "맵 에셋 배치 툴",
+    category: "Tool",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["Unity", "C#", "Editor Scripting"],
+    cover: "assets/works/maze-place.png",   // TODO: 툴 UI 스크린샷(게임 에셋 안 보이게)
+    studyMd: "content/works/05-asset-placer.md",   // ← 상단 시연영상만 미리보기. PDF 오면 본문 채움
+    summary: "맵 에셋을 브러시·스캐터 방식으로 빠르게 배치하는 Unity 에디터 툴. 배치 시간 단축.",
+    description:
+      "맵 제작 시 반복되는 에셋 배치를 자동화한 에디터 툴입니다. 브러시/스캐터 배치, 그리드 스냅·표면 정렬, " +
+      "랜덤 변형(회전·스케일)을 제공해 레벨 셋업 시간을 크게 줄였습니다.",
+    bullets: [
+      "브러시/스캐터 방식 에셋 배치",
+      "그리드 스냅·표면 정렬",
+      "랜덤 회전·스케일로 자연스러운 분포",
+    ],
+    media: [{ type: "image", src: "assets/works/maze-place.png" }],
+  },
+
+  {
+    title: "URP 툰 셰이딩",
+    category: "Shader",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["Unity", "URP", "Shader Graph", "HLSL"],
+    cover: "assets/works/mob-toon.png",   // TODO: 중립 메쉬 적용 스크린샷
+    summary: "Unity URP 환경에서 모바일 성능을 고려해 구현한 툰 셰이딩 — 셀 명암 + 외곽선.",
+    description:
+      "모바일(URP)에 맞춘 툰 셰이더입니다. 램프/계단 명암으로 셀 셰이딩을 구현하고, 외곽선은 모바일 부하를 " +
+      "고려해 노멀 압출 방식으로 처리했습니다. 모바일 GPU 예산 안에서 동작하도록 인스트럭션을 줄여 경량화했습니다.",
+    bullets: [
+      "램프 기반 셀 명암 (단계 음영)",
+      "노멀 압출 외곽선 — 모바일 경량 방식",
+      "URP Shader Graph·HLSL로 구현",
+      "모바일 GPU 예산 내 최적화",
+    ],
+    media: [{ type: "image", src: "assets/works/mob-toon.png" }],
+  },
+
+  {
+    title: "프로시저럴 모델링 툴",
+    category: "Tool",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["Unity", "C#"],
+    cover: "assets/works/maze-proc.png",   // TODO: 결과 메쉬 스크린샷(중립)
+    summary: "스플라인·파라미터로 반복 구조물을 자동 생성하는 Unity 프로시저럴 모델링 툴. 수작업 모델링 시간 절감.",
+    description:
+      "난간·계단·파이프처럼 반복되는 구조물을 파라미터로 생성하는 프로시저럴 모델링 툴입니다. 스플라인을 따라 " +
+      "메쉬를 생성하고 길이·간격·분기를 실시간으로 조절해, 반복 모델링 작업을 자동화했습니다.",
+    bullets: [
+      "파라미터 기반 반복 구조물 생성",
+      "스플라인 따라 메쉬 생성",
+      "실시간 프리뷰·조절",
+    ],
+    media: [{ type: "image", src: "assets/works/maze-proc.png" }],
+  },
+
+  {
+    title: "물리 애니메이션 툴",
+    category: "Tool",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["Unity", "C#"],
+    cover: "assets/works/mob-physanim.png",   // TODO: 툴 UI/결과 스크린샷
+    summary: "본 체인에 흔들림(2차 모션)을 자동으로 주는 Unity 물리 애니메이션 툴. 수작업 키프레임 절감.",
+    description:
+      "머리카락·천·꼬리·장신구 같은 부위에 2차 모션(흔들림)을 자동으로 주는 툴입니다. 본 체인에 스프링·감쇠를 " +
+      "적용해 일일이 키프레임하지 않아도 자연스러운 흔들림을 만들고, 강성·감쇠·충돌을 파라미터로 조절합니다.",
+    bullets: [
+      "본 체인 스프링·감쇠 기반 2차 모션",
+      "강성·감쇠·충돌 파라미터 조절",
+      "수작업 키프레임 없이 자연스러운 흔들림",
+    ],
+    media: [{ type: "image", src: "assets/works/mob-physanim.png" }],
+  },
+
+  {
+    title: "모션 트레일",
+    category: "VFX",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["Unity", "URP", "C#", "HLSL"],
+    cover: "assets/works/mob-trail.png",   // TODO: 중립 씬 잔상 스크린샷
+    summary: "공격 모션에 속도감을 더하는 메쉬 기반 모션 트레일. 모바일 부하를 고려해 경량화.",
+    description:
+      "공격·이동 모션에 잔상을 남겨 속도감을 주는 모션 트레일 기법입니다. 프레임마다 메쉬(또는 본 위치)를 " +
+      "샘플링해 잔상 리본을 생성하고, 수명에 따른 페이드·컬러 그라데이션으로 자연스럽게 사라지게 했습니다. " +
+      "샘플 수·수명을 파라미터로 노출해 모바일 환경에서 부하를 조절할 수 있게 했습니다.",
+    bullets: [
+      "메쉬/본 샘플링 기반 잔상 리본 생성",
+      "수명에 따른 페이드·컬러 그라데이션",
+      "샘플 수·수명 파라미터화로 모바일 최적화",
+    ],
+    media: [{ type: "image", src: "assets/works/mob-trail.png" }],
+  },
+
+  {
+    title: "툰 셰이더 — 외곽선 · 셀셰이딩",
+    category: "Shader",
+    year: "2025",
+    role: "Shader",
+    tools: ["DirectX 11", "HLSL", "C++"],
+    cover: "assets/works/thumb-toon.jpg",   // 전용 썸네일(4:3). 없으면 제목 플레이스홀더로 대체
+    summary: "Ceil 단계 명암과 노멀 압출 2-pass 외곽선으로 원신류 NPR 룩을 재현한 툰 셰이더.",
+    description:
+      "원신 특유의 비실사(NPR) 캐릭터 룩을 만들기 위한 툰 셰이더입니다. 색상은 N·L 조명을 Ceil 함수로 계단형 " +
+      "명암으로 바꿔 단계별 음영을 표현했고, 외곽선은 정점을 노멀 방향으로 살짝 밀어 후면만 남기는 2-pass 방식으로 " +
+      "그렸습니다. 외곽선은 G버퍼 합성 이후 별도 패스로 처리하고 ZBias로 깊이를 미세 조정해 캐릭터를 덮지 않게 했습니다.",
+    bullets: [
+      "Ceil 함수로 N·L 조명을 계단형 단계 명암으로 변환",
+      "노멀 방향 정점 압출 + 후면 컬링으로 실루엣 외곽선 (2-pass)",
+      "외곽선 전용 렌더 패스 분리 + ZBias 깊이 보정",
+      "알베도 알파 0.1 이하 디스카드로 외곽선 정리",
+    ],
+    media: [
+      { type: "image", src: "assets/works/toon/07.png" },
+    ],
+    study: [
+      { p: "원신 특유의 비실사(NPR) 캐릭터 룩을 만들기 위한 툰 셰이더입니다. 툰 셰이더는 크게 두 가지 — 단계별 명암(셀셰이딩)과 외곽선 — 으로 나뉩니다." },
+
+      { h: "1. 셀셰이딩 — 명암을 계단으로" },
+      { p: "일반 조명은 빛과 노말의 내적(N·L)에 따라 밝기가 매끄럽게 이어집니다. 툰 룩의 핵심은 이 연속적인 명암을 계단처럼 끊어, 몇 단계의 또렷한 음영으로 바꾸는 것입니다." },
+      { img: "assets/works/toon/02.png", cap: "선형으로 이어지는 명암을 단계별로 끊는 것이 셀셰이딩의 핵심입니다." },
+      { p: "방법은 의외로 간단합니다. N·L로 구한 밝기 값에 Ceil() 함수를 적용하면 연속 그래프가 계단형으로 바뀝니다. 단계 수를 조절해 음영의 거칠기를 정합니다." },
+      { img: "assets/works/toon/03.png", cap: "N·L 조명에 Ceil 함수를 적용해 계단형 단계 명암으로 변환." },
+
+      { h: "2. 외곽선 — 노멀 압출 2-pass" },
+      { p: "색상보다 까다로운 건 외곽선입니다. 원리는 이렇습니다. 각 정점을 노말 방향으로 살짝 부풀린 뒤, 앞면을 컬링하고 후면만 남기면, 부풀린 만큼이 캐릭터 뒤로 비어져 나와 실루엣처럼 보입니다." },
+      { img: "assets/works/toon/04.png", cap: "외곽선 전략 — 실루엣이 필요한 메쉬는 2-pass로 그리고, G버퍼 합성 이후 외곽선 패스를 한 번 더 돌립니다." },
+      { p: "외곽선은 G버퍼 블렌딩 이후에 적용되므로 깊이 '비교'는 필요하지만 깊이 '기록'은 빼야 했습니다. 깊이를 기록하면 이후 렌더링에 간섭이 생기기 때문입니다. 또 외곽선이 캐릭터를 덮지 않도록 ZBias로 살짝 뒤로 밀었습니다." },
+      { img: "assets/works/toon/05.png", cap: "외곽선 전용 렌더 타겟을 추가하고, 플레이어 렌더링 함수를 따로 두어 2-pass를 구성했습니다." },
+      { img: "assets/works/toon/06.png", cap: "외곽선 패스에는 다른 레지스터·뎁스스텐실 스테이트를 적용 — 깊이 비교는 켜고 기록은 끕니다." },
+      { p: "정점 셰이더는 각 정점을 노말 방향으로 미는 일만 하고, 후면 컬링은 스테이트가 처리하므로 픽셀 셰이더는 외곽선 색만 출력하면 됩니다. 알베도 알파가 0.1 이하인 부분은 디스카드해 외곽선을 깔끔하게 정리했습니다." },
+      { img: "assets/works/toon/07.png", cap: "외곽선이 잡히기 시작한 결과. 이후 색을 검게·두께를 줄이고 색상을 Ceil로 단계화하면 툰 룩이 완성됩니다." },
+    ],
+    links: [
+      { label: "전체 글 보기", href: "https://blog.naver.com/ridas_/223927857368" },
+    ],
+  },
+
+  {
+    title: "SDF 공격 장판",
+    category: "VFX",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["Unity", "URP", "HLSL"],
+    cover: "assets/works/mob-sdf.png",   // TODO: 장판 효과 스크린샷
+    summary: "SDF(부호 거리장)로 공격 범위 장판을 해상도 무관하게 선명히 그리는 기법.",
+    description:
+      "보스·스킬의 공격 범위를 바닥에 표시하는 장판 효과입니다. SDF로 원·부채꼴·사각 등 다양한 모양을 " +
+      "수학적으로 그려, 해상도에 무관하게 선명한 테두리와 채움을 표현했습니다. 경고에서 발동까지의 타이밍을 " +
+      "알파·스케일 애니메이션으로 연출했습니다.",
+    bullets: [
+      "SDF 기반 모양(원·부채꼴·사각) 선명 렌더",
+      "테두리 두께·채움·펄스 파라미터화",
+      "경고 → 발동 타이밍 애니메이션",
+    ],
+    media: [{ type: "image", src: "assets/works/mob-sdf.png" }],
+  },
+
+  {
+    title: "텍스처 검수 툴",
+    category: "Tool",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["Unity", "C#", "Editor Scripting"],
+    cover: "assets/works/maze-texcheck.png",   // TODO: 툴 UI 스크린샷
+    summary: "텍스처 규격(해상도·압축·밉맵·네이밍)을 일괄 검사·자동 교정하는 Unity 툴. 메모리·성능 사고 예방.",
+    description:
+      "규격을 벗어난 텍스처가 메모리·성능 문제를 일으키는 것을 막기 위한 검수 툴입니다. 해상도·압축 포맷·밉맵·" +
+      "네이밍을 일괄 검사하고, 규격 위반 항목을 리포트하고 원클릭으로 교정합니다.",
+    bullets: [
+      "텍스처 해상도·압축·밉맵 일괄 검사",
+      "규격 위반 항목 리포트",
+      "원클릭 자동 교정",
+    ],
+    media: [{ type: "image", src: "assets/works/maze-texcheck.png" }],
+  },
+
+  {
+    title: "최적화 모니터링 툴",
+    category: "Tool",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["Unity", "C#"],
+    cover: "assets/works/maze-perf.png",   // TODO: 툴 UI 스크린샷
+    summary: "드로우콜·배칭·메모리·프레임타임을 실시간 표시하는 Unity 성능 모니터링 툴. 팀 최적화 기준 마련.",
+    description:
+      "팀이 성능 예산 안에서 작업하도록 주요 지표를 실시간으로 보여주는 모니터링 툴입니다. 드로우콜·배칭·메모리·" +
+      "프레임타임을 한 화면에 표시하고, 기준 초과 시 경고해 최적화 기준점을 제공합니다.",
+    bullets: [
+      "드로우콜·배칭·메모리·프레임타임 실시간 표시",
+      "성능 예산 초과 경고",
+      "씬별 성능 스냅샷 비교",
+    ],
+    media: [{ type: "image", src: "assets/works/maze-perf.png" }],
+  },
+
+  {
+    title: "PBR 셰이더 & 라이팅",
+    category: "Shader",
+    year: "2025",
+    role: "Technical Artist · Lighting",
+    tools: ["DirectX 11", "HLSL", "C++"],
+    cover: "assets/works/lop-pbr.jpg",   // TODO: 중립 씬 재질·라이팅 스크린샷
+    summary: "DirectX 환경에서 직접 구현한 PBR 셰이더 + 원작 무드 재현을 위한 라이팅 디자인.",
+    description:
+      "「P의 거짓」의 어둡고 무거운 룩을 재현하기 위해 DirectX 환경에서 직접 구현한 PBR 셰이더입니다. " +
+      "메탈릭·러프니스 기반 물리 셰이딩으로 재질감을 살리고, 원작의 분위기를 좌우하는 빛 디자인을 핵심으로 " +
+      "보고 라이팅까지 직접 설계했습니다.",
+    bullets: [
+      "메탈릭·러프니스 기반 PBR 셰이딩",
+      "DirectX/HLSL로 직접 구현",
+      "원작 무드 재현을 위한 라이팅 디자인",
+    ],
+    media: [{ type: "image", src: "assets/works/lop-pbr.jpg" }],
+  },
+
   {
     title: "디퍼드 렌더링 · 라이팅",
     category: "Rendering",
@@ -477,49 +770,7 @@ const WORKS = [
       { label: "라이팅·뎁스 복원 (2편)", href: "https://blog.naver.com/ridas_/223919726523" },
     ],
   },
-  {
-    title: "툰 셰이더 — 외곽선 · 셀셰이딩",
-    category: "Shader",
-    year: "2025",
-    role: "Shader",
-    tools: ["DirectX 11", "HLSL", "C++"],
-    cover: "assets/works/thumb-toon.jpg",   // 전용 썸네일(4:3). 없으면 제목 플레이스홀더로 대체
-    summary: "Ceil 단계 명암과 노멀 압출 2-pass 외곽선으로 원신류 NPR 룩을 재현한 툰 셰이더.",
-    description:
-      "원신 특유의 비실사(NPR) 캐릭터 룩을 만들기 위한 툰 셰이더입니다. 색상은 N·L 조명을 Ceil 함수로 계단형 " +
-      "명암으로 바꿔 단계별 음영을 표현했고, 외곽선은 정점을 노멀 방향으로 살짝 밀어 후면만 남기는 2-pass 방식으로 " +
-      "그렸습니다. 외곽선은 G버퍼 합성 이후 별도 패스로 처리하고 ZBias로 깊이를 미세 조정해 캐릭터를 덮지 않게 했습니다.",
-    bullets: [
-      "Ceil 함수로 N·L 조명을 계단형 단계 명암으로 변환",
-      "노멀 방향 정점 압출 + 후면 컬링으로 실루엣 외곽선 (2-pass)",
-      "외곽선 전용 렌더 패스 분리 + ZBias 깊이 보정",
-      "알베도 알파 0.1 이하 디스카드로 외곽선 정리",
-    ],
-    media: [
-      { type: "image", src: "assets/works/toon/07.png" },
-    ],
-    study: [
-      { p: "원신 특유의 비실사(NPR) 캐릭터 룩을 만들기 위한 툰 셰이더입니다. 툰 셰이더는 크게 두 가지 — 단계별 명암(셀셰이딩)과 외곽선 — 으로 나뉩니다." },
 
-      { h: "1. 셀셰이딩 — 명암을 계단으로" },
-      { p: "일반 조명은 빛과 노말의 내적(N·L)에 따라 밝기가 매끄럽게 이어집니다. 툰 룩의 핵심은 이 연속적인 명암을 계단처럼 끊어, 몇 단계의 또렷한 음영으로 바꾸는 것입니다." },
-      { img: "assets/works/toon/02.png", cap: "선형으로 이어지는 명암을 단계별로 끊는 것이 셀셰이딩의 핵심입니다." },
-      { p: "방법은 의외로 간단합니다. N·L로 구한 밝기 값에 Ceil() 함수를 적용하면 연속 그래프가 계단형으로 바뀝니다. 단계 수를 조절해 음영의 거칠기를 정합니다." },
-      { img: "assets/works/toon/03.png", cap: "N·L 조명에 Ceil 함수를 적용해 계단형 단계 명암으로 변환." },
-
-      { h: "2. 외곽선 — 노멀 압출 2-pass" },
-      { p: "색상보다 까다로운 건 외곽선입니다. 원리는 이렇습니다. 각 정점을 노말 방향으로 살짝 부풀린 뒤, 앞면을 컬링하고 후면만 남기면, 부풀린 만큼이 캐릭터 뒤로 비어져 나와 실루엣처럼 보입니다." },
-      { img: "assets/works/toon/04.png", cap: "외곽선 전략 — 실루엣이 필요한 메쉬는 2-pass로 그리고, G버퍼 합성 이후 외곽선 패스를 한 번 더 돌립니다." },
-      { p: "외곽선은 G버퍼 블렌딩 이후에 적용되므로 깊이 '비교'는 필요하지만 깊이 '기록'은 빼야 했습니다. 깊이를 기록하면 이후 렌더링에 간섭이 생기기 때문입니다. 또 외곽선이 캐릭터를 덮지 않도록 ZBias로 살짝 뒤로 밀었습니다." },
-      { img: "assets/works/toon/05.png", cap: "외곽선 전용 렌더 타겟을 추가하고, 플레이어 렌더링 함수를 따로 두어 2-pass를 구성했습니다." },
-      { img: "assets/works/toon/06.png", cap: "외곽선 패스에는 다른 레지스터·뎁스스텐실 스테이트를 적용 — 깊이 비교는 켜고 기록은 끕니다." },
-      { p: "정점 셰이더는 각 정점을 노말 방향으로 미는 일만 하고, 후면 컬링은 스테이트가 처리하므로 픽셀 셰이더는 외곽선 색만 출력하면 됩니다. 알베도 알파가 0.1 이하인 부분은 디스카드해 외곽선을 깔끔하게 정리했습니다." },
-      { img: "assets/works/toon/07.png", cap: "외곽선이 잡히기 시작한 결과. 이후 색을 검게·두께를 줄이고 색상을 Ceil로 단계화하면 툰 룩이 완성됩니다." },
-    ],
-    links: [
-      { label: "전체 글 보기", href: "https://blog.naver.com/ridas_/223927857368" },
-    ],
-  },
   {
     title: "그림자 매핑 & SSAO",
     category: "Rendering",
@@ -571,218 +822,6 @@ const WORKS = [
     ],
   },
 
-  // ===== Maze 프로젝트 기술 쇼케이스 (임시 내용 — 실제 작업으로 다듬으세요) =====
-  {
-    title: "Water 셰이더",
-    category: "Shader",
-    year: "2026",
-    role: "Technical Artist",
-    tools: ["Unity", "HLSL", "Shader Graph"],
-    cover: "assets/works/maze-water.png",   // TODO: 중립 씬에서 재현한 스크린샷
-    summary: "깊이·굴절·거품·흐름을 결합한 스타일라이즈드 물 셰이더. 아티스트가 코드 없이 다양한 수역을 연출.",
-    description:
-      "맵의 강·호수에 일관된 룩을 입히기 위해 제작한 물 셰이더입니다. 깊이에 따른 색 블렌딩, 굴절, " +
-      "가장자리 거품, 흐름(flow)을 파라미터로 노출해 아티스트가 코드 없이 다양한 수역을 연출할 수 있게 했습니다.",
-    bullets: [
-      "깊이 기반 얕은물/깊은물 색 블렌딩",
-      "굴절·반사 + 가장자리 거품",
-      "Flow map 기반 물 흐름 표현",
-      "아티스트용 파라미터 노출",
-    ],
-    media: [{ type: "image", src: "assets/works/maze-water.png" }],
-  },
-  {
-    title: "맵 에셋 배치 툴",
-    category: "Tool",
-    year: "2026",
-    role: "Technical Artist",
-    tools: ["Unity", "C#", "Editor Scripting"],
-    cover: "assets/works/maze-place.png",   // TODO: 툴 UI 스크린샷(게임 에셋 안 보이게)
-    summary: "맵 에셋을 브러시·스캐터 방식으로 빠르게 배치하는 Unity 에디터 툴. 배치 시간 단축.",
-    description:
-      "맵 제작 시 반복되는 에셋 배치를 자동화한 에디터 툴입니다. 브러시/스캐터 배치, 그리드 스냅·표면 정렬, " +
-      "랜덤 변형(회전·스케일)을 제공해 레벨 셋업 시간을 크게 줄였습니다.",
-    bullets: [
-      "브러시/스캐터 방식 에셋 배치",
-      "그리드 스냅·표면 정렬",
-      "랜덤 회전·스케일로 자연스러운 분포",
-    ],
-    media: [{ type: "image", src: "assets/works/maze-place.png" }],
-  },
-  {
-    title: "텍스처 검수 툴",
-    category: "Tool",
-    year: "2026",
-    role: "Technical Artist",
-    tools: ["Unity", "C#", "Editor Scripting"],
-    cover: "assets/works/maze-texcheck.png",   // TODO: 툴 UI 스크린샷
-    summary: "텍스처 규격(해상도·압축·밉맵·네이밍)을 일괄 검사·자동 교정하는 Unity 툴. 메모리·성능 사고 예방.",
-    description:
-      "규격을 벗어난 텍스처가 메모리·성능 문제를 일으키는 것을 막기 위한 검수 툴입니다. 해상도·압축 포맷·밉맵·" +
-      "네이밍을 일괄 검사하고, 규격 위반 항목을 리포트하고 원클릭으로 교정합니다.",
-    bullets: [
-      "텍스처 해상도·압축·밉맵 일괄 검사",
-      "규격 위반 항목 리포트",
-      "원클릭 자동 교정",
-    ],
-    media: [{ type: "image", src: "assets/works/maze-texcheck.png" }],
-  },
-  {
-    title: "최적화 모니터링 툴",
-    category: "Tool",
-    year: "2026",
-    role: "Technical Artist",
-    tools: ["Unity", "C#"],
-    cover: "assets/works/maze-perf.png",   // TODO: 툴 UI 스크린샷
-    summary: "드로우콜·배칭·메모리·프레임타임을 실시간 표시하는 Unity 성능 모니터링 툴. 팀 최적화 기준 마련.",
-    description:
-      "팀이 성능 예산 안에서 작업하도록 주요 지표를 실시간으로 보여주는 모니터링 툴입니다. 드로우콜·배칭·메모리·" +
-      "프레임타임을 한 화면에 표시하고, 기준 초과 시 경고해 최적화 기준점을 제공합니다.",
-    bullets: [
-      "드로우콜·배칭·메모리·프레임타임 실시간 표시",
-      "성능 예산 초과 경고",
-      "씬별 성능 스냅샷 비교",
-    ],
-    media: [{ type: "image", src: "assets/works/maze-perf.png" }],
-  },
-  {
-    title: "프로시저럴 모델링 툴",
-    category: "Tool",
-    year: "2026",
-    role: "Technical Artist",
-    tools: ["Unity", "C#"],
-    cover: "assets/works/maze-proc.png",   // TODO: 결과 메쉬 스크린샷(중립)
-    summary: "스플라인·파라미터로 반복 구조물을 자동 생성하는 Unity 프로시저럴 모델링 툴. 수작업 모델링 시간 절감.",
-    description:
-      "난간·계단·파이프처럼 반복되는 구조물을 파라미터로 생성하는 프로시저럴 모델링 툴입니다. 스플라인을 따라 " +
-      "메쉬를 생성하고 길이·간격·분기를 실시간으로 조절해, 반복 모델링 작업을 자동화했습니다.",
-    bullets: [
-      "파라미터 기반 반복 구조물 생성",
-      "스플라인 따라 메쉬 생성",
-      "실시간 프리뷰·조절",
-    ],
-    media: [{ type: "image", src: "assets/works/maze-proc.png" }],
-  },
-
-  // ===== Maze 모바일 스핀오프 기술 쇼케이스 (임시 내용 — 실제 작업으로 다듬으세요) =====
-  {
-    title: "모션 트레일",
-    category: "VFX",
-    year: "2026",
-    role: "Technical Artist",
-    tools: ["Unity", "URP", "C#", "HLSL"],
-    cover: "assets/works/mob-trail.png",   // TODO: 중립 씬 잔상 스크린샷
-    summary: "공격 모션에 속도감을 더하는 메쉬 기반 모션 트레일. 모바일 부하를 고려해 경량화.",
-    description:
-      "공격·이동 모션에 잔상을 남겨 속도감을 주는 모션 트레일 기법입니다. 프레임마다 메쉬(또는 본 위치)를 " +
-      "샘플링해 잔상 리본을 생성하고, 수명에 따른 페이드·컬러 그라데이션으로 자연스럽게 사라지게 했습니다. " +
-      "샘플 수·수명을 파라미터로 노출해 모바일 환경에서 부하를 조절할 수 있게 했습니다.",
-    bullets: [
-      "메쉬/본 샘플링 기반 잔상 리본 생성",
-      "수명에 따른 페이드·컬러 그라데이션",
-      "샘플 수·수명 파라미터화로 모바일 최적화",
-    ],
-    media: [{ type: "image", src: "assets/works/mob-trail.png" }],
-  },
-  {
-    title: "URP 툰 셰이딩",
-    category: "Shader",
-    year: "2026",
-    role: "Technical Artist",
-    tools: ["Unity", "URP", "Shader Graph", "HLSL"],
-    cover: "assets/works/mob-toon.png",   // TODO: 중립 메쉬 적용 스크린샷
-    summary: "Unity URP 환경에서 모바일 성능을 고려해 구현한 툰 셰이딩 — 셀 명암 + 외곽선.",
-    description:
-      "모바일(URP)에 맞춘 툰 셰이더입니다. 램프/계단 명암으로 셀 셰이딩을 구현하고, 외곽선은 모바일 부하를 " +
-      "고려해 노멀 압출 방식으로 처리했습니다. 모바일 GPU 예산 안에서 동작하도록 인스트럭션을 줄여 경량화했습니다.",
-    bullets: [
-      "램프 기반 셀 명암 (단계 음영)",
-      "노멀 압출 외곽선 — 모바일 경량 방식",
-      "URP Shader Graph·HLSL로 구현",
-      "모바일 GPU 예산 내 최적화",
-    ],
-    media: [{ type: "image", src: "assets/works/mob-toon.png" }],
-  },
-  {
-    title: "SDF 공격 장판",
-    category: "VFX",
-    year: "2026",
-    role: "Technical Artist",
-    tools: ["Unity", "URP", "HLSL"],
-    cover: "assets/works/mob-sdf.png",   // TODO: 장판 효과 스크린샷
-    summary: "SDF(부호 거리장)로 공격 범위 장판을 해상도 무관하게 선명히 그리는 기법.",
-    description:
-      "보스·스킬의 공격 범위를 바닥에 표시하는 장판 효과입니다. SDF로 원·부채꼴·사각 등 다양한 모양을 " +
-      "수학적으로 그려, 해상도에 무관하게 선명한 테두리와 채움을 표현했습니다. 경고에서 발동까지의 타이밍을 " +
-      "알파·스케일 애니메이션으로 연출했습니다.",
-    bullets: [
-      "SDF 기반 모양(원·부채꼴·사각) 선명 렌더",
-      "테두리 두께·채움·펄스 파라미터화",
-      "경고 → 발동 타이밍 애니메이션",
-    ],
-    media: [{ type: "image", src: "assets/works/mob-sdf.png" }],
-  },
-  {
-    title: "물리 애니메이션 툴",
-    category: "Tool",
-    year: "2026",
-    role: "Technical Artist",
-    tools: ["Unity", "C#"],
-    cover: "assets/works/mob-physanim.png",   // TODO: 툴 UI/결과 스크린샷
-    summary: "본 체인에 흔들림(2차 모션)을 자동으로 주는 Unity 물리 애니메이션 툴. 수작업 키프레임 절감.",
-    description:
-      "머리카락·천·꼬리·장신구 같은 부위에 2차 모션(흔들림)을 자동으로 주는 툴입니다. 본 체인에 스프링·감쇠를 " +
-      "적용해 일일이 키프레임하지 않아도 자연스러운 흔들림을 만들고, 강성·감쇠·충돌을 파라미터로 조절합니다.",
-    bullets: [
-      "본 체인 스프링·감쇠 기반 2차 모션",
-      "강성·감쇠·충돌 파라미터 조절",
-      "수작업 키프레임 없이 자연스러운 흔들림",
-    ],
-    media: [{ type: "image", src: "assets/works/mob-physanim.png" }],
-  },
-
-  // ===== 오디션 프로젝트 기술 쇼케이스 =====
-  {
-    title: "생성형 AI 아트 파이프라인",
-    category: "Tool",
-    year: "2026",
-    role: "Technical Artist",
-    tools: ["3ds Max", "MAXScript", "Tripo", "Hunyuan 3D", "MeshAI"],
-    cover: "assets/works/audition-aipipe.png",   // TODO: 파이프라인 다이어그램/툴 UI 스크린샷
-    summary: "생성형 3D AI와 3ds Max(MAXScript)를 연동해 아트 리소스 제작을 자동화한 파이프라인. 제작 3일→1일.",
-    description:
-      "온라인 댄스 게임 「오디션」의 아트 리소스 제작을 가속하기 위해 단독 구축한 파이프라인입니다. " +
-      "Tripo·Hunyuan·MeshAI 등 3D 생성 AI로 초기 메쉬를 만들고, MAXScript로 정리·규격화·임포트까지 " +
-      "자동으로 이어, 기존 3일 걸리던 제작을 1일로 단축했습니다.",
-    bullets: [
-      "Tripo·Hunyuan·MeshAI로 초기 3D 에셋 생성",
-      "MAXScript로 메쉬 정리·규격화·임포트 자동화",
-      "AI 결과물 → 제작 워크플로우 원클릭 연결",
-      "아트 리소스 제작 3일 → 1일 단축",
-    ],
-    media: [{ type: "image", src: "assets/works/audition-aipipe.png" }],
-  },
-
-  // ===== P의 거짓 프로젝트 기술 쇼케이스 =====
-  {
-    title: "PBR 셰이더 & 라이팅",
-    category: "Shader",
-    year: "2025",
-    role: "Technical Artist · Lighting",
-    tools: ["DirectX 11", "HLSL", "C++"],
-    cover: "assets/works/lop-pbr.png",   // TODO: 중립 씬 재질·라이팅 스크린샷
-    summary: "DirectX 환경에서 직접 구현한 PBR 셰이더 + 원작 무드 재현을 위한 라이팅 디자인.",
-    description:
-      "「P의 거짓」의 어둡고 무거운 룩을 재현하기 위해 DirectX 환경에서 직접 구현한 PBR 셰이더입니다. " +
-      "메탈릭·러프니스 기반 물리 셰이딩으로 재질감을 살리고, 원작의 분위기를 좌우하는 빛 디자인을 핵심으로 " +
-      "보고 라이팅까지 직접 설계했습니다.",
-    bullets: [
-      "메탈릭·러프니스 기반 PBR 셰이딩",
-      "DirectX/HLSL로 직접 구현",
-      "원작 무드 재현을 위한 라이팅 디자인",
-    ],
-    media: [{ type: "image", src: "assets/works/lop-pbr.png" }],
-  },
   {
     title: "렌더링 최적화 — 옥트리·LOD·컬링",
     category: "Rendering",
@@ -800,27 +839,5 @@ const WORKS = [
       "프러스텀 컬링으로 화면 밖 오브젝트 제외",
     ],
     media: [{ type: "image", src: "assets/works/lop-opt.jpg" }],
-  },
-
-  // ===== 칼리버스 프로젝트 기술 쇼케이스 =====
-  {
-    title: "언리얼 머티리얼 스캐터",
-    category: "Tool",
-    year: "2024",
-    role: "Technical Artist",
-    tools: ["Unreal Engine", "Blueprint"],
-    cover: "assets/works/kalli-scatter.jpg",   // TODO: 툴 UI/결과 스크린샷
-    summary: "모델 임포트 시 머티리얼 인스턴스 생성·슬롯 할당·텍스처 연결을 자동으로 처리하는 언리얼 툴.",
-    description:
-      "모델을 가져올 때마다 반복되던 머티리얼 세팅을 자동화한 툴입니다. 머티리얼 인스턴스를 자동으로 만들어 " +
-      "맞는 슬롯에 넣고, 대응하는 텍스처(알베도·노멀·러프니스 등)까지 자동으로 연결합니다. 인스턴스를 하나씩 " +
-      "만들고 슬롯에 끼우고 텍스처를 링크하던 작업을 한 번에 끝내, 셋업 시간과 실수를 줄였습니다.",
-    bullets: [
-      "머티리얼 인스턴스 자동 생성·매칭",
-      "알맞은 머티리얼 슬롯에 자동 할당",
-      "대응 텍스처(알베도·노멀·러프니스 등) 자동 연결",
-      "반복 셋업 시간·실수 감소",
-    ],
-    media: [{ type: "image", src: "assets/works/kalli-scatter.jpg" }],
   },
 ];

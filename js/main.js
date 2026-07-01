@@ -241,9 +241,123 @@ function renderWorks(filter = "All") {
 
 renderWorks();
 
+/* ---------- Markdown 케이스 스터디 로더 ----------
+   data.js의 work에 studyMd: "content/works/xx.md" 를 주면 그 마크다운을 불러와
+   study(소제목/문단/이미지)로 렌더한다. 인라인 study 배열이 있으면 그게 우선.
+     "## 소제목"        → 소제목
+     빈 줄로 나눈 문단   → 본문 문단
+     "![캡션](경로)"     → 이미지 + 캡션
+     "<!-- ... -->"      → 주석(렌더 안 됨, 작성 가이드용)
+     **굵게**, `코드`    → 인라인 서식
+   이미지 경로: .md 기준 상대경로(예: img/01.png) 또는 assets/…(사이트 루트) 둘 다 OK. */
+const isDev = ["localhost", "127.0.0.1", ""].includes(location.hostname);
+
+function escapeHtml(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+function inlineMd(s) {
+  return escapeHtml(s)
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/`([^`]+)`/g, "<code>$1</code>");
+}
+function resolveMdPath(src, mdPath) {
+  if (/^(https?:|data:|\/)/i.test(src) || src.startsWith("assets/")) return src;
+  const dir = mdPath.slice(0, mdPath.lastIndexOf("/") + 1);
+  return dir + src;
+}
+// 유튜브 URL이면 영상 ID(11자)를 반환, 아니면 null. watch?v= / youtu.be / embed / shorts 지원.
+function youtubeId(url) {
+  if (!/(?:youtube\.com|youtu\.be)/i.test(url)) return null;
+  let m;
+  if ((m = url.match(/[?&]v=([\w-]{11})/))) return m[1];
+  if ((m = url.match(/youtu\.be\/([\w-]{11})/))) return m[1];
+  if ((m = url.match(/\/(?:embed|shorts|live)\/([\w-]{11})/))) return m[1];
+  return null;
+}
+function parseStudyMarkdown(text, mdPath) {
+  const blocks = [];
+  const lines = text.replace(/\r\n/g, "\n").split("\n");
+  let para = [];
+  let inComment = false;
+  const flush = () => {
+    if (!para.length) return;
+    const t = para.join(" ").trim();
+    if (t) blocks.push({ p: inlineMd(t) });
+    para = [];
+  };
+  let inCode = false, codeLang = "", codeLines = [];
+  for (const raw of lines) {
+    const line = raw.trim();
+    // 코드 펜스(```lang … ```) — 최우선. 내부는 원본 줄 그대로 보존(들여쓰기 유지)
+    if (inCode) {
+      if (/^```/.test(line)) { blocks.push({ code: codeLines.join("\n"), lang: codeLang }); inCode = false; codeLang = ""; codeLines = []; }
+      else codeLines.push(raw);
+      continue;
+    }
+    if (inComment) { if (line.includes("-->")) inComment = false; continue; }
+    if (line.startsWith("<!--")) { if (!line.includes("-->")) inComment = true; continue; }
+    let m;
+    if ((m = line.match(/^```(\w+)?\s*$/))) { flush(); inCode = true; codeLang = m[1] || ""; codeLines = []; continue; }
+    if (!line) { flush(); continue; }
+    if ((m = line.match(/^#{1,6}\s+(.*)$/))) { flush(); blocks.push({ h: inlineMd(m[1].trim()) }); continue; }
+    if ((m = line.match(/^!\[([^\]]*)\]\(([^)]+)\)(?:\{([^}]*)\})?\s*$/))) {
+      flush();
+      // 선택적 크기 지정: {w=420} / {width=420} / {small}=360 / {medium}=560
+      let w = null; const opt = m[3];
+      if (opt) {
+        let mm;
+        if ((mm = opt.match(/w(?:idth)?\s*=\s*(\d+)/i))) w = parseInt(mm[1], 10);
+        else if (/small/i.test(opt)) w = 360;
+        else if (/med(?:ium)?/i.test(opt)) w = 560;
+      }
+      blocks.push({ img: resolveMdPath(m[2].trim(), mdPath), cap: escapeHtml(m[1].trim()), w });
+      continue;
+    }
+    para.push(line);
+  }
+  if (inCode && codeLines.length) blocks.push({ code: codeLines.join("\n"), lang: codeLang }); // 닫힘 없이 끝나도 살림
+  flush();
+  return blocks;
+}
+async function loadStudy(w) {
+  if (!w.studyMd) return null;
+  const url = w.studyMd + (isDev ? `?t=${Date.now()}` : "");
+  try {
+    const res = await fetch(url, { cache: isDev ? "no-store" : "default" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const text = await res.text();
+    w._studyRaw = text;
+    return parseStudyMarkdown(text, w.studyMd);
+  } catch (e) {
+    console.warn("[studyMd] 불러오기 실패:", w.studyMd, e);
+    return null;
+  }
+}
+
+/* 로컬(localhost)에서 .md를 저장하면 열려 있는 모달이 자동 갱신 — "보면서 작성" */
+let studyWatch = null;
+function stopStudyWatch() { if (studyWatch) { clearInterval(studyWatch); studyWatch = null; } }
+function startStudyWatch(w, token) {
+  stopStudyWatch();
+  let last = w._studyRaw != null ? w._studyRaw : null;
+  studyWatch = setInterval(async () => {
+    if (token !== modalToken) { stopStudyWatch(); return; }
+    try {
+      const res = await fetch(w.studyMd + `?t=${Date.now()}`, { cache: "no-store" });
+      if (!res.ok) return;
+      const text = await res.text();
+      if (last !== null && text !== last && token === modalToken) {
+        modalBody.innerHTML = workModalHTML(w, parseStudyMarkdown(text, w.studyMd));
+      }
+      last = text;
+    } catch (e) {}
+  }, 1200);
+}
+
 /* ---------- Modal ---------- */
 const modal = document.getElementById("modal");
 const modalBody = document.getElementById("modal-body");
+let modalToken = 0; // 모달 열 때마다 증가 — 비동기 로드가 다른 모달을 덮어쓰지 않게
 
 function galleryHTML(w) {
   if (!w.media || !w.media.length) {
@@ -280,23 +394,45 @@ function openModalShell() {
   if (panel) panel.scrollTop = 0;
 }
 
-// 케이스 스터디: 이미지+캡션을 본문 순서대로 배치 (study 배열이 있으면 갤러리/요약 대신 사용)
-function studyHTML(w) {
-  return `<div class="m-study">${w.study
+// 케이스 스터디: 이미지+캡션을 본문 순서대로 배치 (study 블록이 있으면 갤러리/요약 대신 사용)
+function studyHTML(blocks, w) {
+  return `<div class="m-study">${blocks
     .map((b) => {
       if (b.h) return `<h3 class="m-subhead">${b.h}</h3>`;
       if (b.p) return `<p class="m-desc">${b.p}</p>`;
-      if (b.img)
-        return `<figure class="m-fig"><img src="${b.img}" alt="${b.cap || w.title}" loading="lazy"
-          onerror="this.closest('.m-fig').style.display='none'">${b.cap ? `<figcaption>${b.cap}</figcaption>` : ""}</figure>`;
+      if (b.code != null) {
+        const lang = b.lang ? `<span class="m-code__lang">${escapeHtml(b.lang)}</span>` : "";
+        return `<figure class="m-fig m-fig--code">${lang}<pre class="m-code"><code>${escapeHtml(b.code)}</code></pre></figure>`;
+      }
+      if (b.img) {
+        const cap = b.cap ? `<figcaption>${b.cap}</figcaption>` : "";
+        const sz = b.w ? ` style="max-width:${b.w}px"` : "";  // 개별 크기 지정 시 상한 적용(가운데 정렬)
+        // 이미지 문법의 URL이 유튜브면 16:9 반응형 iframe으로 렌더(무음·루프 자동재생 + 컨트롤).
+        // loop는 playlist=같은ID가 있어야 동작하고, autoplay는 mute 필수. 모션 최소화 시 자동재생 끔.
+        const yt = youtubeId(b.img);
+        if (yt) {
+          const auto = prefersReducedMotion ? "" : "&autoplay=1&mute=1";
+          const src = `https://www.youtube-nocookie.com/embed/${yt}?loop=1&playlist=${yt}&controls=1&rel=0&modestbranding=1&playsinline=1${auto}`;
+          return `<figure class="m-fig m-fig--yt"${sz}><div class="m-yt"><iframe src="${src}" title="${b.cap || w.title}" loading="lazy" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>${cap}</figure>`;
+        }
+        // 이미지 문법이지만 .mp4/.webm이면 무음 루프 자동재생 영상으로 렌더.
+        // 모션 최소화(prefers-reduced-motion) 사용자에겐 자동재생 대신 컨트롤만.
+        if (/\.(mp4|webm)(\?.*)?$/i.test(b.img)) {
+          const play = prefersReducedMotion ? "controls" : "autoplay loop";
+          return `<figure class="m-fig"><video src="${b.img}" ${play} muted playsinline preload="metadata"${sz}
+            onerror="this.closest('.m-fig').style.display='none'"></video>${cap}</figure>`;
+        }
+        return `<figure class="m-fig"><img src="${b.img}" alt="${b.cap || w.title}" loading="lazy"${sz}
+          onerror="this.closest('.m-fig').style.display='none'">${cap}</figure>`;
+      }
       return "";
     })
     .join("")}</div>`;
 }
 
-function openModal(i) {
-  const w = WORKS[i];
-  modalBody.innerHTML = `
+function workModalHTML(w, studyBlocks) {
+  const hasStudy = studyBlocks && studyBlocks.length;
+  return `
     <p class="m-cat">${w.category}</p>
     <h2 class="m-title">${w.title}</h2>
     <div class="m-meta">
@@ -305,9 +441,9 @@ function openModal(i) {
       <div><span class="k">Tools</span><span class="v">${w.tools.join(", ")}</span></div>
     </div>
     ${w.summary ? `<p class="m-lead">${w.summary}</p>` : ""}
-    ${w.study && w.study.length
-      ? studyHTML(w)
-      : `${galleryHTML(w)}<p class="m-desc">${w.description}</p>${w.bullets && w.bullets.length ? `<ul class="m-bullets">${w.bullets.map((b) => `<li>${b}</li>`).join("")}</ul>` : ""}`}
+    ${hasStudy
+      ? studyHTML(studyBlocks, w)
+      : `${galleryHTML(w)}<p class="m-desc">${w.description || ""}</p>${w.bullets && w.bullets.length ? `<ul class="m-bullets">${w.bullets.map((b) => `<li>${b}</li>`).join("")}</ul>` : ""}`}
     <div class="m-tools">${w.tools.map((t) => `<span>${t}</span>`).join("")}</div>
     ${w.links && w.links.length
       ? `<div class="m-linkrow">${w.links
@@ -315,10 +451,28 @@ function openModal(i) {
           .join("")}</div>`
       : ""}
   `;
+}
+
+async function openModal(i) {
+  const w = WORKS[i];
+  const token = ++modalToken;
+  stopStudyWatch();
+  // 1) 즉시 렌더 — 인라인 study가 있으면 그대로, 없으면 요약/갤러리 폴백
+  const inline = w.study && w.study.length ? w.study : null;
+  modalBody.innerHTML = workModalHTML(w, inline);
   openModalShell();
+  // 2) studyMd가 있으면 마크다운을 불러와 다시 렌더 (+ 로컬이면 자동 갱신 감시)
+  if (!inline && w.studyMd) {
+    const blocks = await loadStudy(w);
+    if (token !== modalToken) return; // 그 사이 다른 모달이 열림 → 덮어쓰지 않음
+    modalBody.innerHTML = workModalHTML(w, blocks);
+    if (isDev) startStudyWatch(w, token);
+  }
 }
 
 function openProjectModal(i) {
+  ++modalToken;
+  stopStudyWatch();
   const p = PROJECTS[i];
   const related = (p.related || []).map((wi) => WORKS[wi]).filter(Boolean);
   modalBody.innerHTML = `
@@ -354,6 +508,8 @@ function openProjectModal(i) {
 }
 
 function closeModal() {
+  ++modalToken;
+  stopStudyWatch();
   modal.classList.remove("open");
   modal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";

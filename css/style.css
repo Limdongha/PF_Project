@@ -390,8 +390,21 @@ body::before {
 .m-study { margin-top: .2rem; }
 .m-study .m-subhead:first-child { margin-top: .4rem; }
 .m-fig { margin: 1.5rem 0; }
-.m-fig img { width: 100%; display: block; border-radius: var(--radius-sm); border: 1px solid var(--line-soft); background: #111; }
+/* 이미지는 원본보다 크게 업스케일하지 않음(저해상도 깨짐 방지) + 가운데 정렬. 영상은 폭 100%. */
+.m-fig img { max-width: 100%; height: auto; display: block; margin: 0 auto; border-radius: var(--radius-sm); border: 1px solid var(--line-soft); background: #111; }
+.m-fig video { width: 100%; display: block; border-radius: var(--radius-sm); border: 1px solid var(--line-soft); background: #111; }
+/* 유튜브 임베드: 16:9 반응형 컨테이너(폭 지정 시 가운데 정렬) */
+.m-fig--yt { margin-left: auto; margin-right: auto; }
+.m-yt { position: relative; width: 100%; aspect-ratio: 16 / 9; }
+.m-yt iframe { position: absolute; inset: 0; width: 100%; height: 100%; display: block; border-radius: var(--radius-sm); border: 1px solid var(--line-soft); background: #111; }
 .m-fig figcaption { font-size: .82rem; color: var(--txt-dim); margin-top: .55rem; line-height: 1.55; }
+/* 코드 블록 (```lang … ```) */
+.m-fig--code { position: relative; }
+.m-code { font-family: "JetBrains Mono", monospace; font-size: .82rem; line-height: 1.65; color: #d7dbe4; background: #0d0f14; border: 1px solid var(--line-soft); border-radius: var(--radius-sm); padding: 1rem 1.1rem; margin: 0; overflow-x: auto; white-space: pre; -webkit-overflow-scrolling: touch; }
+.m-code code { font-family: inherit; }
+.m-code__lang { position: absolute; top: .5rem; right: .7rem; font-size: .68rem; font-family: "JetBrains Mono", monospace; color: var(--txt-dim); text-transform: uppercase; letter-spacing: .06em; pointer-events: none; }
+/* 인라인 코드 (`…`) */
+.m-desc code, .m-fig figcaption code { font-family: "JetBrains Mono", monospace; font-size: .88em; background: rgba(255,255,255,.06); border: 1px solid var(--line-soft); border-radius: 4px; padding: .05em .38em; }
 /* 모달 상단 안내 박스 (예: AI 대체 이미지 고지) */
 .m-notice { margin: 0 0 1.5rem; padding: 1rem 1.2rem; border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); background: rgba(255,255,255,.04); color: var(--txt-soft); font-size: .92rem; line-height: 1.6; }
 
