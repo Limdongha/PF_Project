@@ -524,6 +524,7 @@ const WORKS = [
     role: "Technical Artist",
     tools: ["Unity", "URP", "Shader Graph", "HLSL"],
     cover: "assets/works/mob-toon.png",   // TODO: 중립 메쉬 적용 스크린샷
+    studyMd: "content/works/06-urp-toon.md",   // ← 셰이딩 파트 초안. 외곽선 파트는 자료 오면 추가
     summary: "Unity URP 환경에서 모바일 성능을 고려해 구현한 툰 셰이딩 — 셀 명암 + 외곽선.",
     description:
       "모바일(URP)에 맞춘 툰 셰이더입니다. 램프/계단 명암으로 셀 셰이딩을 구현하고, 외곽선은 모바일 부하를 " +

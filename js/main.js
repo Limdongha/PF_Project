@@ -285,6 +285,12 @@ function parseStudyMarkdown(text, mdPath) {
     if (t) blocks.push({ p: inlineMd(t) });
     para = [];
   };
+  let listItems = [];
+  const flushList = () => {
+    if (!listItems.length) return;
+    blocks.push({ list: listItems });
+    listItems = [];
+  };
   let inCode = false, codeLang = "", codeLines = [];
   for (const raw of lines) {
     const line = raw.trim();
@@ -297,11 +303,15 @@ function parseStudyMarkdown(text, mdPath) {
     if (inComment) { if (line.includes("-->")) inComment = false; continue; }
     if (line.startsWith("<!--")) { if (!line.includes("-->")) inComment = true; continue; }
     let m;
-    if ((m = line.match(/^```(\w+)?\s*$/))) { flush(); inCode = true; codeLang = m[1] || ""; codeLines = []; continue; }
-    if (!line) { flush(); continue; }
-    if ((m = line.match(/^#{1,6}\s+(.*)$/))) { flush(); blocks.push({ h: inlineMd(m[1].trim()) }); continue; }
+    if ((m = line.match(/^```(\w+)?\s*$/))) { flush(); flushList(); inCode = true; codeLang = m[1] || ""; codeLines = []; continue; }
+    if (!line) { flush(); flushList(); continue; }
+    if ((m = line.match(/^#{1,6}\s+(.*)$/))) { flush(); flushList(); blocks.push({ h: inlineMd(m[1].trim()) }); continue; }
+    // 구분선(가로줄): "---" / "***" / "___" (3개 이상) — 파트 경계용
+    if (/^(?:-{3,}|\*{3,}|_{3,})$/.test(line)) { flush(); flushList(); blocks.push({ hr: true }); continue; }
+    // 목록 항목: "- " 또는 "* " 로 시작. 연속 항목을 하나의 목록 블록으로 묶는다.
+    if ((m = line.match(/^[-*]\s+(.*)$/))) { flush(); listItems.push(inlineMd(m[1].trim())); continue; }
     if ((m = line.match(/^!\[([^\]]*)\]\(([^)]+)\)(?:\{([^}]*)\})?\s*$/))) {
-      flush();
+      flush(); flushList();
       // 선택적 크기 지정: {w=420} / {width=420} / {small}=360 / {medium}=560
       let w = null; const opt = m[3];
       if (opt) {
@@ -313,10 +323,12 @@ function parseStudyMarkdown(text, mdPath) {
       blocks.push({ img: resolveMdPath(m[2].trim(), mdPath), cap: escapeHtml(m[1].trim()), w });
       continue;
     }
+    flushList();
     para.push(line);
   }
   if (inCode && codeLines.length) blocks.push({ code: codeLines.join("\n"), lang: codeLang }); // 닫힘 없이 끝나도 살림
   flush();
+  flushList();
   return blocks;
 }
 async function loadStudy(w) {
@@ -399,7 +411,9 @@ function studyHTML(blocks, w) {
   return `<div class="m-study">${blocks
     .map((b) => {
       if (b.h) return `<h3 class="m-subhead">${b.h}</h3>`;
+      if (b.hr) return `<hr class="m-divider">`;
       if (b.p) return `<p class="m-desc">${b.p}</p>`;
+      if (b.list) return `<ul class="m-bullets">${b.list.map((it) => `<li>${it}</li>`).join("")}</ul>`;
       if (b.code != null) {
         const lang = b.lang ? `<span class="m-code__lang">${escapeHtml(b.lang)}</span>` : "";
         return `<figure class="m-fig m-fig--code">${lang}<pre class="m-code"><code>${escapeHtml(b.code)}</code></pre></figure>`;

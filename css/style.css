@@ -365,8 +365,8 @@ body::before {
 .m-ph { aspect-ratio: 16/9; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-family: "JetBrains Mono", monospace; color: rgba(255,255,255,.85); border: 1px dashed var(--line); }
 .m-desc { color: var(--txt-soft); margin-bottom: 1.4rem; }
 .m-bullets { display: flex; flex-direction: column; gap: .6rem; }
-.m-bullets li { display: flex; gap: .7rem; color: var(--txt-soft); }
-.m-bullets li::before { content: "▸"; color: var(--txt-dim); }
+.m-bullets li { position: relative; padding-left: 1.4rem; color: var(--txt-soft); }
+.m-bullets li::before { content: "▸"; position: absolute; left: 0; color: var(--txt-dim); }
 .m-tools { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1.6rem; }
 .m-tools span { font-family: "JetBrains Mono", monospace; font-size: .75rem; color: var(--txt-dim); padding: .3rem .7rem; border: 1px solid var(--line); border-radius: 6px; }
 .m-subhead + .m-tools { margin-top: 0; }
@@ -389,6 +389,9 @@ body::before {
 .m-lead { color: var(--txt); font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.6rem; padding-bottom: 1.4rem; border-bottom: 1px solid var(--line-soft); }
 .m-study { margin-top: .2rem; }
 .m-study .m-subhead:first-child { margin-top: .4rem; }
+/* 파트 경계용 구분선 (예: 셰이딩 → 외곽선) */
+.m-divider { border: 0; height: 1px; margin: 3.6rem 0; background: linear-gradient(to right, transparent, var(--line-soft) 15%, var(--line-soft) 85%, transparent); }
+.m-divider + .m-subhead { margin-top: 0; }
 .m-fig { margin: 1.5rem 0; }
 /* 이미지는 원본보다 크게 업스케일하지 않음(저해상도 깨짐 방지) + 가운데 정렬. 영상은 폭 100%. */
 .m-fig img { max-width: 100%; height: auto; display: block; margin: 0 auto; border-radius: var(--radius-sm); border: 1px solid var(--line-soft); background: #111; }
