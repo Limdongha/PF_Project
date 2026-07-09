@@ -108,7 +108,7 @@ const PROJECTS = [
     tools: ["Unity", "C#"],
     link: "",                 // 외부 링크 버튼용(선택). 플레이 영상은 아래 media에 유튜브로 넣음
     linkLabel: "영상 보기",
-    related: [1, 4, 6, 11, 12],  // Water 셰이더·맵 배치 툴·프로시저럴 모델링 툴·텍스처 검수 툴·최적화 모니터링 툴
+    related: [1, 4, 6, 11],  // Water 셰이더·맵 배치 툴·프로시저럴 던전 배치 툴·Unity 최적화 툴킷
     media: [
       { type: "image", src: "assets/projects/maze.jpg" },
       // TODO: 플레이 영상 유튜브 링크 받으면 아래 주석 풀고 넣기
@@ -210,7 +210,7 @@ const PROJECTS = [
     tools: ["DirectX 11", "HLSL", "C++"],
     link: "",                 // 외부 링크 버튼용(선택). 플레이 영상은 아래 media에 유튜브로
     linkLabel: "영상 보기",
-    related: [13, 16],        // PBR 셰이더 & 라이팅 · 렌더링 최적화
+    related: [12],            // PBR 셰이더 & 라이팅
     media: [
       { type: "youtube", id: "https://youtu.be/Ug0tOwWOcdg" },
     ],
@@ -246,7 +246,7 @@ const PROJECTS = [
     tools: ["DirectX 11", "HLSL", "C++"],
     link: "",
     linkLabel: "영상 보기",
-    related: [3, 9, 14, 15],   // 디퍼드 렌더러 쇼케이스 4개(파티클·툰·디퍼드·그림자&SSAO) 연결
+    related: [3, 9, 13, 14],   // 디퍼드 렌더러 쇼케이스 4개(파티클·커스텀셰이딩·디퍼드·그림자&SSAO) 연결
     media: [
       { type: "youtube", id: "https://youtu.be/GOxVFVGjr_s" },
     ],
@@ -589,119 +589,85 @@ const WORKS = [
     role: "Technical Artist",
     tools: ["Unity", "URP", "C#", "HLSL"],
     cover: "assets/works/mob-trail.jpg",   // TODO: 중립 씬 잔상 스크린샷
-    summary: "공격 모션에 속도감을 더하는 메쉬 기반 모션 트레일. 모바일 부하를 고려해 경량화.",
+    studyMd: "content/works/09-motion-trail.md",
+    summary: "회피 순간의 캐릭터 메시를 BakeMesh로 박제해 남기는 잔상. 풀링·사전 워밍으로 모바일에서도 가볍게.",
     description:
-      "공격·이동 모션에 잔상을 남겨 속도감을 주는 모션 트레일 기법입니다. 프레임마다 메쉬(또는 본 위치)를 " +
-      "샘플링해 잔상 리본을 생성하고 수명에 따른 페이드·컬러 그라데이션으로 자연스럽게 사라지게 했습니다. " +
-      "샘플 수·수명을 파라미터로 노출해 모바일 환경에서 부하를 조절할 수 있게 했습니다.",
+      "회피할 때 캐릭터 뒤에 남는 잔상(모션 트레일)입니다. 파티클로 모양을 흉내내는 대신 SkinnedMeshRenderer.BakeMesh로 " +
+      "그 순간의 포즈를 정적 메시로 박제해 진짜 실루엣을 남겼고, 라이팅·그림자를 끈 Additive 단색과 MaterialPropertyBlock으로 " +
+      "머티리얼 인스턴스를 없앴습니다. 고스트 슬롯을 미리 만들어 사전 BakeMesh로 데워 두는 풀링으로 런타임 할당과 첫 발동 " +
+      "히치를 제거하고, 회피를 안 쓰는 동안에는 비용이 0이 되게 했습니다.",
     bullets: [
-      "메쉬/본 샘플링 기반 잔상 리본 생성",
-      "수명에 따른 페이드·컬러 그라데이션",
-      "샘플 수·수명 파라미터화로 모바일 최적화",
+      "BakeMesh로 그 순간 포즈를 박제 → 진짜 캐릭터 실루엣",
+      "라이팅·그림자 없는 Additive 단색 + MPB → 머티리얼 인스턴스 제로",
+      "풀링 + 사전 워밍 → 런타임 할당·첫 발동 히치 제거",
+      "LateUpdate 두 박자(방출·페이드), 안 쓸 땐 0 비용",
     ],
     media: [{ type: "image", src: "assets/works/mob-trail.jpg" }],
   },
 
   {
-    title: "툰 셰이더 — 외곽선 · 셀셰이딩",
+    title: "언리얼 커스텀 셰이딩 모델",
     category: "Shader",
     year: "2025",
-    role: "Shader",
-    tools: ["DirectX 11", "HLSL", "C++"],
-    cover: "assets/works/thumb-toon.jpg",   // 전용 썸네일(4:3). 없으면 제목 플레이스홀더로 대체
-    summary: "Ceil 단계 명암과 노멀 압출 2-pass 외곽선으로 원신류 NPR 룩을 재현한 툰 셰이더.",
+    role: "Technical Artist · Graphics",
+    tools: ["Unreal Engine 5", "C++", "HLSL", "USF"],
+    cover: "content/works/img/18-unreal-shadingmodel/41.png",   // 보스 몬스터 툰 적용 결과
+    studyMd: "content/works/18-unreal-shadingmodel.md",
+    summary: "언리얼 엔진 소스를 직접 수정해 추가한 커스텀 툰 셰이딩 모델. 머티리얼 값이 GBuffer를 거쳐 HLSL까지 도달하는 파이프라인을 직접 구현.",
     description:
-      "원신 특유의 비실사(NPR) 캐릭터 룩을 만들기 위한 툰 셰이더입니다. 색상은 N·L 조명을 Ceil 함수로 계단형 " +
-      "명암으로 바꿔 단계별 음영을 표현했고 외곽선은 정점을 노멀 방향으로 살짝 밀어 후면만 남기는 2-pass 방식으로 " +
-      "그렸습니다. 외곽선은 G버퍼 합성 이후 별도 패스로 처리하고 ZBias로 깊이를 미세 조정해 캐릭터를 덮지 않게 했습니다.",
+      "언리얼 엔진 소스코드를 직접 고쳐 나만의 셰이딩 모델(MSM_Dongha)을 추가한 작업입니다. EMaterialShadingModel enum " +
+      "등록부터 커스텀 데이터 핀 노출, GBuffer 렌더타겟 발송, HLSL의 ToonBxDF 분기까지 CPU에서 GPU로 이어지는 전체 " +
+      "경로를 구현했습니다. CPU→GPU로 매 프레임 오가는 데이터라 사용 플래그를 1비트까지 압축했고, 툰 공식을 .usf로 " +
+      "외부화해 엔진 재빌드 없이 룩을 조정할 수 있게 구조를 잡았습니다. 마지막으로 셀 셰이딩 외곽선 포스트프로세스를 " +
+      "합쳐 보스 몬스터에 적용했습니다.",
     bullets: [
-      "Ceil 함수로 N·L 조명을 계단형 단계 명암으로 변환",
-      "노멀 방향 정점 압출 + 후면 컬링으로 실루엣 외곽선 (2-pass)",
-      "외곽선 전용 렌더 패스 분리 + ZBias 깊이 보정",
-      "알베도 알파 0.1 이하 디스카드로 외곽선 정리",
+      "EMaterialShadingModel enum에 커스텀 모델 등록 (사용 플래그 1비트 압축)",
+      "CustomData 핀(DonghaSpecular·DonghaOffset)을 float4로 GPU 전달",
+      "GBuffer 렌더타겟 발송 + HLSL switch → ToonBxDF 셰이딩",
+      "툰 공식 .usf 외부화로 엔진 재빌드 없이 룩 조정",
+      "셀 셰이딩 외곽선 포스트프로세스 합성",
     ],
     media: [
-      { type: "image", src: "content/works/img/10-toon-shader/07.png" },
-    ],
-    study: [
-      { p: "원신 특유의 비실사(NPR) 캐릭터 룩을 만들기 위한 툰 셰이더입니다. 툰 셰이더는 크게 두 가지 — 단계별 명암(셀셰이딩)과 외곽선 — 으로 나뉩니다." },
-
-      { h: "1. 셀셰이딩 — 명암을 계단으로" },
-      { p: "일반 조명은 빛과 노말의 내적(N·L)에 따라 밝기가 매끄럽게 이어집니다. 툰 룩의 핵심은 이 연속적인 명암을 계단처럼 끊어 몇 단계의 또렷한 음영으로 바꾸는 것입니다." },
-      { img: "content/works/img/10-toon-shader/02.png", cap: "선형으로 이어지는 명암을 단계별로 끊는 것이 셀셰이딩의 핵심입니다." },
-      { p: "방법은 의외로 간단합니다. N·L로 구한 밝기 값에 Ceil() 함수를 적용하면 연속 그래프가 계단형으로 바뀝니다. 단계 수를 조절해 음영의 거칠기를 정합니다." },
-      { img: "content/works/img/10-toon-shader/03.png", cap: "N·L 조명에 Ceil 함수를 적용해 계단형 단계 명암으로 변환." },
-
-      { h: "2. 외곽선 — 노멀 압출 2-pass" },
-      { p: "색상보다 까다로운 건 외곽선입니다. 원리는 이렇습니다. 각 정점을 노말 방향으로 살짝 부풀린 뒤 앞면을 컬링하고 후면만 남기면 부풀린 만큼이 캐릭터 뒤로 비어져 나와 실루엣처럼 보입니다." },
-      { img: "content/works/img/10-toon-shader/04.png", cap: "외곽선 전략 — 실루엣이 필요한 메쉬는 2-pass로 그리고 G버퍼 합성 이후 외곽선 패스를 한 번 더 돌립니다." },
-      { p: "외곽선은 G버퍼 블렌딩 이후에 적용되므로 깊이 '비교'는 필요하지만 깊이 '기록'은 빼야 했습니다. 깊이를 기록하면 이후 렌더링에 간섭이 생기기 때문입니다. 또 외곽선이 캐릭터를 덮지 않도록 ZBias로 살짝 뒤로 밀었습니다." },
-      { img: "content/works/img/10-toon-shader/05.png", cap: "외곽선 전용 렌더 타겟을 추가하고 플레이어 렌더링 함수를 따로 두어 2-pass를 구성했습니다." },
-      { img: "content/works/img/10-toon-shader/06.png", cap: "외곽선 패스에는 다른 레지스터·뎁스스텐실 스테이트를 적용 — 깊이 비교는 켜고 기록은 끕니다." },
-      { p: "정점 셰이더는 각 정점을 노말 방향으로 미는 일만 하고 후면 컬링은 스테이트가 처리하므로 픽셀 셰이더는 외곽선 색만 출력하면 됩니다. 알베도 알파가 0.1 이하인 부분은 디스카드해 외곽선을 깔끔하게 정리했습니다." },
-      { img: "content/works/img/10-toon-shader/07.png", cap: "외곽선이 잡히기 시작한 결과. 이후 색을 검게·두께를 줄이고 색상을 Ceil로 단계화하면 툰 룩이 완성됩니다." },
+      { type: "image", src: "content/works/img/18-unreal-shadingmodel/44.png" },
     ],
     links: [
-      { label: "전체 글 보기", href: "https://blog.naver.com/ridas_/223927857368" },
+      { label: "전체 글 보기", href: "https://blog.naver.com/ridas_/224075960293" },
     ],
   },
 
   {
-    title: "SDF 공격 장판",
+    title: "공격 예고장판 시스템",
     category: "VFX",
     year: "2026",
     role: "Technical Artist",
-    tools: ["Unity", "URP", "HLSL"],
+    tools: ["Unity", "URP", "HLSL", "C#"],
     cover: "assets/works/mob-sdf.jpg",   // TODO: 장판 효과 스크린샷
-    summary: "SDF(부호 거리장)로 공격 범위 장판을 해상도 무관하게 선명히 그리는 기법.",
+    studyMd: "content/works/11-sdf-aoe.md",
+    summary: "그리기와 판정을 같은 모양 데이터로 묶어 '보이는 게 곧 맞는 것'을 보장한 공격 예고장판 시스템. 타격 순간 채움 강제 + 풀링으로 모바일 경량.",
     description:
-      "보스·스킬의 공격 범위를 바닥에 표시하는 장판 효과입니다. SDF로 원·부채꼴·사각 등 다양한 모양을 " +
-      "수학적으로 그려 해상도에 무관하게 선명한 테두리와 채움을 표현했습니다. 경고에서 발동까지의 타이밍을 " +
-      "알파·스케일 애니메이션으로 연출했습니다.",
+      "보스·몹 공격을 바닥에 미리 알려 주는 예고장판 시스템입니다. 원·부채꼴·사각을 담은 하나의 모양 데이터를 " +
+      "셰이더 렌더와 데미지 판정이 함께 써서 보이는 범위와 맞는 범위가 어긋나지 않게 했고, 타격 순간 채움을 100%로 " +
+      "강제 스냅해 '꽉 참 = 타격' 타이밍을 코드로 보장했습니다. 쿼드 풀링과 MaterialPropertyBlock으로 런타임 할당과 " +
+      "머티리얼 인스턴스를 없애 모바일에서 여러 장판이 떠도 가볍게 동작합니다.",
     bullets: [
-      "SDF 기반 모양(원·부채꼴·사각) 선명 렌더",
-      "테두리 두께·채움·펄스 파라미터화",
-      "경고 → 발동 타이밍 애니메이션",
+      "그리기·판정이 같은 모양 데이터 공유 → 보이는 범위 = 맞는 범위",
+      "타격 순간 채움 100% 강제 스냅 → 타이밍 튜닝 제거",
+      "그리는 서비스와 때리는 주체 분리 (디자이너 코드 0줄 / 보스 코드 주도)",
+      "쿼드 풀링 + MaterialPropertyBlock → 런타임 할당·머티리얼 인스턴스 제로",
     ],
     media: [{ type: "image", src: "assets/works/mob-sdf.jpg" }],
   },
 
   {
-    title: "텍스처 검수 툴",
+    title: "Unity 최적화 툴킷",
     category: "Tool",
     year: "2026",
     role: "Technical Artist",
     tools: ["Unity", "C#", "Editor Scripting"],
     cover: "assets/works/maze-texcheck.png",   // TODO: 툴 UI 스크린샷
-    summary: "텍스처 규격(해상도·압축·밉맵·네이밍)을 일괄 검사·자동 교정하는 Unity 툴. 메모리·성능 사고 예방.",
-    description:
-      "규격을 벗어난 텍스처가 메모리·성능 문제를 일으키는 것을 막기 위한 검수 툴입니다. 해상도·압축 포맷·밉맵·" +
-      "네이밍을 일괄 검사하고 규격 위반 항목을 리포트하고 원클릭으로 교정합니다.",
-    bullets: [
-      "텍스처 해상도·압축·밉맵 일괄 검사",
-      "규격 위반 항목 리포트",
-      "원클릭 자동 교정",
-    ],
-    media: [{ type: "image", src: "assets/works/maze-texcheck.png" }],
-  },
-
-  {
-    title: "최적화 모니터링 툴",
-    category: "Tool",
-    year: "2026",
-    role: "Technical Artist",
-    tools: ["Unity", "C#"],
-    cover: "assets/works/maze-perf.png",   // TODO: 툴 UI 스크린샷
-    summary: "드로우콜·배칭·메모리·프레임타임을 실시간 표시하는 Unity 성능 모니터링 툴. 팀 최적화 기준 마련.",
-    description:
-      "팀이 성능 예산 안에서 작업하도록 주요 지표를 실시간으로 보여주는 모니터링 툴입니다. 드로우콜·배칭·메모리·" +
-      "프레임타임을 한 화면에 표시하고 기준 초과 시 경고해 최적화 기준점을 제공합니다.",
-    bullets: [
-      "드로우콜·배칭·메모리·프레임타임 실시간 표시",
-      "성능 예산 초과 경고",
-      "씬별 성능 스냅샷 비교",
-    ],
-    media: [{ type: "image", src: "assets/works/maze-perf.png" }],
+    studyMd: "content/works/19-unity-toolkit.md",
+    summary: "텍스처 규격 검수 + 실시간 성능 모니터링. 팀이 성능 예산 안에서 작업하도록 받쳐주는 TA 툴셋.",
+    // 본문(영상+설명)은 studyMd에서 렌더. media 갤러리는 study가 있으면 표시되지 않음.
   },
 
   {
@@ -721,7 +687,10 @@ const WORKS = [
       "DirectX/HLSL로 직접 구현",
       "원작 무드 재현을 위한 라이팅 디자인",
     ],
-    media: [{ type: "image", src: "assets/works/lop-pbr.jpg" }],
+    media: [
+      { type: "youtube", id: "umvKZkgY9RQ" },   // 약 40분 분량 상세 영상
+      { type: "image", src: "assets/works/lop-pbr.jpg" },
+    ],
   },
 
   {
@@ -744,37 +713,14 @@ const WORKS = [
       "뎁스 버퍼에서 NDC→뷰→월드 역변환으로 픽셀 월드 좌표 복원",
       "하늘·파티클 등 라이팅 제외 그룹을 별도 분리 처리",
     ],
+    studyMd: "content/works/15-deferred.md",
     media: [
       { type: "image", src: "content/works/img/15-deferred/05.png" },
     ],
-    study: [
-      { p: "캐릭터·이펙트·환경이 한 화면에서 어우러지려면 조명을 일관되게 입히는 구조가 필요했습니다. 그래서 화면을 한 번에 칠하는 대신 디퓨즈·노말·조명을 따로 그려 마지막에 합치는 디퍼드(지연) 렌더링을 직접 구현했습니다." },
-
-      { h: "1. 렌더를 가로채 멀티 렌더 타겟으로" },
-      { p: "디퍼드 렌더링의 출발점은 '렌더 가로채기'입니다. 평소 화면(백버퍼)으로 바로 나갈 그림을 중간에 텍스처(렌더 타겟)로 받아내고 그 텍스처를 셰이더 리소스 뷰(SRV)로 다시 셰이더에 넣어 후처리합니다." },
-      { img: "content/works/img/15-deferred/01.png", cap: "기초 원리부터 다시 잡으며 정리한 후처리 셰이딩의 흐름 — 렌더 타겟을 텍스처로 받아 사각(렉트) 버퍼에 다시 그립니다." },
-      { p: "핵심은 출력 슬롯을 나누는 것입니다. 픽셀 셰이더의 출력 시멘틱(SV_TARGET0, 1, 2…)으로 한 번의 렌더링에서 여러 렌더 타겟에 동시에 그릴 수 있습니다(MRT). 1번 슬롯엔 디퓨즈, 2번엔 노말, 3번엔 조명 결과를 나눠 담는 구조를 잡았습니다." },
-      { img: "content/works/img/15-deferred/02.png", cap: "출력 시멘틱으로 MRT 슬롯을 지정 — 한 번의 패스로 디퓨즈·노말·조명을 각 슬롯에 분리해 그립니다." },
-      { img: "content/works/img/15-deferred/03.png", cap: "분리해 그린 렌더 타겟들을 직교투영 버퍼로 모아 합성합니다(디퓨즈×조명, 스페큘러, 노말 적용 등)." },
-
-      { h: "2. 합성 과정에서 만난 문제" },
-      { p: "전처리 결과를 모으는 'All' 렌더 타겟을 만들어 합쳤더니 하늘이 까맣게 날아가고 파티클·무기도 검게 나오는 문제가 생겼습니다." },
-      { img: "content/works/img/15-deferred/04.png", cap: "합성 직후 — 하늘·파티클·무기가 검게 사라진 상태. 셰이더에서 해당 값을 넘기지 않아 클리어 색(검정)이 그대로 남은 것입니다." },
-      { p: "원인별로 나눠 해결했습니다. 하늘은 알파가 0인 픽셀을 디스카드해 처리하고 파티클은 조명을 받지 않아야 하므로 '논블렌드'가 아니라 '논라이트' 그룹으로 따로 분리해 관리했습니다." },
-      { img: "content/works/img/15-deferred/05.png", cap: "그룹 분리와 디스카드 처리로 복구한 결과 — 하늘과 라이팅 제외 대상이 제자리를 찾았습니다." },
-
-      { h: "3. 조명 — 노말 변환과 스페큘러" },
-      { p: "조명 계산의 첫 단추는 노말맵입니다. 노말맵은 탄젠트 공간 기준이라 그대로 쓰면 안 되고 TBN 행렬을 곱해 월드 공간으로 옮겨야 빛 방향과 올바르게 내적됩니다." },
-      { img: "content/works/img/15-deferred/06.png", cap: "TBN 행렬로 노말맵을 탄젠트 → 월드 공간으로 변환." },
-      { img: "content/works/img/15-deferred/07.png", cap: "월드 공간으로 옮긴 노말 — R·G·B가 각각 X·Y·Z축에 대응합니다(파란빛이 Z축). 이 값을 빛 방향과 내적해 명암을 만듭니다." },
-      { p: "빛 방향과 노말을 내적(N·L)해 기본 명암을 만들고 너무 어두워지는 암부는 앰비언트 값을 더해 살렸습니다. 빛의 세계에서는 1을 넘는 값이 1로 잘리므로 앰비언트는 사실상 어두운 부분의 최소 밝기 역할을 합니다." },
-      { p: "스페큘러(하이라이트)는 보는 방향에서 반사된 방향에 빛이 있을 때 가장 강합니다. 반사벡터 공식 R = 2(N·L)N − L 로 구하는데 여기엔 픽셀의 월드 좌표가 필요했습니다." },
-      { img: "content/works/img/15-deferred/08.png", cap: "반사벡터(R = 2(N·L)N − L)로 스페큘러를 계산 — 이를 위해 픽셀의 월드 좌표가 필요합니다." },
-      { p: "월드 좌표는 뎁스 버퍼에서 복원했습니다. 픽셀의 z를 NDC 공간 값으로 저장하고 카메라 far로 정규화한 거리를 함께 넘긴 뒤 NDC → 뷰 → 월드로 투영·뷰 행렬의 역행렬을 차례로 곱해 되돌립니다. 후처리 셰이더는 이렇게 렌더링 파이프라인의 공간 변환을 정확히 이해해야 다룰 수 있었습니다." },
-    ],
     links: [
-      { label: "MRT 구성 (1편)", href: "https://blog.naver.com/ridas_/223918326412" },
-      { label: "라이팅·뎁스 복원 (2편)", href: "https://blog.naver.com/ridas_/223919726523" },
+      { label: "후처리 개념 (1편)", href: "https://blog.naver.com/ridas_/223912874757" },
+      { label: "MRT 구성 (2편)", href: "https://blog.naver.com/ridas_/223918326412" },
+      { label: "라이팅·뎁스 복원 (3편)", href: "https://blog.naver.com/ridas_/223919726523" },
     ],
   },
 
@@ -798,53 +744,13 @@ const WORKS = [
       "TBN으로 정렬한 반구 16방향 샘플링 + 깊이 비교 폐색 누적",
       "[unroll] 루프 전개로 픽셀 셰이더 샘플링 최적화",
     ],
+    studyMd: "content/works/16-shadow-ssao.md",
     media: [
       { type: "image", src: "content/works/img/16-shadow-ssao/09.png" },
-    ],
-    study: [
-      { p: "직접광 명암만으로는 장면이 평면적으로 보입니다. 빛에 가려 생기는 그림자와 구석·틈에서 간접광이 차단되어 생기는 미묘한 음영(AO)을 더해 입체감을 살렸습니다. 둘 다 깊이(뎁스) 정보를 활용하는 기법입니다." },
-
-      { h: "1. 그림자 — 빛 시점의 깊이 비교" },
-      { p: "그림자의 규칙은 둘입니다. ① 빛의 반대 방향으로 생기고, ② 빛이 가로막힌 모든 픽셀이 어두워져야 합니다. ②번이 까다롭습니다. 그림자 방향에 다른 물체가 있으면 그 물체도 어두워져야 하니까요." },
-      { img: "content/works/img/16-shadow-ssao/01.png", cap: "그림자를 코드로 어떻게 계산하는지부터 짚었습니다. 기존 조명은 노말과 광원의 내적으로 명암을 정합니다." },
-      { img: "content/works/img/16-shadow-ssao/02.png", cap: "빛에 가려지는 픽셀은 그 뒤의 물체까지 모두 어두워져야 한다 — 이 두 번째 규칙이 핵심 난제입니다." },
-      { p: "해법은 섀도우 매핑입니다. 빛의 방향에서 장면을 바라보는 카메라로 깊이 버퍼를 한 장 찍습니다. 그리고 기존 화면의 각 픽셀을 같은 빛 공간으로 변환해 '빛에서 본 깊이'와 비교합니다. 기존 픽셀이 더 멀면(=빛이 다른 것에 먼저 막혔으면) 그 픽셀은 그림자 안이므로 곱셈으로 어둡게 칠합니다." },
-      { img: "content/works/img/16-shadow-ssao/03.png", cap: "빛 방향 카메라로 그린 깊이 버퍼. G버퍼 합성 전에 별도 렌더 타겟·별도 함수로 찍습니다." },
-      { p: "비교를 위해 기존 깊이값을 NDC → 월드로 역변환한 뒤 다시 빛의 뷰·투영 행렬을 곱해 '빛에서 본 공간'으로 끌고 옵니다. 이를 UV 좌표로 바꿔 섀도우 맵을 샘플링하고 깊이를 비교합니다." },
-      { img: "content/works/img/16-shadow-ssao/04.png", cap: "깊이 비교로 그림자를 입힌 결과. 섀도우 맵 해상도를 키울수록 경계가 또렷해집니다." },
-
-      { h: "2. SSAO — 화면 공간 간접광 차단" },
-      { p: "AO(앰비언트 오클루전)는 빛이 직접 닿지 않는 구석을 어둡게 만들어 입체감을 더합니다. 'SS'가 붙으면 화면 공간(Screen Space)에서, 즉 화면에 보이는 픽셀만 계산해 부하를 줄인다는 뜻입니다." },
-      { img: "content/works/img/16-shadow-ssao/05.png", cap: "AO는 구석·틈의 간접광 차단을 표현합니다. 기본 내적 조명으로는 잡히지 않는 음영입니다." },
-      { img: "content/works/img/16-shadow-ssao/06.png", cap: "기준 픽셀 P에서 일정 거리 안에 다른 면이 있는지를 비교하는 것이 기본 원리입니다." },
-      { img: "content/works/img/16-shadow-ssao/07.png", cap: "주변에 가리는 면이 많을수록 그 픽셀을 더 어둡게 — 폐색값을 누적합니다." },
-      { img: "content/works/img/16-shadow-ssao/08.png", cap: "픽셀을 기점으로 반구 형태로 방향을 쏴 나보다 앞에 면이 있으면 어두워집니다. 움푹 들어간 면도 자기 면을 기준으로 AO가 반응합니다." },
-      { p: "정확한 거리 비교가 관건이었습니다. 투영 이후에는 원근 때문에 거리가 왜곡되므로 뷰 공간의 노말·포지션을 렌더 타겟에 따로 저장해 사용했습니다. 반구로 뻗는 16개 방향 벡터를 미리 만들어 셰이더에 넘기고 픽셀마다 TBN 행렬로 그 방향들을 픽셀의 뷰 공간 노말에 맞춰 정렬합니다." },
-      { p: "각 샘플 방향을 따라간 위치를 다시 NDC → UV로 변환해 그 지점의 뎁스를 읽고 실제 픽셀 깊이와 비교합니다. 더 앞에 면이 있으면 폐색값을 누적합니다. 반복문은 [unroll]로 펼쳐 픽셀 셰이더 연산을 빠르게 했고 화면 가장자리를 벗어나는 샘플은 예외 처리했습니다." },
-      { img: "content/works/img/16-shadow-ssao/09.png", cap: "왼쪽이 SSAO 적용, 오른쪽이 미적용. 움푹 들어간 부분이 주변광 차단으로 어두워져 입체감이 살아납니다. AO는 곱셈 연산이라 렌더 타겟을 흰색으로 클리어하는 것이 포인트입니다." },
     ],
     links: [
       { label: "그림자 매핑", href: "https://blog.naver.com/ridas_/223930081038" },
       { label: "SSAO", href: "https://blog.naver.com/ridas_/223934613803" },
     ],
-  },
-
-  {
-    title: "렌더링 최적화 — 옥트리·LOD·컬링",
-    category: "Rendering",
-    year: "2025",
-    role: "Technical Artist",
-    tools: ["DirectX 11", "C++"],
-    cover: "assets/works/lop-opt.jpg",   // TODO: 디버그 뷰/지표 스크린샷
-    summary: "옥트리 공간 분할 + 거리 기반 LOD + 프러스텀 컬링으로 렌더링 부하를 줄인 최적화.",
-    description:
-      "넓은 씬을 안정적으로 렌더링하기 위한 최적화 작업입니다. 옥트리로 공간을 분할해 컬링·쿼리를 가속하고, " +
-      "거리 기반 LOD로 폴리곤 부하를 줄였으며, 프러스텀 컬링으로 화면 밖 오브젝트를 그리지 않게 했습니다.",
-    bullets: [
-      "옥트리 공간 분할로 컬링·쿼리 가속",
-      "거리 기반 LOD로 폴리곤 부하 절감",
-      "프러스텀 컬링으로 화면 밖 오브젝트 제외",
-    ],
-    media: [{ type: "image", src: "assets/works/lop-opt.jpg" }],
   },
 ];

@@ -395,7 +395,7 @@ body::before {
 .m-fig { margin: 1.5rem 0; }
 /* 이미지는 원본보다 크게 업스케일하지 않음(저해상도 깨짐 방지) + 가운데 정렬. 영상은 폭 100%. */
 .m-fig img { max-width: 100%; height: auto; display: block; margin: 0 auto; border-radius: var(--radius-sm); border: 1px solid var(--line-soft); background: #111; }
-.m-fig video { width: 100%; display: block; border-radius: var(--radius-sm); border: 1px solid var(--line-soft); background: #111; }
+.m-fig video { width: 100%; display: block; margin: 0 auto; border-radius: var(--radius-sm); border: 1px solid var(--line-soft); background: #111; }
 /* 유튜브 임베드: 16:9 반응형 컨테이너(폭 지정 시 가운데 정렬) */
 .m-fig--yt { margin-left: auto; margin-right: auto; }
 .m-yt { position: relative; width: 100%; aspect-ratio: 16 / 9; }
