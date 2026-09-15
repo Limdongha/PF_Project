@@ -26,7 +26,7 @@ const PROFILE = {
   stats: [
     { value: "2+", label: "Years" },
     { value: "13", label: "Projects" },
-    { value: "4",  label: "Tools" },
+    { value: "6",  label: "Tools" },
   ],
 };
 
@@ -58,7 +58,7 @@ const APPROACH = [
 
 /* 스킬 / 도구 ------------------------------------------------------------- */
 const SKILLS = [
-  { group: "Real-time / Engine", items: ["Unreal Engine 5", "Unity (URP/HDRP)", "HLSL / GLSL", "Shader Graph", "Niagara / VFX Graph"] },
+  { group: "Real-time / Engine", items: ["Unreal Engine 5", "Unity (URP)", "HLSL / GLSL", "Shader Graph", "Niagara / VFX Graph"] },
   { group: "DCC / Look-dev",     items: ["3ds Max", "Maya", "Blender", "Substance Designer", "Substance Painter"] },
   { group: "Tools / Pipeline",   items: ["Python", "PySide / Qt", "C# / C++", "Git", "ImGui"] },
 ];
@@ -683,13 +683,20 @@ const WORKS = [
       "메탈릭·러프니스 기반 물리 셰이딩으로 재질감을 살리고 원작의 분위기를 좌우하는 빛 디자인을 핵심으로 " +
       "보고 라이팅까지 직접 설계했습니다.",
     bullets: [
-      "메탈릭·러프니스 기반 PBR 셰이딩",
-      "DirectX/HLSL로 직접 구현",
-      "원작 무드 재현을 위한 라이팅 디자인",
+      "Cook-Torrance BRDF(D·G·F) 직접 구현 — 마이크로패싯 기반 스펙큘러",
+      "메탈릭 워크플로: F0 보간 + kS/kD 에너지 보존 분배",
+      "노말맵 범위 변환 + TBN으로 탄젠트→월드 공간 조명 계산",
+      "암부 전용 fill light·스카이라이트로 원작 무드 재현",
+      "ACES 톤매핑 → 감마 보정 → LUT 색보정 파이프라인",
     ],
+    studyMd: "content/works/14-pbr-lighting.md",
     media: [
       { type: "youtube", id: "umvKZkgY9RQ" },   // 약 40분 분량 상세 영상
       { type: "image", src: "assets/works/lop-pbr.jpg" },
+    ],
+    links: [
+      { label: "PBR 셰이더 연구", href: "https://blog.naver.com/ridas_/223907888187" },
+      { label: "PBR 셰이더 심화", href: "https://blog.naver.com/ridas_/224066690277" },
     ],
   },
 

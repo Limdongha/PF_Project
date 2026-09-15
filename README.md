@@ -82,18 +82,20 @@ npx serve .
 
 ### 이미지 / 영상 갈아끼우기 (가장 중요)
 
-작업물 이미지는 **PNG 파일을 같은 이름으로 덮어쓰면** 그대로 교체됩니다.
-코드를 안 건드려도 돼요. 권장 크기 **1600×1000** (16:10).
+작업물 이미지는 **같은 이름으로 덮어쓰면** 그대로 교체됩니다. 코드를 안 건드려도 돼요.
 
-| 슬롯 | 파일 경로 |
-|---|---|
-| 랜딩(히어로) 큰 배경 | `assets/img/hero.png` |
-| 1. 툰 셰이더 | `assets/works/water.png` |
-| 2. 절차적 VFX | `assets/works/vfx.png` |
-| 3. 파이프라인 툴 | `assets/works/tool.png` |
-| 4. 환경 라이팅 | `assets/works/light.png` |
-| 5. 디졸브 R&D | `assets/works/rnd.png` |
-| 6. 헤어 셰이더 | `assets/works/hair.png` |
+이미지가 들어가는 자리는 아래와 같습니다.
+
+| 자리 | 경로 | 비고 |
+|---|---|---|
+| 히어로 배경(폴백/포스터) | `assets/img/hero.png` | 영상 로딩 전에 깔리는 정지 이미지 |
+| 카드 썸네일 | `assets/works/*` | 각 작업의 `cover` 경로. 그리드에 뜨는 대표컷 |
+| 케이스 스터디 본문 이미지 | `content/works/img/NN-이름/` | 해당 `.md` 안에서 `![캡션](img/NN-이름/파일)` 로 삽입 |
+| 링크 미리보기 썸네일 | `assets/img/og.jpg` | 1200×630. 카톡·슬랙에 링크 보낼 때 뜨는 카드 |
+| 탭 아이콘 | `assets/img/favicon.ico` / `favicon.png` | `apple-touch-icon.png` 는 iOS 홈화면용 |
+
+**어떤 파일이 어느 작업의 썸네일인지**는 `js/data.js` 에서 각 항목의 `cover:` 를 보면 됩니다.
+다른 파일로 바꾸고 싶으면 그 `cover` 경로만 고치세요. 권장 크기는 **4:3** (카드 비율).
 
 - 새 이름으로 넣고 싶으면 `js/data.js` 의 `cover` / `media` 경로만 바꾸면 됩니다.
 - **이미지가 없으면** 자동으로 색 그라데이션 플레이스홀더가 표시됩니다 (검은 화면 안 됨).
@@ -124,8 +126,7 @@ npx serve .
   ```
   - `-an` 음성 제거, `-crf` 숫자가 클수록 용량↓품질↓, `+faststart` 는 웹에서 빨리 재생 시작.
 
-> 현재 들어있는 PNG는 예시용으로 `tools/gen_art.py`(Python+Pillow)가 생성한 추상 아트입니다.
-> 본인 작업물로 교체하면 됩니다. (예시 아트를 다시 만들려면 `python tools/gen_art.py`)
+> 이미지는 전부 실제 작업물로 교체 완료됐습니다. (초기 예시 아트 생성기 `tools/gen_art.py` 는 역할이 끝나 제거)
 
 ## 배포 (나중에 결정)
 - **GitHub Pages**: 레포에 올리고 Settings → Pages → main 브랜치 / root.
