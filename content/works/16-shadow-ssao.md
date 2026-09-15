@@ -123,3 +123,11 @@ for (int i = 0; i < sampleCount; ++i)
 ![왼쪽이 SSAO 적용, 오른쪽이 미적용. 움푹 들어간 부분이 주변광 차단으로 어두워져 입체감이 살아납니다. AO는 곱셈 연산이라 렌더 타겟을 흰색으로 클리어하는 것이 포인트입니다.](img/16-shadow-ssao/09.png)
 
 작업 내내 큰 도움이 된 건 SSAO 렌더 타겟을 화면에 특대형 디버그 창으로 띄워 실시간으로 확인한 것입니다. 계산이 어디서부터 틀어졌는지 곧바로 보이니, 곱셈 블렌딩으로 바로 합성했다면 원인을 못 찾았을 문제를 여러 번 빠르게 잡을 수 있었습니다.
+
+## 참고 자료
+
+두 기법 모두 널리 쓰이는 표준 기법이며 원 출처는 아래와 같습니다.
+
+- 섀도우 매핑 — Lance Williams, "Casting Curved Shadows on Curved Surfaces" (SIGGRAPH 1978)
+- SSAO — Martin Mittring, "Finding Next Gen: CryEngine 2" (SIGGRAPH 2007)
+- 노말 방향 반구 샘플 커널 — John Chapman, [SSAO Tutorial](https://john-chapman-graphics.blogspot.com/2013/01/ssao-tutorial.html) (2013)

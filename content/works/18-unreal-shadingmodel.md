@@ -162,6 +162,13 @@ FDirectLighting ToonBxDF(FGBufferData GBuffer, half3 N, half3 V, half3 L, float 
 
 ![커스텀 셰이딩 모델 작업 영상.](https://youtu.be/MNoHBLx1e9s){w=640}
 
+## 참고 자료
+
+- 작업의 출발점 — 언리얼 페스트 2023 커스텀 셰이딩 모델 세션(본문 상단 영상)
+- `ToonBxDF` 셰이딩 공식 — [공개 구현(知乎)](https://zhuanlan.zhihu.com/p/404857208)을 바탕으로 정리했습니다.
+- `D_GGX`·`Diffuse_Lambert` 등 함수 안에서 호출하는 함수는 언리얼 엔진 소스에 있는 것을 그대로 썼습니다.
+- 작업 원문 — [커스텀 셰이딩 모델 추가](https://blog.naver.com/ridas_/224075960293) · [엔진 소스 빌드](https://blog.naver.com/ridas_/224075759324) · [셀 셰이딩 외곽선](https://blog.naver.com/ridas_/224048637608)
+
 <!-- ── 참고 링크 ─────────────────────────────────
   원문: https://blog.naver.com/ridas_/224075960293
   선행(엔진 소스 빌드): https://blog.naver.com/ridas_/224075759324

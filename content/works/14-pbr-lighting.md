@@ -231,3 +231,10 @@ float3 colorLUT = IncreaseSaturation(Lo, 1.2f);
 PBR을 직접 구현하면서 남은 것은 공식 자체보다 그 공식이 무엇을 모델링하고 있는지에 대한 감각입니다. 러프니스 슬라이더를 움직일 때 실제로는 표면을 덮은 미세한 거울들의 방향 분포가 흩어지는 것이고 메탈릭을 올리면 디퓨즈가 사라지는 것이 아니라 흡수되지 않은 에너지가 전부 반사로 넘어가는 것입니다.
 
 엔진에서 머티리얼을 만질 때 값이 예상과 다르게 움직이면 어느 항이 관여하는지를 짚어 볼 수 있게 됐습니다. 금속에서 디퓨즈가 먹통이 되는 것 같은 문제를 만났을 때 원인을 바로 지목할 수 있는 것이 직접 짜 보고 얻은 가장 실용적인 소득입니다.
+
+## 참고 자료
+
+셰이더 코드는 직접 작성했습니다. 사용한 공식의 출처는 아래와 같습니다.
+
+- Cook-Torrance BRDF와 GGX·Smith·Schlick 근사 — Brian Karis, [Real Shading in Unreal Engine 4](https://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf) (SIGGRAPH 2013)
+- ACES 필름 톤매핑 커브 — Krzysztof Narkowicz, [ACES Filmic Tone Mapping Curve](https://knarkowicz.wordpress.com/2016/01/06/aces-filmic-tone-mapping-curve/) (2016)

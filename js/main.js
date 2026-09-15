@@ -217,6 +217,7 @@ function renderWorks(filter = "All") {
         <div class="tile__overlay">
           <span class="tile__cat">${w.category}</span>
           <h3 class="tile__title">${w.title}</h3>
+          ${w.credit ? `<span class="tile__sub">${w.credit}</span>` : ""}
           <span class="tile__view">Case study 보기 →</span>
         </div>
       </article>`;
@@ -258,7 +259,8 @@ function escapeHtml(s) {
 function inlineMd(s) {
   return escapeHtml(s)
     .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
-    .replace(/`([^`]+)`/g, "<code>$1</code>");
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
 }
 function resolveMdPath(src, mdPath) {
   if (/^(https?:|data:|\/)/i.test(src) || src.startsWith("assets/")) return src;
@@ -452,8 +454,10 @@ function workModalHTML(w, studyBlocks) {
     <div class="m-meta">
       <div><span class="k">Year</span><span class="v">${w.year}</span></div>
       <div><span class="k">Role</span><span class="v">${w.role}</span></div>
+      ${w.credit ? `<div><span class="k">Credit</span><span class="v">${w.credit}</span></div>` : ""}
       <div><span class="k">Tools</span><span class="v">${w.tools.join(", ")}</span></div>
     </div>
+    ${w.creditNote ? `<div class="m-notice">${w.creditNote}</div>` : ""}
     ${w.summary ? `<p class="m-lead">${w.summary}</p>` : ""}
     ${hasStudy
       ? studyHTML(studyBlocks, w)

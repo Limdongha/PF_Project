@@ -368,6 +368,7 @@ const WORKS = [
     role: "Technical Artist",
     tools: ["Gemini", "ComfyUI", "Blender", "ZBrush", "3ds Max"],
     cover: "assets/works/audition-aipipe.png",   // TODO: 실제 결과 컷으로 교체 권장(예: 품질 그리드/파이프라인 다이어그램)
+    credit: "1인 TA · 실무",
     studyMd: "content/works/01-ai-pipeline.md",   // ← 케이스 스터디 본문은 이 마크다운 파일에서 작성
     summary: "ComfyUI 멀티뷰 생성으로 만든 3D 에셋을 ZBrush 리토폴·3ds Max 자동화로 이은 의상 제작 파이프라인. 제작 3일→1일.",
     description:
@@ -390,6 +391,8 @@ const WORKS = [
     role: "Technical Artist",
     tools: ["Unity", "HLSL", "Shader Graph"],
     cover: "assets/works/maze-water.png",   // TODO: 중립 씬에서 재현한 스크린샷
+    credit: "팀 프로젝트 · 본인 제작",
+    creditNote: "Maze 팀 프로젝트입니다. 물 셰이더는 제가 제작했고, 셰이더가 참조하는 커스텀 디퍼드 렌더러는 팀 그래픽 프로그래머가 구축했습니다. 텍스처·렌더타겟 예산은 그래픽 프로그래머와 함께 정했습니다.",
     studyMd: "content/works/02-water.md",   // ← 케이스 스터디 본문
     summary: "깊이·굴절·거품을 결합한 모바일용 스타일라이즈드 물 셰이더. 기존 텍스처·렌더타겟을 재활용해 가볍게 구현.",
     description:
@@ -413,6 +416,8 @@ const WORKS = [
     role: "Technical Artist",
     tools: ["Unreal Engine", "Blueprint", "Python"],
     cover: "assets/works/kalli-scatter.jpg",   // TODO: 툴 UI/결과 스크린샷
+    credit: "팀 프로젝트 · 본인 제작",
+    creditNote: "칼리버스 팀 프로젝트입니다. 머티리얼 스캐터 툴은 제가 개발했습니다.",
     studyMd: "content/works/03-material-scatter.md",   // ← 상단 시연영상만 미리보기. PDF 오면 본문 채움
     summary: "모델 임포트 시 머티리얼 인스턴스 생성·슬롯 할당·텍스처 연결을 자동으로 처리하는 언리얼 툴.",
     description:
@@ -435,6 +440,7 @@ const WORKS = [
     role: "Graphics · Tech Art",
     tools: ["DirectX 11", "HLSL", "C++"],
     cover: "assets/works/thumb-particle.jpg",   // 전용 썸네일(4:3). 없으면 제목 플레이스홀더로 대체
+    credit: "1인 개발",
     summary: "GPU 인스턴싱 기반 파티클 시스템. 바리센트릭 기법으로 메쉬 표면에 균등 분포 스폰을 구현.",
     description:
       "수천 개의 파티클을 단일 드로우콜로 그리기 위해 정점·인덱스 버퍼에 인스턴스 버퍼를 더한 구조를 설계했습니다. " +
@@ -504,15 +510,18 @@ const WORKS = [
     role: "Technical Artist",
     tools: ["Unity", "C#", "Editor Scripting"],
     cover: "assets/works/maze-place.png",   // TODO: 툴 UI 스크린샷(게임 에셋 안 보이게)
-    studyMd: "content/works/05-asset-placer.md",   // ← 상단 시연영상만 미리보기. PDF 오면 본문 채움
-    summary: "맵 에셋을 브러시·스캐터 방식으로 빠르게 배치하는 Unity 에디터 툴. 배치 시간 단축.",
+    credit: "팀 프로젝트 · 본인 제작",
+    creditNote: "Maze 팀 프로젝트입니다. 팀의 요청을 받아 툴 설계와 구현을 제가 맡았습니다.",
+    studyMd: "content/works/05-asset-placer.md",
+    summary: "어느 씬에서든 스테이지를 꾸미고 결과는 Graphic 프리팹에만 저장하는 Unity 에디터 툴.",
     description:
-      "맵 제작 시 반복되는 에셋 배치를 자동화한 에디터 툴입니다. 브러시/스캐터 배치, 그리드 스냅·표면 정렬, " +
-      "랜덤 변형(회전·스케일)을 제공해 레벨 셋업 시간을 크게 줄였습니다.",
+      "Maze 스테이지 배치를 위해 만든 에디터 툴입니다. 프리팹을 열지 않고 캐릭터와 조명이 있는 씬에서 배치하되 " +
+      "저장은 스테이지의 Graphic 프리팹에만 반영되도록 배치 화면과 저장 결과를 분리했습니다.",
     bullets: [
-      "브러시/스캐터 방식 에셋 배치",
-      "그리드 스냅·표면 정렬",
-      "랜덤 회전·스케일로 자연스러운 분포",
+      "썸네일 브라우저 + 배치 컨트롤, 두 창 구성",
+      "단축키 선택·스냅 정렬·복사/붙여넣기/Undo",
+      "배치 결과는 Graphic 프리팹에만 저장",
+      "MVP 패턴으로 기능 확장이 쉬운 구조",
     ],
     media: [{ type: "image", src: "assets/works/maze-place.png" }],
   },
@@ -524,6 +533,8 @@ const WORKS = [
     role: "Technical Artist",
     tools: ["Unity", "URP", "Shader Graph", "HLSL"],
     cover: "assets/works/mob-toon.png",   // TODO: 중립 메쉬 적용 스크린샷
+    credit: "팀 프로젝트 · 본인 제작",
+    creditNote: "셀 셰이딩 로직과 외곽선 3종은 제가 구현했습니다. 그 기반인 커스텀 디퍼드 렌더러는 팀 그래픽 프로그래머가 구축했습니다.",
     studyMd: "content/works/06-urp-toon.md",   // ← 셰이딩 파트 초안. 외곽선 파트는 자료 오면 추가
     summary: "Unity URP 환경에서 모바일 성능을 고려해 구현한 툰 셰이딩 — 셀 명암 + 외곽선.",
     description:
@@ -545,6 +556,8 @@ const WORKS = [
     role: "Technical Artist",
     tools: ["Unity", "C#"],
     cover: "assets/works/maze-proc.png",   // TODO: 배치 결과 스크린샷(중립)
+    credit: "팀 프로젝트 · 본인 제작",
+    creditNote: "Maze 팀 프로젝트입니다. 입력으로 쓰는 바닥 가이드 메시는 기획이, 벽·기둥 조각 키트는 아트팀이 만들었고 배치 툴은 제가 개발했습니다.",
     studyMd: "content/works/07-procedural.md",
     summary: "격자 없는 불규칙 바닥의 테두리를 추출해 벽·기둥·장식을 반자동 배치하는 Unity 던전 툴. 시드·좌표 해시로 재생성 결정성 확보.",
     description:
@@ -567,6 +580,7 @@ const WORKS = [
     role: "Technical Artist",
     tools: ["Unity", "C#"],
     cover: "assets/works/mob-physanim.png",   // TODO: 툴 UI/결과 스크린샷
+    credit: "개인 R&D · 1인",
     studyMd: "content/works/08-physics.md",
     summary: "머리카락·치마의 흔들림을 Verlet 적분으로 직접 구현한 모바일용 스프링 본 툴.",
     description:
@@ -589,6 +603,7 @@ const WORKS = [
     role: "Technical Artist",
     tools: ["Unity", "URP", "C#", "HLSL"],
     cover: "assets/works/mob-trail.jpg",   // TODO: 중립 씬 잔상 스크린샷
+    credit: "본인 제작",   // TODO: Maze 팀 작업인지 모바일 스핀오프(1인) 작업인지 확인 후 구체화
     studyMd: "content/works/09-motion-trail.md",
     summary: "회피 순간의 캐릭터 메시를 BakeMesh로 박제해 남기는 잔상. 풀링·사전 워밍으로 모바일에서도 가볍게.",
     description:
@@ -612,6 +627,8 @@ const WORKS = [
     role: "Technical Artist · Graphics",
     tools: ["Unreal Engine 5", "C++", "HLSL", "USF"],
     cover: "content/works/img/18-unreal-shadingmodel/41.png",   // 보스 몬스터 툰 적용 결과
+    credit: "개인 R&D · 1인",
+    creditNote: "엔진 파이프라인 연결은 직접 구현했고, 셰이딩 공식(ToonBxDF)은 공개 구현을 바탕으로 정리했습니다. 출처는 본문 끝 참고 자료에 적었습니다.",
     studyMd: "content/works/18-unreal-shadingmodel.md",
     summary: "언리얼 엔진 소스를 직접 수정해 추가한 커스텀 툰 셰이딩 모델. 머티리얼 값이 GBuffer를 거쳐 HLSL까지 도달하는 파이프라인을 직접 구현.",
     description:
@@ -642,6 +659,7 @@ const WORKS = [
     role: "Technical Artist",
     tools: ["Unity", "URP", "HLSL", "C#"],
     cover: "assets/works/mob-sdf.jpg",   // TODO: 장판 효과 스크린샷
+    credit: "본인 제작",   // TODO: Maze 팀 작업인지 모바일 스핀오프(1인) 작업인지 확인 후 구체화
     studyMd: "content/works/11-sdf-aoe.md",
     summary: "그리기와 판정을 같은 모양 데이터로 묶어 '보이는 게 곧 맞는 것'을 보장한 공격 예고장판 시스템. 타격 순간 채움 강제 + 풀링으로 모바일 경량.",
     description:
@@ -665,6 +683,8 @@ const WORKS = [
     role: "Technical Artist",
     tools: ["Unity", "C#", "Editor Scripting"],
     cover: "assets/works/maze-texcheck.png",   // TODO: 툴 UI 스크린샷
+    credit: "팀 프로젝트 · 본인 제작",
+    creditNote: "Maze 팀 프로젝트입니다. 텍스처 검수 툴과 성능 모니터링 툴 모두 제가 개발했습니다.",
     studyMd: "content/works/19-unity-toolkit.md",
     summary: "텍스처 규격 검수 + 실시간 성능 모니터링. 팀이 성능 예산 안에서 작업하도록 받쳐주는 TA 툴셋.",
     // 본문(영상+설명)은 studyMd에서 렌더. media 갤러리는 study가 있으면 표시되지 않음.
@@ -677,6 +697,8 @@ const WORKS = [
     role: "Technical Artist · Lighting",
     tools: ["DirectX 11", "HLSL", "C++"],
     cover: "assets/works/lop-pbr.jpg",   // TODO: 중립 씬 재질·라이팅 스크린샷
+    credit: "팀 프로젝트 · 본인 담당",
+    creditNote: "「P의 거짓」 모작 팀 프로젝트입니다(팀장). PBR 셰이더와 라이팅을 제가 담당했습니다.",
     summary: "DirectX 환경에서 직접 구현한 PBR 셰이더 + 원작 무드 재현을 위한 라이팅 디자인.",
     description:
       "「P의 거짓」의 어둡고 무거운 룩을 재현하기 위해 DirectX 환경에서 직접 구현한 PBR 셰이더입니다. " +
@@ -707,6 +729,7 @@ const WORKS = [
     role: "Graphics · Tech Art",
     tools: ["DirectX 11", "HLSL", "C++"],
     cover: "assets/works/thumb-deferred.jpg",   // 전용 썸네일(4:3). 없으면 제목 플레이스홀더로 대체
+    credit: "1인 개발",
     summary: "렌더 타겟을 가로채 MRT(디퓨즈·노말·라이트)로 분리하고 뎁스로 월드 좌표를 복원해 조명을 계산한 디퍼드 파이프라인.",
     description:
       "화면을 한 번에 칠하는 대신 렌더 타겟을 가로채 디퓨즈·노말·라이트를 멀티 렌더 타겟(MRT)에 나눠 그린 뒤 " +
@@ -738,6 +761,7 @@ const WORKS = [
     role: "Graphics · Tech Art",
     tools: ["DirectX 11", "HLSL", "C++"],
     cover: "assets/works/thumb-shadowssao.jpg",   // 전용 썸네일(4:3). 없으면 제목 플레이스홀더로 대체
+    credit: "1인 개발",
     summary: "빛 시점 뎁스로 그림자를 만들고 스크린 공간 반구 샘플링으로 구석 폐색(SSAO)을 더한 음영 표현.",
     description:
       "그림자는 빛의 방향에서 장면을 찍은 뎁스 버퍼를 만들고 기존 화면의 픽셀을 같은 빛 공간으로 변환해 깊이를 " +
