@@ -29,3 +29,6 @@ content/works/_src/
 
 # ── Claude 실행용 개인 런처(로컬 전용) ──
 PF.bat
+
+# ── 로컬 미리보기 서버(개인용) ──
+serve.py

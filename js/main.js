@@ -293,6 +293,20 @@ function parseStudyMarkdown(text, mdPath) {
     blocks.push({ list: listItems });
     listItems = [];
   };
+  // 표: "| a | b |" 줄이 이어지면 하나의 표 블록으로. 둘째 줄이 "|---|---|" 면 첫 줄이 머리글.
+  let tableRows = [];
+  const flushTable = () => {
+    if (!tableRows.length) return;
+    const cells = (l) => l.replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => c.trim());
+    const rows = tableRows.map(cells);
+    let head = null;
+    if (rows.length >= 2 && rows[1].length && rows[1].every((c) => /^:?-{2,}:?$/.test(c))) {
+      head = rows[0].map(inlineMd);
+      rows.splice(0, 2);
+    }
+    blocks.push({ table: { head, rows: rows.map((r) => r.map(inlineMd)) } });
+    tableRows = [];
+  };
   let inCode = false, codeLang = "", codeLines = [];
   for (const raw of lines) {
     const line = raw.trim();
@@ -305,15 +319,17 @@ function parseStudyMarkdown(text, mdPath) {
     if (inComment) { if (line.includes("-->")) inComment = false; continue; }
     if (line.startsWith("<!--")) { if (!line.includes("-->")) inComment = true; continue; }
     let m;
-    if ((m = line.match(/^```(\w+)?\s*$/))) { flush(); flushList(); inCode = true; codeLang = m[1] || ""; codeLines = []; continue; }
-    if (!line) { flush(); flushList(); continue; }
-    if ((m = line.match(/^#{1,6}\s+(.*)$/))) { flush(); flushList(); blocks.push({ h: inlineMd(m[1].trim()) }); continue; }
+    if ((m = line.match(/^```(\w+)?\s*$/))) { flush(); flushList(); flushTable(); inCode = true; codeLang = m[1] || ""; codeLines = []; continue; }
+    if (!line) { flush(); flushList(); flushTable(); continue; }
+    if ((m = line.match(/^#{1,6}\s+(.*)$/))) { flush(); flushList(); flushTable(); blocks.push({ h: inlineMd(m[1].trim()) }); continue; }
     // 구분선(가로줄): "---" / "***" / "___" (3개 이상) — 파트 경계용
-    if (/^(?:-{3,}|\*{3,}|_{3,})$/.test(line)) { flush(); flushList(); blocks.push({ hr: true }); continue; }
+    if (/^(?:-{3,}|\*{3,}|_{3,})$/.test(line)) { flush(); flushList(); flushTable(); blocks.push({ hr: true }); continue; }
     // 목록 항목: "- " 또는 "* " 로 시작. 연속 항목을 하나의 목록 블록으로 묶는다.
-    if ((m = line.match(/^[-*]\s+(.*)$/))) { flush(); listItems.push(inlineMd(m[1].trim())); continue; }
+    if ((m = line.match(/^[-*]\s+(.*)$/))) { flush(); flushTable(); listItems.push(inlineMd(m[1].trim())); continue; }
+    // 표 줄
+    if (/^\|.*\|$/.test(line)) { flush(); flushList(); tableRows.push(line); continue; }
     if ((m = line.match(/^!\[([^\]]*)\]\(([^)]+)\)(?:\{([^}]*)\})?\s*$/))) {
-      flush(); flushList();
+      flush(); flushList(); flushTable();
       // 선택적 크기 지정: {w=420} / {width=420} / {small}=360 / {medium}=560
       let w = null; const opt = m[3];
       if (opt) {
@@ -331,6 +347,7 @@ function parseStudyMarkdown(text, mdPath) {
   if (inCode && codeLines.length) blocks.push({ code: codeLines.join("\n"), lang: codeLang }); // 닫힘 없이 끝나도 살림
   flush();
   flushList();
+  flushTable();
   return blocks;
 }
 async function loadStudy(w) {
@@ -416,6 +433,15 @@ function studyHTML(blocks, w) {
       if (b.hr) return `<hr class="m-divider">`;
       if (b.p) return `<p class="m-desc">${b.p}</p>`;
       if (b.list) return `<ul class="m-bullets">${b.list.map((it) => `<li>${it}</li>`).join("")}</ul>`;
+      if (b.table) {
+        const head = b.table.head
+          ? `<thead><tr>${b.table.head.map((c) => `<th>${c}</th>`).join("")}</tr></thead>`
+          : "";
+        const body = `<tbody>${b.table.rows
+          .map((r) => `<tr>${r.map((c) => `<td>${c}</td>`).join("")}</tr>`)
+          .join("")}</tbody>`;
+        return `<div class="m-tablewrap"><table class="m-table">${head}${body}</table></div>`;
+      }
       if (b.code != null) {
         const lang = b.lang ? `<span class="m-code__lang">${escapeHtml(b.lang)}</span>` : "";
         return `<figure class="m-fig m-fig--code">${lang}<pre class="m-code"><code>${escapeHtml(b.code)}</code></pre></figure>`;

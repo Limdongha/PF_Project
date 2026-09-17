@@ -82,9 +82,41 @@ const SKILLS = [
    ========================================================================= */
 const PROJECTS = [
   {
+    title: "HERO",
+    platform: "팀 프로젝트 · Mobile",
+    year: "2026년 7월 – 현재",
+    role: "Technical Artist",
+    studio: "콩스튜디오",
+    cover: "assets/projects/Hero.jpg",
+    summary: "드래곤 퀘스트 IP 기반 모바일 신작. 테크니컬 아티스트로 참여 중입니다.",
+    notice: "※ 위 이미지는 같은 IP로 이미 공개된 타이틀의 키비주얼입니다.",
+    description:
+      "콩스튜디오에서 계약직 테크니컬 아티스트로 참여 중인 드래곤 퀘스트 IP 기반 모바일 신작입니다. " +
+      "캐릭터 툰 셰이딩의 램프 파이프라인과 카드 비주얼 파이프라인을 맡았습니다. 아트 컨펌이 3ds Max에서 나고 " +
+      "런타임은 유니티라 두 쪽을 잇는 작업이 많았습니다. (개발 중)",
+    contribution: [
+      "인덱스 램프 파이프라인 구축 — 3ds Max 편집 툴 · fx 이식 · 유니티 임포터",
+      "카드 비주얼 파이프라인 구축 — 11겹 합성 셰이더 · 제너레이터 · 소재 생성 툴",
+      "캐릭터 툰 셰이더(HeroToon.fx) 램프 이식",
+      "아티스트 요청 대응 및 파이프라인 문서화",
+    ],
+    results: [
+      "램프 색을 3ds Max 안에서 정하게 만들어 유니티 왕복 제거",
+      "아틀라스 한 장과 JSON으로 Max·유니티 연결, 분해·임포트 설정·배열 조립 자동화",
+      "등급 다섯 종을 데이터로만 가르는 카드 셰이더와 제너레이터 구축",
+    ],
+    tools: ["Unity", "URP", "HLSL", "3ds Max", "MAXScript", "C#"],
+    link: "",
+    linkLabel: "영상 보기",
+    related: [1, 2],   // 인덱스 램프 툴 · 카드 비주얼 파이프라인
+    media: [
+      { type: "image", src: "assets/projects/Hero.jpg" },
+    ],
+  },
+  {
     title: "Maze",
     platform: "팀 프로젝트 · PC · Mobile",
-    year: "2026년 3 – 7월 (마일스톤 참여)",
+    year: "2026년 3월 – 현재",
     role: "Technical Artist",
     studio: "콩스튜디오",
     cover: "assets/projects/maze.jpg",   // TODO: 그리드 썸네일 PNG를 assets/projects/maze.jpg 로 넣기
@@ -92,8 +124,8 @@ const PROJECTS = [
     notice: "※ 아래 이미지는 실제 게임 화면이 아닙니다. 미공개 프로젝트라 원본을 공개할 수 없어 분위기만 참고해 AI로 새로 생성한 대체 이미지입니다.",
     description:
       "콩스튜디오에서 팀 프로젝트로 개발한 서브컬처 스테이지형 RPG입니다. PC와 모바일 빌드를 " +
-      "모두 진행했습니다(정식 출시 전). 저는 테크니컬 아티스트로 마일스톤 기간(2026년 3~7월)에 참여해 " +
-      "셰이더 제작과 아티스트용 제작·배치 툴, 그리고 최적화를 맡았습니다.",
+      "모두 진행했습니다(정식 출시 전). 저는 테크니컬 아티스트로 2026년 3월부터 참여해 " +
+      "셰이더 제작과 아티스트용 제작·배치 툴 그리고 최적화를 맡고 있습니다.",
     contribution: [
       "캐릭터 셰이더 제작",
       "맵 에셋 배치 툴 개발",
@@ -108,7 +140,7 @@ const PROJECTS = [
     tools: ["Unity", "C#"],
     link: "",                 // 외부 링크 버튼용(선택). 플레이 영상은 아래 media에 유튜브로 넣음
     linkLabel: "영상 보기",
-    related: [1, 4, 6, 11],  // Water 셰이더·맵 배치 툴·프로시저럴 던전 배치 툴·Unity 최적화 툴킷
+    related: [3, 6, 8, 13],  // Water 셰이더·맵 배치 툴·프로시저럴 던전 배치 툴·Unity 최적화 툴킷
     media: [
       { type: "image", src: "assets/projects/maze.jpg" },
       // TODO: 플레이 영상 유튜브 링크 받으면 아래 주석 풀고 넣기
@@ -116,33 +148,33 @@ const PROJECTS = [
     ],
   },
   {
-    title: "Maze: 모바일 스핀오프",   // 정식 이름 없음. 원하면 이름 바꾸세요.
+    title: "Maze — 모바일 미니게임",   // 정식 이름 없음. 원하면 이름 바꾸세요.
     platform: "개인 프로젝트 · Mobile",
     year: "2026년 7월 (약 1개월)",
     role: "1인 개발 (전 과정)",
     studio: "콩스튜디오",
     cover: "assets/projects/maze-mobile.jpg",   // TODO: 썸네일 PNG를 assets/projects/maze-mobile.jpg 로
-    summary: "Maze 중단 후 기존 리소스로 1개월간 혼자 만든 모바일 프로젝트. 전 과정에 AI 활용.",
+    summary: "팀장 요청으로 상부 제시용으로 만든 모바일 미니게임. 기존 Maze 리소스를 써서 1인으로 개발했습니다.",
     notice: "※ 아래 이미지는 실제 게임 화면이 아닙니다. 미공개 프로젝트라 원본을 공개할 수 없어, 분위기만 참고해 AI로 새로 생성한 대체 이미지입니다.",
     description:
-      "Maze 개발 중단이 확정된 뒤 콩스튜디오에서 기존 Maze 리소스를 활용해 약 1개월간 진행한 " +
-      "모바일 프로젝트입니다. 빈 프로젝트에서 시작해 기획·구현·아트를 1인으로 전부 담당했고 " +
-      "개발 전 과정에 AI를 적극 활용했습니다. 모바일 전용으로 설계했습니다. (정식 출시 전)",
+      "Maze를 진행하던 중에 팀장 요청으로 상부에 보여줄 제시용 빌드를 만든 것입니다. 기존 Maze 리소스를 " +
+      "그대로 활용해 약 1개월간 진행했고 빈 프로젝트에서 시작해 기획·구현·아트를 1인으로 전부 담당했습니다. " +
+      "개발 전 과정에 AI를 적극 활용했고 모바일 전용으로 설계했습니다. 제시와 확인이 목적이라 실제 제품에는 들어가지 않았습니다.",
     contribution: [
       "빈 프로젝트부터 모바일 빌드까지 1인 개발",
-      "Maze 리소스를 모바일에 맞게 재구성",
+      "Maze 리소스를 미니게임에 맞게 재구성",
       "모바일 전용으로 설계 및 최적화",
       "개발 전 과정에 AI 활용",
     ],
     results: [
-      "1개월 만에 1인으로 모바일 빌드 완성",
+      "상부 제시용 모바일 빌드를 1개월 만에 1인으로 완성",
       "PC 리소스를 모바일 사양에 맞게 경량화",
       "AI 활용 워크플로우로 제작 속도 향상",
     ],
     tools: ["Unity", "C#"],
     link: "",                 // 외부 링크 버튼용(선택). 플레이 영상은 아래 media에 유튜브로 넣음
     linkLabel: "영상 보기",
-    related: [5, 7, 8, 10],  // URP 툰 셰이딩·물리 애니메이션 툴·모션 트레일·SDF 공격 장판
+    related: [7, 9, 10, 12],  // URP 툰 셰이딩·물리 애니메이션 툴·모션 트레일·SDF 공격 장판
     media: [
       { type: "image", src: "assets/projects/maze-mobile.jpg" },
       // TODO: 플레이 영상 유튜브 링크 받으면 주석 풀고 넣기
@@ -210,7 +242,7 @@ const PROJECTS = [
     tools: ["DirectX 11", "HLSL", "C++"],
     link: "",                 // 외부 링크 버튼용(선택). 플레이 영상은 아래 media에 유튜브로
     linkLabel: "영상 보기",
-    related: [12],            // PBR 셰이더 & 라이팅
+    related: [14],            // PBR 셰이더 & 라이팅
     media: [
       { type: "youtube", id: "https://youtu.be/Ug0tOwWOcdg" },
     ],
@@ -246,7 +278,7 @@ const PROJECTS = [
     tools: ["DirectX 11", "HLSL", "C++"],
     link: "",
     linkLabel: "영상 보기",
-    related: [3, 9, 13, 14],   // 디퍼드 렌더러 쇼케이스 4개(파티클·커스텀셰이딩·디퍼드·그림자&SSAO) 연결
+    related: [5, 11, 15, 16],   // 디퍼드 렌더러 쇼케이스 4개(파티클·커스텀셰이딩·디퍼드·그림자&SSAO) 연결
     media: [
       { type: "youtube", id: "https://youtu.be/GOxVFVGjr_s" },
     ],
@@ -310,7 +342,7 @@ const PROJECTS = [
     tools: ["Unreal Engine", "Blueprint"],
     link: "",                 // 공식 영상/소개 페이지 있으면 (있으면 버튼 노출)
     linkLabel: "공연 영상 보기",
-    related: [2],             // 언리얼 머티리얼 스캐터
+    related: [4],             // 언리얼 머티리얼 스캐터
     media: [
       { type: "image", src: "assets/projects/kalliverse.png" },
       // { type: "youtube", id: "https://youtu.be/영상ID" },
@@ -382,6 +414,57 @@ const WORKS = [
       "에셋 제작 3일 → 1일 단축 (월 3.5~5세트 → 24세트)",
     ],
     media: [{ type: "image", src: "assets/works/audition-aipipe.png" }],
+  },
+
+  {
+    title: "인덱스 램프 툴",
+    category: "Tool",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["3ds Max", "MAXScript", "Unity", "C#", "HLSL"],
+    cover: "assets/works/ramp-tool.png",   // TODO: 램프 툴 창 캡처
+    credit: "1인 TA · 실무",
+    creditNote: "3ds Max 편집 툴과 유니티 임포터 그리고 fx 이식까지 제가 단독으로 만들었습니다. 이식 대상인 캐릭터 툰 셰이더와 fx 원본은 팀의 기존 자산입니다. 유니티 배열 조립은 프로젝트에 이미 들어 있던 pschraut의 공개 구현 Texture2DArrayImporter를 호출합니다.",
+    studyMd: "content/works/20-ramp-tool.md",
+    summary: "캐릭터 툰 셰이더의 램프를 3ds Max 안에서 보면서 만들고 유니티까지 넘기는 파이프라인. 편집 툴 · fx 이식 · 임포터 한 벌.",
+    description:
+      "아트 컨펌은 3ds Max에서 나는데 Max의 fx는 텍스처 배열을 못 읽어 인덱스별 램프를 미리 볼 수 없었습니다. " +
+      "램프 236장을 실측 분석해 포토샵 대신 마커 그라디언트로 만들도록 바꾸고 아틀라스 한 장과 JSON 배선도로 " +
+      "Max 편집과 유니티 조립을 이었습니다. 인덱스마다 구분색을 자동으로 넣어 안 보이던 부위 번호를 눈에 보이게 했습니다.",
+    bullets: [
+      "램프 236장을 실측 분석해 제작 방식 결정 — 126종은 바이트까지 동일했습니다",
+      "인덱스 자동 구분색 — 부위 번호를 눈으로 확인하고 검증 도구로도 사용",
+      "아틀라스 1장 + JSON 배선도로 Max와 유니티를 연결. MAXScript JSON 파서는 직접 구현",
+      "드래그 중 실시간 미리보기 26ms → 4.95ms — 색 계산이 89%인 것을 재고 바뀐 줄만 굽기",
+      "HeroToon.fx 램프 이식 — 기존 코드는 두 군데 3줄만 변경",
+      "유니티 임포터 — 분해·임포트 설정·배열 조립 + 픽셀 1,536개 전수 대조",
+    ],
+    media: [{ type: "image", src: "assets/works/ramp-tool.png" }],
+  },
+
+  {
+    title: "카드 비주얼 파이프라인",
+    category: "Shader",
+    year: "2026",
+    role: "Technical Artist",
+    tools: ["Unity", "URP", "HLSL", "C#", "Editor Scripting"],
+    cover: "assets/works/card-pipeline.png",   // 데모 영상에서 잘라낸 스틸. 움직이는 썸네일을 원하면 content/works/img/21-card-pipeline/fig01-demo.mp4 로 바꾸면 됩니다
+    credit: "1인 TA · 실무",
+    studyMd: "content/works/21-card-pipeline.md",
+    summary: "판 한 장에 11겹을 합성하는 등급별 카드 셰이더와 데이터만 바꾸면 카드가 찍혀 나오는 제너레이터.",
+    description:
+      "트레이딩 카드 게임의 등급별 카드 비주얼을 만드는 파이프라인입니다. 겹을 오브젝트로 쌓지 않고 한 장의 판에 " +
+      "셰이더가 11겹을 덮어써 드로우콜을 하나로 유지했습니다. 등급은 값으로만 갈리므로 등급을 추가해도 셰이더는 " +
+      "고치지 않습니다. 카드를 UI로 만들지 3D로 만들지는 두 벌을 실제로 만들고 프로젝트를 전수 조사해 보고했습니다.",
+    bullets: [
+      "앞면 11겹 합성 셰이더 — 홀로그램·시차·금색 아웃라인·반짝이",
+      "등급은 데이터로만 갈린다 — 셰이더는 등급을 모름",
+      "메시·위상 텍스처·SDF 생성 툴과 겹 단위 머티리얼 인스펙터",
+      "제너레이터 — 프리셋에서 값을 복사하고 머티리얼은 메모리에서 굽기. 파일은 하나도 안 생깁니다",
+      "캔버스 vs 3D 비교 보고 — 두 방식을 다 만들고 프로젝트 전수 조사",
+      "검은 얼룩 디버깅 — Depth Priming·다이나믹 배칭·MaterialPropertyBlock 세 조건",
+    ],
+    media: [{ type: "video", src: "content/works/img/21-card-pipeline/fig01-demo.mp4" }],
   },
 
   {

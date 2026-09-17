@@ -388,6 +388,8 @@ body::before {
 /* 케이스 스터디 (이미지 + 캡션) */
 .m-lead { color: var(--txt); font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.6rem; padding-bottom: 1.4rem; border-bottom: 1px solid var(--line-soft); }
 .m-study { margin-top: .2rem; }
+/* 케이스 스터디 본문의 목록은 뒤 문단과 간격을 둔다 (.m-bullets 자체엔 아래 여백이 없음) */
+.m-study .m-bullets { margin-bottom: 2.6rem; }
 .m-study .m-subhead:first-child { margin-top: .4rem; }
 /* 파트 경계용 구분선 (예: 셰이딩 → 외곽선) */
 .m-divider { border: 0; height: 1px; margin: 3.6rem 0; background: linear-gradient(to right, transparent, var(--line-soft) 15%, var(--line-soft) 85%, transparent); }
@@ -406,6 +408,14 @@ body::before {
 .m-code { font-family: "JetBrains Mono", monospace; font-size: .82rem; line-height: 1.65; color: #d7dbe4; background: #0d0f14; border: 1px solid var(--line-soft); border-radius: var(--radius-sm); padding: 1rem 1.1rem; margin: 0; overflow-x: auto; white-space: pre; -webkit-overflow-scrolling: touch; }
 .m-code code { font-family: inherit; }
 .m-code__lang { position: absolute; top: .5rem; right: .7rem; font-size: .68rem; font-family: "JetBrains Mono", monospace; color: var(--txt-dim); text-transform: uppercase; letter-spacing: .06em; pointer-events: none; }
+/* 표 (| a | b | … 행) — 좁은 화면에선 가로 스크롤 */
+.m-tablewrap { margin: 1.5rem 0; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--line-soft); border-radius: var(--radius-sm); background: rgba(255,255,255,.02); }
+.m-table { width: 100%; border-collapse: collapse; font-size: .88rem; line-height: 1.6; }
+.m-table th, .m-table td { padding: .6rem .9rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line-soft); white-space: normal; }
+.m-table thead th { color: var(--txt); font-weight: 600; font-size: .8rem; letter-spacing: .02em; background: rgba(255,255,255,.04); border-bottom-color: var(--line); }
+.m-table tbody td { color: var(--txt-soft); }
+.m-table tbody tr:last-child td { border-bottom: 0; }
+.m-table td code, .m-table th code { font-family: "JetBrains Mono", monospace; font-size: .88em; background: rgba(255,255,255,.06); border: 1px solid var(--line-soft); border-radius: 4px; padding: .05em .38em; }
 /* 인라인 코드 (`…`) */
 .m-desc code, .m-fig figcaption code { font-family: "JetBrains Mono", monospace; font-size: .88em; background: rgba(255,255,255,.06); border: 1px solid var(--line-soft); border-radius: 4px; padding: .05em .38em; }
 /* 모달 상단 안내 박스 (예: AI 대체 이미지 고지) */
