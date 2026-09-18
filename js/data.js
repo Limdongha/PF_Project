@@ -119,9 +119,9 @@ const PROJECTS = [
     year: "2026년 3월 – 현재",
     role: "Technical Artist",
     studio: "콩스튜디오",
-    cover: "assets/projects/maze.jpg",   // TODO: 그리드 썸네일 PNG를 assets/projects/maze.jpg 로 넣기
+    cover: "assets/projects/maze2.png",
     summary: "콩스튜디오에서 팀으로 개발한 서브컬처 스테이지형 RPG. PC·모바일 빌드.",
-    notice: "※ 아래 이미지는 실제 게임 화면이 아닙니다. 미공개 프로젝트라 원본을 공개할 수 없어 분위기만 참고해 AI로 새로 생성한 대체 이미지입니다.",
+    notice: "※ AI로 생성한 대체 이미지입니다.",
     description:
       "콩스튜디오에서 팀 프로젝트로 개발한 서브컬처 스테이지형 RPG입니다. PC와 모바일 빌드를 " +
       "모두 진행했습니다(정식 출시 전). 저는 테크니컬 아티스트로 2026년 3월부터 참여해 " +
@@ -142,7 +142,7 @@ const PROJECTS = [
     linkLabel: "영상 보기",
     related: [3, 6, 8, 13],  // Water 셰이더·맵 배치 툴·프로시저럴 던전 배치 툴·Unity 최적화 툴킷
     media: [
-      { type: "image", src: "assets/projects/maze.jpg" },
+      { type: "image", src: "assets/projects/maze2.png" },
       // TODO: 플레이 영상 유튜브 링크 받으면 아래 주석 풀고 넣기
       // { type: "youtube", id: "https://youtu.be/영상ID" },
     ],
@@ -155,7 +155,7 @@ const PROJECTS = [
     studio: "콩스튜디오",
     cover: "assets/projects/maze-mobile.jpg",   // TODO: 썸네일 PNG를 assets/projects/maze-mobile.jpg 로
     summary: "팀장 요청으로 상부 제시용으로 만든 모바일 미니게임. 기존 Maze 리소스를 써서 1인으로 개발했습니다.",
-    notice: "※ 아래 이미지는 실제 게임 화면이 아닙니다. 미공개 프로젝트라 원본을 공개할 수 없어, 분위기만 참고해 AI로 새로 생성한 대체 이미지입니다.",
+    notice: "※ AI로 생성한 대체 이미지입니다.",
     description:
       "Maze를 진행하던 중에 팀장 요청으로 상부에 보여줄 제시용 빌드를 만든 것입니다. 기존 Maze 리소스를 " +
       "그대로 활용해 약 1개월간 진행했고 빈 프로젝트에서 시작해 기획·구현·아트를 1인으로 전부 담당했습니다. " +
@@ -424,9 +424,9 @@ const WORKS = [
     tools: ["3ds Max", "MAXScript", "Unity", "C#", "HLSL"],
     cover: "assets/works/ramp-tool.png",   // TODO: 램프 툴 창 캡처
     credit: "1인 TA · 실무",
-    creditNote: "3ds Max 편집 툴과 유니티 임포터 그리고 fx 이식까지 제가 단독으로 만들었습니다. 이식 대상인 캐릭터 툰 셰이더와 fx 원본은 팀의 기존 자산입니다. 유니티 배열 조립은 프로젝트에 이미 들어 있던 pschraut의 공개 구현 Texture2DArrayImporter를 호출합니다.",
+    creditNote: "3ds Max 편집 툴과 유니티 임포터 그리고 fx 셰이더 파일을 만들었습니다.",
     studyMd: "content/works/20-ramp-tool.md",
-    summary: "캐릭터 툰 셰이더의 램프를 3ds Max 안에서 보면서 만들고 유니티까지 넘기는 파이프라인. 편집 툴 · fx 이식 · 임포터 한 벌.",
+    summary: "캐릭터 툰 셰이더의 램프를 3ds Max 안에서 보면서 만들 수 있습니다.",
     description:
       "아트 컨펌은 3ds Max에서 나는데 Max의 fx는 텍스처 배열을 못 읽어 인덱스별 램프를 미리 볼 수 없었습니다. " +
       "램프 236장을 실측 분석해 포토샵 대신 마커 그라디언트로 만들도록 바꾸고 아틀라스 한 장과 JSON 배선도로 " +
@@ -440,6 +440,9 @@ const WORKS = [
       "유니티 임포터 — 분해·임포트 설정·배열 조립 + 픽셀 1,536개 전수 대조",
     ],
     media: [{ type: "image", src: "assets/works/ramp-tool.png" }],
+    links: [
+      { label: "OKLab 색공간 정리", href: "https://blog.naver.com/ridas_/224391843068" },
+    ],
   },
 
   {
