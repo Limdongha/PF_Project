@@ -386,7 +386,7 @@ body::before {
 .m-linkrow { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1.8rem; }
 .m-linkrow .m-link { margin-top: 0; }
 /* 케이스 스터디 (이미지 + 캡션) */
-.m-lead { color: var(--txt); font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.6rem; padding-bottom: 1.4rem; border-bottom: 1px solid var(--line-soft); }
+.m-lead { color: var(--txt); font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.6rem; }
 .m-study { margin-top: .2rem; }
 /* 케이스 스터디 본문의 목록은 뒤 문단과 간격을 둔다 (.m-bullets 자체엔 아래 여백이 없음) */
 .m-study .m-bullets { margin-bottom: 2.6rem; }

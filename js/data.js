@@ -617,7 +617,6 @@ const WORKS = [
     tools: ["Unity", "URP", "Shader Graph", "HLSL"],
     cover: "assets/works/mob-toon.png",   // TODO: 중립 메쉬 적용 스크린샷
     credit: "팀 프로젝트 · 본인 제작",
-    creditNote: "셀 셰이딩 로직과 외곽선 3종은 제가 구현했습니다. 그 기반인 커스텀 디퍼드 렌더러는 팀 그래픽 프로그래머가 구축했습니다.",
     studyMd: "content/works/06-urp-toon.md",   // ← 셰이딩 파트 초안. 외곽선 파트는 자료 오면 추가
     summary: "Unity URP 환경에서 모바일 성능을 고려해 구현한 툰 셰이딩 — 셀 명암 + 외곽선.",
     description:
