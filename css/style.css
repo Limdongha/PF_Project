@@ -420,6 +420,9 @@ body::before {
 .m-desc code, .m-fig figcaption code { font-family: "JetBrains Mono", monospace; font-size: .88em; background: rgba(255,255,255,.06); border: 1px solid var(--line-soft); border-radius: 4px; padding: .05em .38em; }
 /* 모달 상단 안내 박스 (예: AI 대체 이미지 고지) */
 .m-study a { color: var(--txt); text-decoration: underline; text-underline-offset: 3px; }
+/* 본문에 주소를 그대로 노출한 링크 (맨 https://… 자동 링크). 좁은 화면에서 줄이 넘치지 않게 끊는다. */
+.m-study a.study__url { font-family: "JetBrains Mono", monospace; font-size: .86em; color: var(--txt-soft); overflow-wrap: anywhere; word-break: break-all; }
+.m-study a.study__url:hover { color: var(--txt); }
 .m-notice { margin: 0 0 1.5rem; padding: 1rem 1.2rem; border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); background: rgba(255,255,255,.04); color: var(--txt-soft); font-size: .92rem; line-height: 1.6; }
 
 /* Scroll reveal ----------------------------------------------------------

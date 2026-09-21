@@ -260,7 +260,14 @@ function inlineMd(s) {
   return escapeHtml(s)
     .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
     .replace(/`([^`]+)`/g, "<code>$1</code>")
-    .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+    // 맨 주소(https://…)를 그대로 쓴 경우도 클릭되게 한다. 주소가 그대로 보이는 게 목적.
+    // 앞 단계에서 만든 <a>…</a> 는 첫 대안으로 통째 잡아 두어 다시 감싸지 않는다.
+    .replace(
+      /(<a\b[^>]*>[\s\S]*?<\/a>)|(https?:\/\/[^\s<>"']+[^\s<>"'.,;:)\]])/g,
+      (m, anchor, url) =>
+        anchor || `<a class="study__url" href="${url}" target="_blank" rel="noopener">${url}</a>`
+    );
 }
 function resolveMdPath(src, mdPath) {
   if (/^(https?:|data:|\/)/i.test(src) || src.startsWith("assets/")) return src;

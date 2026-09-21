@@ -121,4 +121,4 @@ vWorldPos   = mul(vWorldPos, g_ProjMatrixInv);
 vWorldPos   = mul(vWorldPos, g_ViewMatrixInv);
 ```
 
-점광원은 여기에 거리 감쇠(`(range − dist) / range`)를 곱해 광원에서 멀어질수록 어두워지게 처리했습니다. 결국 후처리 셰이더는 렌더링 파이프라인의 공간 변환을 정확히 이해해야 다룰 수 있었고, 그 과정을 직접 짜면서 좌표계 변환이 몸에 익었습니다.
+점광원은 여기에 거리 감쇠(`(range − dist) / range`)를 곱해 광원에서 멀어질수록 어두워지게 처리했습니다.
