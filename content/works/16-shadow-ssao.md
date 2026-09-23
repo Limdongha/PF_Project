@@ -126,8 +126,7 @@ for (int i = 0; i < sampleCount; ++i)
 
 ## 참고 자료
 
-두 기법 모두 널리 쓰이는 표준 기법이며 원 출처는 아래와 같습니다.
+개념을 정리하면서 참고한 글들입니다.
 
-- 섀도우 매핑 — Lance Williams, "Casting Curved Shadows on Curved Surfaces" (SIGGRAPH 1978)
-- SSAO — Martin Mittring, "Finding Next Gen: CryEngine 2" (SIGGRAPH 2007)
-- 노말 방향 반구 샘플 커널 — John Chapman, [SSAO Tutorial](https://john-chapman-graphics.blogspot.com/2013/01/ssao-tutorial.html) (2013)
+- 광원 시점 뎁스맵과 깊이 비교 그리고 바이어스 — [HLSL 프로그래밍_3 ShadowMapping](https://rech4210.github.io/posts/graphics/shader_5.html)
+- 노말 방향 반구 샘플 커널과 노이즈 회전 그리고 블러 — [[Computer Graphics] SSAO](https://www.chanwooyam.dev/series/computer-graphics/ojmFQrHGDTUaZxy9CxX2)
