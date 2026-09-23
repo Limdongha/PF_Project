@@ -130,7 +130,7 @@ FDirectLighting ToonBxDF(FGBufferData GBuffer, half3 N, half3 V, half3 L, float 
 
 엔진 소스를 고쳤으니 UE5를 따로 빌드해야 할 것 같지만, 제 게임 프로젝트(DonghaEngine)를 빌드하면 엔진까지 함께 빌드되므로 별도 빌드는 필요 없습니다.
 
-빌드하고 나면 머티리얼의 Shading Model 탭에 제가 만든 `Dongha` 모델이 실제로 생깁니다.
+빌드하고 나면 머티리얼의 Shading Model 탭에 직접 만든 `Dongha` 모델이 실제로 생깁니다.
 
 ![머티리얼 Shading Model 드롭다운에 추가된 Dongha 모델.](img/18-unreal-shadingmodel/39.png){w=420}
 

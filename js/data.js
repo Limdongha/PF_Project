@@ -224,7 +224,7 @@ const PROJECTS = [
     description:
       "「P의 거짓」의 비주얼과 플레이를 모작한 포트폴리오용 팀 프로젝트입니다(PC, 약 2개월). 팀장을 맡아 " +
       "일정·작업 분배를 이끌었고 직접 담당한 영역은 플레이어·셰이더·라이팅·최적화입니다. 플레이어는 모든 " +
-      "시스템이 맞물리는 허브라 판단해 제가 맡았습니다. 아트 출신인 만큼 원본 룩을 최대한 재현하기 위해 " +
+      "시스템이 맞물리는 허브라 판단해 맡았습니다. 아트 출신인 만큼 원본 룩을 최대한 재현하기 위해 " +
       "DirectX 환경에서 PBR 셰이더를 구현하고 빛 디자인이 핵심이라 보고 라이팅 아티스트 역할을 겸했습니다. " +
       "최적화는 옥트리·LOD·프러스텀 컬링으로 처리했습니다. (포트폴리오 목적으로 제작)",
     contribution: [
@@ -478,13 +478,13 @@ const WORKS = [
     tools: ["Unity", "HLSL", "Shader Graph"],
     cover: "assets/works/maze-water.png",   // TODO: 중립 씬에서 재현한 스크린샷
     credit: "팀 프로젝트 · 본인 제작",
-    creditNote: "Maze 팀 프로젝트입니다. 물 셰이더는 제가 제작했고, 셰이더가 참조하는 커스텀 디퍼드 렌더러는 팀 그래픽 프로그래머가 구축했습니다. 텍스처·렌더타겟 예산은 그래픽 프로그래머와 함께 정했습니다.",
+    creditNote: "Maze 팀 프로젝트에서 물 셰이더 제작을 담당했습니다.",
     studyMd: "content/works/02-water.md",   // ← 케이스 스터디 본문
-    summary: "깊이·굴절·거품을 결합한 모바일용 스타일라이즈드 물 셰이더. 기존 텍스처·렌더타겟을 재활용해 가볍게 구현.",
+    summary: "깊이·굴절·거품을 결합한 스타일라이즈드 물 셰이더",
     description:
-      "모바일 타깃 프로젝트 Maze의 여러 스테이지에 사용한 스타일라이즈드 물 셰이더입니다. 깊이에 따른 색 블렌딩, 굴절, " +
+      "Maze의 여러 스테이지에 사용한 스타일라이즈드 물 셰이더입니다. 깊이에 따른 색 블렌딩, 굴절, " +
       "가장자리 거품, 노말 스크롤 반사를 파라미터로 노출해 아티스트가 코드 없이 다양한 수역을 연출할 수 있게 했고 " +
-      "기존 3D 노이즈 텍스처와 커스텀 디퍼드의 렌더타겟을 재활용해 모바일에서도 가볍게 동작하도록 만들었습니다.",
+      "기존 3D 노이즈 텍스처와 커스텀 디퍼드의 렌더타겟을 재활용해 가볍게 동작하도록 만들었습니다.",
     bullets: [
       "깊이 기반 얕은물/깊은물 색 블렌딩",
       "깊이 비례 굴절 + 가장자리 포말",
@@ -503,9 +503,9 @@ const WORKS = [
     tools: ["Unreal Engine", "Blueprint", "Python"],
     cover: "assets/works/kalli-scatter.jpg",   // TODO: 툴 UI/결과 스크린샷
     credit: "팀 프로젝트 · 본인 제작",
-    creditNote: "칼리버스 팀 프로젝트입니다. 머티리얼 스캐터 툴은 제가 개발했습니다.",
+    creditNote: "칼리버스 팀 프로젝트입니다. 언리얼 환경에서 머티리얼 스캐터 툴을 개발했습니다.",
     studyMd: "content/works/03-material-scatter.md",   // ← 상단 시연영상만 미리보기. PDF 오면 본문 채움
-    summary: "모델 임포트 시 머티리얼 인스턴스 생성·슬롯 할당·텍스처 연결을 자동으로 처리하는 언리얼 툴.",
+    summary: "모델 임포트 시 머티리얼 인스턴스 생성·슬롯 할당·텍스처 연결을 자동으로 처리합니다.",
     description:
       "모델을 가져올 때마다 반복되던 머티리얼 세팅을 자동화한 툴입니다. 머티리얼 인스턴스를 자동으로 만들어 " +
       "맞는 슬롯에 넣고 대응하는 텍스처(알베도·노멀·러프니스 등)까지 자동으로 연결합니다. 인스턴스를 하나씩 " +
@@ -594,7 +594,7 @@ const WORKS = [
     tools: ["Unity", "C#", "Editor Scripting"],
     cover: "assets/works/maze-place.png",   // TODO: 툴 UI 스크린샷(게임 에셋 안 보이게)
     credit: "팀 프로젝트 · 본인 제작",
-    creditNote: "Maze 팀 프로젝트입니다. 팀의 요청을 받아 툴 설계와 구현을 제가 맡았습니다.",
+    creditNote: "Maze 팀 프로젝트입니다. 팀의 요청을 받아 툴 설계와 구현을 맡았습니다.",
     studyMd: "content/works/05-asset-placer.md",
     summary: "어느 씬에서든 스테이지를 꾸미고 결과는 Graphic 프리팹에만 저장하는 Unity 에디터 툴.",
     description:
@@ -639,7 +639,7 @@ const WORKS = [
     tools: ["Unity", "C#"],
     cover: "assets/works/maze-proc.png",   // TODO: 배치 결과 스크린샷(중립)
     credit: "팀 프로젝트 · 본인 제작",
-    creditNote: "Maze 팀 프로젝트입니다. 입력으로 쓰는 바닥 가이드 메시는 기획이, 벽·기둥 조각 키트는 아트팀이 만들었고 배치 툴은 제가 개발했습니다.",
+    creditNote: "Maze 팀 프로젝트입니다. 입력으로 쓰는 바닥 가이드 메시는 기획이, 벽·기둥 조각 키트는 아트팀이 만들었고 배치 툴을 개발했습니다.",
     studyMd: "content/works/07-procedural.md",
     summary: "격자 없는 불규칙 바닥의 테두리를 추출해 벽·기둥·장식을 반자동 배치하는 Unity 던전 툴. 시드·좌표 해시로 재생성 결정성 확보.",
     description:
@@ -766,7 +766,7 @@ const WORKS = [
     tools: ["Unity", "C#", "Editor Scripting"],
     cover: "assets/works/maze-texcheck.png",   // TODO: 툴 UI 스크린샷
     credit: "팀 프로젝트 · 본인 제작",
-    creditNote: "Maze 팀 프로젝트입니다. 텍스처 검수 툴과 성능 모니터링 툴 모두 제가 개발했습니다.",
+    creditNote: "Maze 팀 프로젝트입니다. 텍스처 검수 툴과 성능 모니터링 툴을 모두 개발했습니다.",
     studyMd: "content/works/19-unity-toolkit.md",
     summary: "텍스처 규격 검수 + 실시간 성능 모니터링. 팀이 성능 예산 안에서 작업하도록 받쳐주는 TA 툴셋.",
     // 본문(영상+설명)은 studyMd에서 렌더. media 갤러리는 study가 있으면 표시되지 않음.
@@ -780,7 +780,7 @@ const WORKS = [
     tools: ["DirectX 11", "HLSL", "C++"],
     cover: "assets/works/lop-pbr.jpg",   // TODO: 중립 씬 재질·라이팅 스크린샷
     credit: "팀 프로젝트 · 본인 담당",
-    creditNote: "「P의 거짓」 모작 팀 프로젝트입니다(팀장). PBR 셰이더와 라이팅을 제가 담당했습니다.",
+    creditNote: "「P의 거짓」 모작 팀 프로젝트입니다(팀장). PBR 셰이더와 라이팅을 담당했습니다.",
     summary: "DirectX 환경에서 직접 구현한 PBR 셰이더 + 원작 무드 재현을 위한 라이팅 디자인.",
     description:
       "「P의 거짓」의 어둡고 무거운 룩을 재현하기 위해 DirectX 환경에서 직접 구현한 PBR 셰이더입니다. " +
