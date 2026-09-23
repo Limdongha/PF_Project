@@ -777,8 +777,8 @@ const WORKS = [
     tools: ["DirectX 11", "HLSL", "C++"],
     cover: "assets/works/lop-pbr.jpg",   // TODO: 중립 씬 재질·라이팅 스크린샷
     credit: "팀 프로젝트 · 본인 담당",
-    creditNote: "「P의 거짓」 모작 팀 프로젝트입니다(팀장). PBR 셰이더와 라이팅을 제가 담당했습니다.",
-    summary: "DirectX 환경에서 직접 구현한 PBR 셰이더 + 원작 무드 재현을 위한 라이팅 디자인.",
+    creditNote: "「P의 거짓」 모작 팀 프로젝트입니다. PBR 셰이더와 라이팅을 담당했습니다.",
+    summary: "DirectX 환경에서 직접 구현한 PBR 셰이더.",
     description:
       "「P의 거짓」의 어둡고 무거운 룩을 재현하기 위해 DirectX 환경에서 직접 구현한 PBR 셰이더입니다. " +
       "메탈릭·러프니스 기반 물리 셰이딩으로 재질감을 살리고 원작의 분위기를 좌우하는 빛 디자인을 핵심으로 " +
@@ -809,7 +809,7 @@ const WORKS = [
     tools: ["DirectX 11", "HLSL", "C++"],
     cover: "assets/works/thumb-deferred.jpg",   // 전용 썸네일(4:3). 없으면 제목 플레이스홀더로 대체
     credit: "1인 개발",
-    summary: "렌더 타겟을 가로채 MRT(디퓨즈·노말·라이트)로 분리하고 뎁스로 월드 좌표를 복원해 조명을 계산한 디퍼드 파이프라인.",
+    summary: "DirectX 11에서 디퍼드 렌더링을 직접 구현했습니다.",
     description:
       "화면을 한 번에 칠하는 대신 렌더 타겟을 가로채 디퓨즈·노말·라이트를 멀티 렌더 타겟(MRT)에 나눠 그린 뒤 " +
       "마지막에 합성하는 디퍼드 렌더링을 직접 구현했습니다. 노말맵은 TBN 행렬로 탄젠트→월드 공간으로 변환해 넘기고 " +
